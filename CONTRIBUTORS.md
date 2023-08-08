@@ -8,4 +8,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Mentors
 
+- [Devin Jaggernauth](https://github.com/mentalcaries)
+
 ## Code of Conduct Contacts
