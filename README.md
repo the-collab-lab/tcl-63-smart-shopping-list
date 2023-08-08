@@ -62,7 +62,7 @@ After you’ve cloned the project locally and updated the dependencies, run the 
 
 You’ll want to make your first contribution to this repo before your kick-off call! This will help make sure you’re ready to go on day one.
 
-1. Get this project set up locally by following [the setup instructions](#set-up-the-project).
+1. Get this project set up locally by following [the setup instructions here](#set-up-the-project).
 2. Add your name to the [CONTRIBUTORS.md](CONTRIBUTORS.md) file.
    - Do this from your local environment and not from GitHub in your browser. The purpose (aside from highlighting our amazing team) is to make sure your local environment is set up properly!
    - Commit to the `main` branch and push it up to the remote repo. (Over the next 8 weeks, we will rely on feature branches as we collaborate on the project, but for this task committing to main will do just fine.)
