@@ -14,5 +14,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Devin Jaggernauth](https://github.com/mentalcaries) 👻
 - [Caitlin Floyd](https://github.com/cafloyd) 🌸
+- [Chase Wright](https://github.com/chase-cove) 🐱
 
 ## Code of Conduct Contacts
