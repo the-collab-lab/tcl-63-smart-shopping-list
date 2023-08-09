@@ -9,6 +9,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 - [Shangguan Wang](https://github.com/shangguanwang) 🌉
 - [Raquel Pfeifle](https://github.com/rdpfeifle) 🌄
 - [Corina Murg](https://github.com/CorinaMurg) 🐳
+- [Aslan Taheri](https://github.com/AslanTaheri) 🦁
 
 ## Mentors
 
