@@ -18,3 +18,5 @@ Add yourself as a contributor to this project as a Markdown link that links your
 - [Chase Wright](https://github.com/chase-cove) 🐱
 
 ## Code of Conduct Contacts
+
+- [Julia Undeutsch](https://github.com/YuriDevAT) 🤓
