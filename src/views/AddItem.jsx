@@ -55,7 +55,7 @@ export function AddItem({ listToken }) {
 						onChange={handleChange}
 						placeholder="add item here"
 						required
-					></input>{' '}
+					></input>
 					{/*Accessibility: screenreader will prompt user this is a required field */}
 				</label>
 				<fieldset>
@@ -68,7 +68,7 @@ export function AddItem({ listToken }) {
 							value="7"
 							onChange={handleChange}
 							checked={formData.daysUntilNextPurchase === 7}
-						/>{' '}
+						/>
 						Soon
 					</label>
 					<br />
@@ -80,7 +80,7 @@ export function AddItem({ listToken }) {
 							value="14"
 							checked={formData.daysUntilNextPurchase === 14}
 							onChange={handleChange}
-						/>{' '}
+						/>
 						Kind of Soon
 					</label>
 					<br />
@@ -92,7 +92,7 @@ export function AddItem({ listToken }) {
 							value="30"
 							checked={formData.daysUntilNextPurchase === 30}
 							onChange={handleChange}
-						/>{' '}
+						/>
 						Not Soon
 					</label>
 				</fieldset>
