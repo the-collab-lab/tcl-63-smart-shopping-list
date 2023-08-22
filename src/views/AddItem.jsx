@@ -24,6 +24,11 @@ export function AddItem({ listToken }) {
 	// This async handleSubmit function sends the data to firebase and displays a user message
 	async function handleSubmit(event) {
 		event.preventDefault();
+		// check if user has entered an empty string or whitespace
+		if (formData.itemName.trim() === '') {
+			setSubmissionStatus('Please enter an item name.')
+			return
+		}
 
 		try {
 			await addItem(listToken, formData); // add formData to firebase
@@ -54,13 +59,13 @@ export function AddItem({ listToken }) {
 						value={formData.itemName}
 						onChange={handleChange}
 						placeholder="add item here"
-						required
 					></input>
-					{/*Accessibility: screenreader will prompt user this is a required field */}
 				</label>
-				<fieldset>
+				<fieldset style={{border: "none"}}>
 					<p>How soon will you buy this again?</p>
 					<label htmlFor="soon">
+						{/* this <br> is necessary for the screen reader to read first radio button */}
+						<br />
 						<input
 							type="radio"
 							name="daysUntilNextPurchase"
@@ -98,8 +103,8 @@ export function AddItem({ listToken }) {
 				</fieldset>
 				<button type="submit">Add Item</button>
 			</form>
-			{/* Give feedback when the item is added */}
-			{submissionStatus && <p>{submissionStatus}</p>}
+			{/* Give feedback when the item is added, including for screen reader users */}
+			<div aria-live="polite">{submissionStatus && <p>{submissionStatus}</p>}</div>
 		</>
 	);
 }
