@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
 
@@ -20,7 +25,7 @@ export function App() {
 	 */
 	const [listToken, setListToken] = useStateWithStorage(
 		'tcl-shopping-list-token',
-		'my test list',
+		null,
 	);
 
 	/**
@@ -33,8 +38,20 @@ export function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route index element={<Home />} />
-					<Route path="/list" element={<List data={data} />} />
+					<Route
+						index
+						element={
+							listToken ? (
+								<Navigate to="/list" />
+							) : (
+								<Home setListToken={setListToken} />
+							)
+						}
+					/>
+					<Route
+						path="/list"
+						element={listToken ? <List data={data} /> : <Navigate to="/" />}
+					/>
 					<Route path="/add-item" element={<AddItem />} />
 				</Route>
 			</Routes>
