@@ -26,8 +26,8 @@ export function AddItem({ listToken }) {
 		event.preventDefault();
 		// check if user has entered an empty string or whitespace
 		if (formData.itemName.trim() === '') {
-			setSubmissionStatus('Please enter an item name.')
-			return
+			setSubmissionStatus('Please enter an item name.');
+			return;
 		}
 
 		try {
@@ -61,7 +61,7 @@ export function AddItem({ listToken }) {
 						placeholder="add item here"
 					></input>
 				</label>
-				<fieldset style={{border: "none"}}>
+				<fieldset style={{ border: 'none' }}>
 					<p>How soon will you buy this again?</p>
 					<label htmlFor="soon">
 						{/* this <br> is necessary for the screen reader to read first radio button */}
@@ -77,11 +77,11 @@ export function AddItem({ listToken }) {
 						Soon
 					</label>
 					<br />
-					<label htmlFor="soon">
+					<label htmlFor="kindsoon">
 						<input
 							type="radio"
 							name="daysUntilNextPurchase"
-							id="soon"
+							id="kindsoon"
 							value="14"
 							checked={formData.daysUntilNextPurchase === 14}
 							onChange={handleChange}
@@ -89,11 +89,11 @@ export function AddItem({ listToken }) {
 						Kind of Soon
 					</label>
 					<br />
-					<label htmlFor="soon">
+					<label htmlFor="notsoon">
 						<input
 							type="radio"
 							name="daysUntilNextPurchase"
-							id="soon"
+							id="notsoon"
 							value="30"
 							checked={formData.daysUntilNextPurchase === 30}
 							onChange={handleChange}
@@ -104,7 +104,9 @@ export function AddItem({ listToken }) {
 				<button type="submit">Add Item</button>
 			</form>
 			{/* Give feedback when the item is added, including for screen reader users */}
-			<div aria-live="polite">{submissionStatus && <p>{submissionStatus}</p>}</div>
+			<div aria-live="polite">
+				{submissionStatus && <p>{submissionStatus}</p>}
+			</div>
 		</>
 	);
 }
