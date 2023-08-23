@@ -10,8 +10,6 @@ import { getFutureDate } from '../utils';
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
 
-// create collection
-
 export function useShoppingListData(listId) {
 	// Start with an empty array for our data.
 	/** @type {import('firebase/firestore').DocumentData[]} */
@@ -55,7 +53,7 @@ export function useShoppingListData(listId) {
  */
 
 export async function createCollection(listId, initialData = {}) {
-	// If the addItem function doesn't work, it could mean that we need a "document id", which would be the third parameter in listReference
+	// If encountering issues with the addItem function, it might be due to the absence of a "document id" as the third parameter in listReference.
 	const listReference = doc(db, listId);
 
 	return setDoc(listReference, initialData);

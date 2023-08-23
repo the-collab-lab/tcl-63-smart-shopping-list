@@ -1,6 +1,11 @@
 import { ListItem } from '../components';
 
 export function List({ data }) {
+	/**
+	 * Retrieve the user's shopping list token from the local storage.
+	 * This is a temporary solution to display the token on the page,
+	 * ensuring that users have a reference in case they forget their unique token.
+	 */
 	const token = localStorage.getItem('tcl-shopping-list-token');
 	return (
 		<>
