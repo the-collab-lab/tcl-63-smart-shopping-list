@@ -73,6 +73,7 @@ export function AddItem({ listToken }) {
 							value="7"
 							onChange={handleChange}
 							checked={formData.daysUntilNextPurchase === 7}
+							required // ensures the user makes a selection before proceeding
 						/>
 						Soon
 					</label>
