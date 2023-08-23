@@ -2,7 +2,7 @@ import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import Button from '../components/Button';
 import './Home.css';
 import { useState } from 'react';
-import { createCollection } from '../api/firebase';
+// import { createCollection } from '../api/firebase';
 
 export function Home({ setListToken }) {
 	const [retrievedToken, setRetrievedToken] = useState('');
@@ -43,13 +43,14 @@ export function Home({ setListToken }) {
 
 			<form>
 				<label htmlFor="token">Share token</label>
+				<br />
 				<input
 					type="text"
 					name="token"
 					onChange={handleTokenInput}
 					value={retrievedToken}
 				/>
-
+				<br />
 				<Button
 					label="Join an existing list"
 					type="submit"
