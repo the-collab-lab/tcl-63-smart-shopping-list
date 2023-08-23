@@ -12,7 +12,7 @@ export function Home({ setListToken }) {
 	 */
 	const createNewList = () => {
 		const newToken = generateToken();
-		setRetrievedToken(newToken);
+		setListToken(newToken);
 
 		/**
 		 * We were creating a new collection in the database using the newToken:
@@ -32,16 +32,17 @@ export function Home({ setListToken }) {
 	 */
 	const joinExistentList = (e) => {
 		e.preventDefault();
+
 		setListToken(retrievedToken);
 	};
 
 	return (
 		<div className="Home">
-			<Button label={'Create New List'} onClick={createNewList} />
+			<Button label="Create New List" onClick={createNewList} />
 			<p>-or-</p>
 			<p>Join an existing shopping list by entering a three word token.</p>
 
-			<form>
+			<form onSubmit={joinExistentList}>
 				<label htmlFor="token">Share token</label>
 				<br />
 				<input
@@ -51,11 +52,7 @@ export function Home({ setListToken }) {
 					value={retrievedToken}
 				/>
 				<br />
-				<Button
-					label="Join an existing list"
-					type="submit"
-					onClick={joinExistentList}
-				/>
+				<Button label="Join an existing list" type="submit" />
 			</form>
 		</div>
 	);
