@@ -2,7 +2,6 @@ import { ListItem } from '../components';
 
 export function List({ data }) {
 	const token = localStorage.getItem('tcl-shopping-list-token');
-	console.log(token);
 	return (
 		<>
 			<p>
