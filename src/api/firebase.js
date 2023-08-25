@@ -10,8 +10,6 @@ import { getFutureDate } from '../utils';
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
 
-// create collection
-
 export function useShoppingListData(listId) {
 	// Start with an empty array for our data.
 	/** @type {import('firebase/firestore').DocumentData[]} */

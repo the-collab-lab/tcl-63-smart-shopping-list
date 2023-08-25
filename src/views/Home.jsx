@@ -12,7 +12,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<div className="Home">
-			<Button label={'Create New List'} onClick={createNewList} />
+			<Button label="Create New List" onClick={createNewList} />
 			<p>-or-</p>
 			<p>Join an existing shopping list by entering a three word token.</p>
 
