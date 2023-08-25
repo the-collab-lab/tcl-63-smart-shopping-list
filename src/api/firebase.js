@@ -1,4 +1,4 @@
-import { collection, onSnapshot, doc, setDoc } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -53,13 +53,6 @@ export function useShoppingListData(listId) {
  * @param {string} itemData.itemName The name of the item.
  * @param {number} itemData.daysUntilNextPurchase The number of days until the user thinks they'll need to buy the item again.
  */
-
-export async function createCollection(listId, initialData = {}) {
-	// If the addItem function doesn't work, it could mean that we need a "document id", which would be the third parameter in listReference
-	const listReference = doc(db, listId);
-
-	return setDoc(listReference, initialData);
-}
 
 export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	const listCollectionRef = collection(db, listId);
