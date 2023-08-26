@@ -9,6 +9,7 @@ import { getFutureDate } from '../utils';
  * @param {string | null} listId
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
+
 export function useShoppingListData(listId) {
 	// Start with an empty array for our data.
 	/** @type {import('firebase/firestore').DocumentData[]} */
@@ -50,6 +51,7 @@ export function useShoppingListData(listId) {
  * @param {string} itemData.itemName The name of the item.
  * @param {number} itemData.daysUntilNextPurchase The number of days until the user thinks they'll need to buy the item again.
  */
+
 export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	const listCollectionRef = collection(db, listId);
 	return addDoc(listCollectionRef, {
