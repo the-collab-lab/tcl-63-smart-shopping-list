@@ -58,7 +58,7 @@ export function App() {
 							)
 						}
 					/>
-					<Route path="/add-item" element={<AddItem />} />
+					<Route path="/add-item" element={<AddItem listToken={listToken} />} />
 				</Route>
 			</Routes>
 		</Router>
