@@ -15,10 +15,12 @@ export function List({ data, listToken }) {
 	const stringMatch = (inputItem, listItem) => {
 		return listItem.toLowerCase().includes(inputItem.toLowerCase());
 	};
+
 	// Applies the helper function to narrow down the data
 	const filterData = data.filter((listItem) =>
 		stringMatch(inputItem, listItem.name),
 	);
+
 	return (
 		<>
 			<p>
@@ -39,9 +41,15 @@ export function List({ data, listToken }) {
 					onChange={handleInput}
 					placeholder="Start typing here..."
 				/>
-				<Button label={'x'} type={'reset'} onClick={handleClear} />
+				<Button
+					ariaLabel={'clear input field'}
+					label={'x'}
+					type={'reset'}
+					onClick={handleClear}
+				/>
 			</form>
-			<ul>
+			{/* Accessibility feature: added the aria-live and tabIndex attributes for screenreaders to announce as the user types */}
+			<ul aria-live="polite">
 				{filterData.length > 0 ? (
 					filterData.map((item) => <ListItem key={item.id} name={item.name} />)
 				) : (
