@@ -1,12 +1,14 @@
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import Button from '../components/Button';
 import './Home.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
 
 export function Home({ setListToken }) {
-	//This function generates a new unique Token corresponding to a new shopping list.
 
+	// CREATE A REFERENCE TO THE TOKEN INPUT IN ORDER TO DIRECT FOCUS TO IT AFTER IT'S CLEARED
+	const tokenInputRef = useRef(null)
+	
 	const [tokenInput, setTokenInput] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	
@@ -32,11 +34,11 @@ export function Home({ setListToken }) {
 	};
 
 	// IMPORT useShoppingListData FROM Firebase.js TO TEST WHETHER THE tokenInput IS VALID
-	const sharedListData  = useShoppingListData(tokenInput)
+	const sharedListData = useShoppingListData(tokenInput)
 
 	const submitTokenInput = (event) => {
 		event.preventDefault();
-
+		
 		if(tokenInput.trim() === "") {
 			setErrorMessage("Please, enter 3-word token.");
 			setTimeout(() => {
@@ -46,7 +48,7 @@ export function Home({ setListToken }) {
 		} 
 
 		if(sharedListData.length === 0) {
-			setErrorMessage("The list does not exist or it is empty");
+			setErrorMessage("The list does not exist. Please try again.");
 			setTimeout(() => {
 				setErrorMessage("");
 			}, 7000);
@@ -60,6 +62,11 @@ export function Home({ setListToken }) {
 		setTokenInput(event.target.value);
 	}
 
+	// This function resets the token input and keeps focus on the input field
+	const clearTokenInput = () => {
+		setTokenInput('');
+		tokenInputRef.current.focus();
+	}
 
 	return (
 		<div className="Home">
@@ -70,20 +77,22 @@ export function Home({ setListToken }) {
 			<form onSubmit={submitTokenInput}>
 				<label htmlFor="tokenInput">
 				Enter token:
+				<br />
 					<input
 						type="text"
 						name="tokenInput"
 						id="tokenInput"
 						value={tokenInput}
 						onChange={handleInputChange}
+						ref={tokenInputRef}
 					/>
 					
-				
 				</label>
-				
-				{/* change label to JOIN SHARED LIST, or add ariaLabel, or visually hidden span */}
-				<Button label="Join" />
+				<Button label="X" type="reset" ariaLabel="Clear token input" onClick={clearTokenInput}/>
+				<br />
+				<Button label="Join" type="submit" ariaLabel="Join shared shopping list"/>
 			</form>
+			
 			<div aria-live="polite">
 				{errorMessage && <p>{errorMessage}</p>}
 			</div>
