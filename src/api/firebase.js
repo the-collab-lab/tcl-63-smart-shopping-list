@@ -44,6 +44,15 @@ export function useShoppingListData(listId) {
 	return data;
 }
 
+// OPTION B: NEWLY CREATED LIST IS ADDED TO FIRESTORE
+// NORMALLY FIRESTORE CREATES A COLLECTION WHEN A DOC IS ADDED TO IT; 
+// HERE WE ARE ADDING AN EMPTY DOC TO THE COLLECTION SO WE CAN SAVE THE LIST TO FIRESTORE RIGHT AFTER IT'S CREATED
+
+export async function addNewListToFirestore(listId) {
+	const newListCollectionRef = collection(db, listId);
+	return addDoc(newListCollectionRef, {});
+}
+
 /**
  * Add a new item to the user's list in Firestore.
  * @param {string} listId The id of the list we're adding to.
