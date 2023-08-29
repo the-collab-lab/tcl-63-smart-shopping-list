@@ -4,10 +4,12 @@ import Button from '../components/Button';
 
 export function List({ data, listToken }) {
 	const [inputItem, setInputItem] = useState('');
+
 	// This fuction resets the input field:
 	const handleClear = () => {
 		setInputItem('');
 	};
+
 	const handleInput = (e) => {
 		setInputItem(e.target.value);
 	};
@@ -48,14 +50,18 @@ export function List({ data, listToken }) {
 					onClick={handleClear}
 				/>
 			</form>
-			{/* Accessibility feature: added the aria-live and tabIndex attributes for screenreaders to announce as the user types */}
-			<ul aria-live="polite">
-				{filterData.length > 0 ? (
-					filterData.map((item) => <ListItem key={item.id} name={item.name} />)
-				) : (
-					<p>No item found!</p>
-				)}
-			</ul>
+			{/* Accessibility feature: added the aria-live attribute for screenreaders */}
+			<div aria-live="polite">
+				<ul>
+					{filterData.length > 0 ? (
+						filterData.map((item) => (
+							<ListItem key={item.id} name={item.name} />
+						))
+					) : (
+						<p aria-live="polite">No item found!</p>
+					)}
+				</ul>
+			</div>
 		</>
 	);
 }
