@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ListItem } from '../components';
 import Button from '../components/Button';
 
 export function List({ data, listToken }) {
 	const [inputItem, setInputItem] = useState('');
 
+	// Initialize a useRef to bring focus back to input field
+	const filterInputRef = useRef(null);
+
 	// This fuction resets the input field:
 	const handleClear = () => {
 		setInputItem('');
+		filterInputRef.current.focus();
 	};
 
 	const handleInput = (e) => {
@@ -29,27 +33,29 @@ export function List({ data, listToken }) {
 				Hello from the <code>/list</code> page!
 			</p>
 			<p>Your token is: {listToken}</p>
-			{data.length === 0 && (
+			{data.length === 0 ? (
 				<p>Your shopping list is empty. Click on "Add item" to begin!</p>
+			) : (
+				<form onSubmit={(e) => e.preventDefault()}>
+					<label htmlFor="filterItems">Filter items</label>
+					<br />
+					<input
+						type="text"
+						name="filterItems"
+						id="filterItems"
+						value={inputItem}
+						onChange={handleInput}
+						ref={filterInputRef}
+						placeholder="Start typing here..."
+					/>
+					<Button
+						ariaLabel={'clear input field'}
+						label={'x'}
+						type={'reset'}
+						onClick={handleClear}
+					/>
+				</form>
 			)}
-			<form onSubmit={(e) => e.preventDefault()}>
-				<label htmlFor="filter">Filter items</label>
-				<br />
-				<input
-					type="text"
-					name="filter"
-					id="filter"
-					value={inputItem}
-					onChange={handleInput}
-					placeholder="Start typing here..."
-				/>
-				<Button
-					ariaLabel={'clear input field'}
-					label={'x'}
-					type={'reset'}
-					onClick={handleClear}
-				/>
-			</form>
 			{/* Accessibility feature: added the aria-live attribute for screenreaders */}
 			<div aria-live="polite">
 				<ul>
