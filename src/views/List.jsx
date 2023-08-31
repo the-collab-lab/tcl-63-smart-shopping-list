@@ -18,8 +18,11 @@ export function List({ data, listToken }) {
 		setInputItem(e.target.value);
 	};
 	// This helper function matches the user input any part of the item name from the items list
+	// It also sanitizes the input by filtering out any special characters and converting uppercase to lowercase
 	const stringMatch = (inputItem, listItem) => {
-		return listItem.toLowerCase().includes(inputItem.toLowerCase());
+		return listItem
+			.toLowerCase()
+			.includes(inputItem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').toLowerCase());
 	};
 
 	// Applies the helper function to narrow down the data
