@@ -1,8 +1,12 @@
 import { useState, useRef } from 'react';
 import { ListItem } from '../components';
+import { sanitizeInput } from '../utils/sanitizeInput';
 import Button from '../components/Button';
 
 export function List({ data, listToken }) {
+	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
+	// FILTER OUT THE DATA THAT CONTAINS AN OBJECT WITH NO NAME PROPERTY
+	const realData = data.filter((item) => item.name);
 	const [inputItem, setInputItem] = useState('');
 
 	// Initialize a useRef to bring focus back to input field
@@ -20,23 +24,19 @@ export function List({ data, listToken }) {
 	// This helper function matches the user input any part of the item name from the items list
 	// It also sanitizes the input by filtering out any special characters and converting uppercase to lowercase
 	const stringMatch = (inputItem, listItem) => {
-		return listItem
-			.toLowerCase()
-			.includes(inputItem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').toLowerCase());
+		const sanitizedInput = sanitizeInput(inputItem);
+		return listItem.toLowerCase().includes(sanitizedInput.toLowerCase());
 	};
 
 	// Applies the helper function to narrow down the data
-	const filterData = data.filter((listItem) =>
+	const filterData = realData.filter((listItem) =>
 		stringMatch(inputItem, listItem.name),
 	);
 
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
 			<p>Your token is: {listToken}</p>
-			{data.length === 0 ? (
+			{realData.length === 0 ? (
 				<p>Your shopping list is empty. Click on "Add item" to begin!</p>
 			) : (
 				<form onSubmit={(e) => e.preventDefault()}>
