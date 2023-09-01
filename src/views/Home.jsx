@@ -3,6 +3,7 @@ import Button from '../components/Button';
 import './Home.css';
 import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
+import { sanitizeInput } from '../utils/sanitizeInput';
 
 export function Home({ setListToken }) {
 
@@ -59,8 +60,10 @@ export function Home({ setListToken }) {
 	}
 
 	const handleInputChange = (event) => {
-		setTokenInput(event.target.value);
-	}
+		const sanitizedInput = sanitizeInput(event.target.value);
+		setTokenInput(sanitizedInput);
+	};
+	  
 
 	// This function resets the token input and keeps focus on the input field
 	const clearTokenInput = () => {

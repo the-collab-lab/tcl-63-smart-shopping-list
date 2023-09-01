@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { ListItem } from '../components';
+import { sanitizeInput } from '../utils/sanitizeInput';
 import Button from '../components/Button';
 
 export function List({ data, listToken }) {
@@ -23,9 +24,8 @@ export function List({ data, listToken }) {
 	// This helper function matches the user input any part of the item name from the items list
 	// It also sanitizes the input by filtering out any special characters and converting uppercase to lowercase
 	const stringMatch = (inputItem, listItem) => {
-		return listItem
-			.toLowerCase()
-			.includes(inputItem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').toLowerCase());
+		const sanitizedInput = sanitizeInput(inputItem);
+		return listItem.toLowerCase().includes(sanitizedInput.toLowerCase());
 	};
 
 	// Applies the helper function to narrow down the data
