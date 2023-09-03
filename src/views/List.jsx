@@ -62,13 +62,11 @@ export function List({ data, listToken }) {
 			{/* Accessibility feature: added the aria-live attribute for screenreaders */}
 			<div aria-live="polite">
 				<ul>
-					{filterData.length > 0 ? (
-						filterData.map((item) => (
-							<ListItem key={item.id} name={item.name} />
-						))
-					) : (
-						<p aria-live="polite">No item found!</p>
-					)}
+					{filterData.length > 0
+						? filterData.map((item) => (
+								<ListItem key={item.id} name={item.name} />
+						  ))
+						: realData.length > 0 && <p aria-live="polite">No item found!</p>}
 				</ul>
 			</div>
 		</>
