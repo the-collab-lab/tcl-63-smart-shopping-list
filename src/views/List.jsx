@@ -66,10 +66,9 @@ export function List({ data, listToken }) {
 						? filterData.map((item) => (
 								<ListItem
 									key={item.id}
-									name={item.name}
 									listToken={listToken}
+									item={item}
 									itemId={item.id}
-									lastPurchased={item.lastPurchased}
 								/>
 						  ))
 						: realData.length > 0 && <p aria-live="polite">No item found!</p>}

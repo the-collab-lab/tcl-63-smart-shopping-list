@@ -82,6 +82,12 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	});
 }
 
+/**
+ * update a user's list item in Firebase
+ * @param {*} listId The list token we are modifying its data.
+ * @param {*} itemId The item id.
+ * @param {*} checked A boolean value indicating whether the item is purchased.
+ */
 export async function updateItem(listId, itemId, checked) {
 	const itemRef = doc(db, listId, itemId);
 	const itemDoc = await getDoc(itemRef);
