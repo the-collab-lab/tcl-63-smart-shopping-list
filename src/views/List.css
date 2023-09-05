@@ -1,0 +1,9 @@
+
+.addItemButton {
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
+    color: black;
+}

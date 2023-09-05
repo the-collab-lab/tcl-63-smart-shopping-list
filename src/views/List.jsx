@@ -1,7 +1,9 @@
 import { useState, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { ListItem } from '../components';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import Button from '../components/Button';
+import "./List.css"
 
 export function List({ data, listToken }) {
 	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
@@ -35,9 +37,17 @@ export function List({ data, listToken }) {
 
 	return (
 		<>
+			<p>Friends who shop together, stay together!</p>
 			<p>Your token is: {listToken}</p>
+			<p>Please feel free to share it with your friends and family</p>
+			<br />
 			{realData.length === 0 ? (
-				<p>Your shopping list is empty. Click on "Add item" to begin!</p>
+				<>
+					<p>Your shopping list is empty.</p>
+					{/* a NavLink is semantically a better element than a button because
+					it links to another page, and it is compatible with screen readers */}
+					<NavLink to="/add-item" className="addItemButton">Add Item</NavLink>
+				</>
 			) : (
 				<form onSubmit={(e) => e.preventDefault()}>
 					<label htmlFor="filterItems">Filter items</label>
