@@ -1,6 +1,6 @@
-const Button = ({ ariaLabel, label, onClick, type }) => {
+const Button = ({ ariaLabel, label, onClick, type, isDisabled }) => {
 	return (
-		<button aria-label={ariaLabel} type={type} onClick={onClick}>
+		<button aria-label={ariaLabel} type={type} onClick={onClick} disabled={isDisabled}>
 			{label}
 		</button>
 	);

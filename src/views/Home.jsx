@@ -3,7 +3,6 @@ import Button from '../components/Button';
 import './Home.css';
 import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
-import { sanitizeInput } from '../utils/sanitizeInput';
 
 export function Home({ setListToken }) {
 
@@ -12,6 +11,7 @@ export function Home({ setListToken }) {
 	
 	const [tokenInput, setTokenInput] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
+	const [isTokenValid, setIsTokenValid] = useState(false)
 	
 	
 	// OPTION: A - NEW (EMPTY) LIST IS ONLY SAVED TO LOCAL STORAGE
@@ -34,34 +34,20 @@ export function Home({ setListToken }) {
 		}
 	};
 
-	// IMPORT useShoppingListData FROM Firebase.js TO TEST WHETHER THE tokenInput IS VALID
-	const sharedListData = useShoppingListData(tokenInput)
-
-	const submitTokenInput = (event) => {
-		event.preventDefault();
-		
-		if(tokenInput.trim() === "") {
-			setErrorMessage("Please, enter 3-word token.");
-			setTimeout(() => {
-				setErrorMessage("");
-			}, 7000);
-			return;
-		} 
-
-		if(sharedListData.length === 0) {
-			setErrorMessage("The list does not exist. Please try again.");
-			setTimeout(() => {
-				setErrorMessage("");
-			}, 7000);
-			return;
-		} 
-
-		setListToken(tokenInput)
-	}
-
 	const handleInputChange = (event) => {
-		const sanitizedInput = sanitizeInput(event.target.value);
-		setTokenInput(sanitizedInput);
+		const tokenInput = event.target.value;
+		setTokenInput(tokenInput);
+
+		const tokenWords = tokenInput.split(' ').filter(word => word !== '');
+		setIsTokenValid(tokenWords.length === 3);
+
+		if (/[^a-zA-Z\s]/.test(tokenInput)) {
+			setErrorMessage("Please use only letters!");
+			setIsTokenValid(false);
+			setTimeout(() => {
+				setErrorMessage("");
+			}, 5000);
+		}
 	};
 	  
 
@@ -71,15 +57,49 @@ export function Home({ setListToken }) {
 		tokenInputRef.current.focus();
 	}
 
+	// IMPORT useShoppingListData FROM Firebase.js TO TEST WHETHER THE tokenInput IS VALID
+
+	const token = tokenInput.trim().toLowerCase()
+	const sharedListData = useShoppingListData(token)
+
+	const submitTokenInput = (event) => {
+		event.preventDefault();
+
+		if(sharedListData.length === 0) {
+			setErrorMessage("The list does not exist. Please try again.");
+			setTimeout(() => {
+				setErrorMessage("");
+			}, 7000);
+			return;
+		} 
+
+		setListToken(token)
+	}
+
+	const handleEnterKey = (event) => {
+		if (event.key === "Enter") {
+			event.preventDefault()
+			if (!isTokenValid) {
+				setErrorMessage('A token must contain exactly three words separated by a space.')
+				setTimeout(() => {
+					setErrorMessage("");
+				}, 7000);
+			} else {
+				submitTokenInput(event)
+			}
+		}
+	}
+	
+
 	return (
 		<div className="Home">
 			<Button label="Create New List" onClick={createNewList} />
 			<p>-or-</p>
-			<p>Join an existing shopping list by entering a three word token.</p>
+			<p>Join an existing shopping list.</p>
 
 			<form onSubmit={submitTokenInput}>
 				<label htmlFor="tokenInput">
-				Enter token:
+				Enter a 3-word token (example: "word word word"):
 				<br />
 					<input
 						type="text"
@@ -87,13 +107,19 @@ export function Home({ setListToken }) {
 						id="tokenInput"
 						value={tokenInput}
 						onChange={handleInputChange}
+						onKeyDown={handleEnterKey}
 						ref={tokenInputRef}
 					/>
 					
 				</label>
 				<Button label="X" type="reset" ariaLabel="Clear token input" onClick={clearTokenInput}/>
 				<br />
-				<Button label="Join" type="submit" ariaLabel="Join shared shopping list"/>
+				<Button 
+					label="Join" 
+					type="submit" 
+					ariaLabel="Join shared shopping list"
+					isDisabled={!isTokenValid}
+				/>
 			</form>
 			
 			<div aria-live="polite">
