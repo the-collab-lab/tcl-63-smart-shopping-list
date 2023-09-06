@@ -2,7 +2,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 
 import './Layout.css';
 
-export function Layout() {
+export function Layout({listToken}) {
 	return (
 		<>
 			<div className="Layout">
@@ -14,9 +14,10 @@ export function Layout() {
 				</main>
 				<nav className="Nav">
 					<div className="Nav-container">
-						<NavLink to="/" className="Nav-link">
+						{/* this removes the Home navlink from the List and AddItem pages when there is a token assigned */}
+						{!listToken && <NavLink to="/" className="Nav-link">
 							Home
-						</NavLink>
+						</NavLink>}
 						<NavLink to="/list" className="Nav-link">
 							List
 						</NavLink>
