@@ -47,7 +47,7 @@ export function ListItem({ listToken, item, itemId }) {
 	return (
 		<>
 			<li className="ListItem">
-				<label aria-label="Mark as purchased">
+				<label aria-label={`Mark ${name} as purchased`}>
 					<input
 						id={name}
 						name={name}
