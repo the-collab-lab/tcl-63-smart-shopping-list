@@ -42,7 +42,7 @@ export function Home({ setListToken }) {
 		setIsTokenValid(tokenWords.length === 3);
 
 		// test for all non-letter characters; 
-		// please note: it does not work for '/'. see useShoppingListData function in firestore.js
+		// please note: it does not work for '/', but do not panic! see useShoppingListData function in firestore.js for solution
 		if (/[^a-zA-Z\s]/.test(tokenInput)) {
 			setErrorMessage("Please use only letters!");
 			setIsTokenValid(false);
