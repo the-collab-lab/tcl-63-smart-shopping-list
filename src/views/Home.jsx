@@ -36,11 +36,11 @@ export function Home({ setListToken }) {
 
 	const handleInputChange = (event) => {
 		const tokenInput = event.target.value;
-		setTokenInput(tokenInput);
 
 		const tokenWords = tokenInput.split(' ').filter(word => word !== '');
 		setIsTokenValid(tokenWords.length === 3);
 
+		// test for all non-letter characters with the exception of '/'. see useShoppingListData function in firestore.js
 		if (/[^a-zA-Z\s]/.test(tokenInput)) {
 			setErrorMessage("Please use only letters!");
 			setIsTokenValid(false);
@@ -48,6 +48,7 @@ export function Home({ setListToken }) {
 				setErrorMessage("");
 			}, 5000);
 		}
+		setTokenInput(tokenInput);
 	};
 	  
 
