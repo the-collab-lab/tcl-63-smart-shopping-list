@@ -58,9 +58,10 @@ export function Home({ setListToken }) {
 		tokenInputRef.current.focus();
 	}
 
+	
+	// trim spaces at both ends of the token; keep only one space between words; turn all letters to lower case
+	const token = tokenInput.trim().replace(/\s+/g, ' ').toLowerCase();
 	// IMPORT useShoppingListData FROM Firebase.js TO TEST WHETHER THE tokenInput IS VALID
-
-	const token = tokenInput.trim().toLowerCase()
 	const sharedListData = useShoppingListData(token)
 
 	const submitTokenInput = (event) => {
