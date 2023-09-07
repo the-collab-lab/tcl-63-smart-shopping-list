@@ -1,4 +1,11 @@
-import { collection, onSnapshot, addDoc } from 'firebase/firestore';
+import {
+	collection,
+	onSnapshot,
+	addDoc,
+	doc,
+	getDoc,
+	updateDoc,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
 import { getFutureDate } from '../utils';
@@ -45,7 +52,7 @@ export function useShoppingListData(listId) {
 }
 
 // OPTION B: NEWLY CREATED LIST IS ADDED TO FIRESTORE
-// NORMALLY FIRESTORE CREATES A COLLECTION WHEN A DOC IS ADDED TO IT; 
+// NORMALLY FIRESTORE CREATES A COLLECTION WHEN A DOC IS ADDED TO IT;
 // HERE WE ARE ADDING AN EMPTY DOC TO THE COLLECTION SO WE CAN SAVE THE LIST TO FIRESTORE RIGHT AFTER IT'S CREATED
 
 export async function addNewListToFirestore(listId) {
@@ -71,15 +78,30 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 		dateNextPurchased: getFutureDate(daysUntilNextPurchase),
 		name: itemName,
 		totalPurchases: 0,
+		checked: false,
 	});
 }
 
-export async function updateItem() {
-	/**
-	 * TODO: Fill this out so that it uses the correct Firestore function
-	 * to update an existing item. You'll need to figure out what arguments
-	 * this function must accept!
-	 */
+/**
+ * update a user's list item in Firebase
+ * @param {*} listId The list token we are modifying its data.
+ * @param {*} itemId The item id.
+ * @param {*} checked A boolean value indicating whether the item is purchased.
+ */
+export async function updateItem(listId, itemId, checked) {
+	const itemRef = doc(db, listId, itemId);
+	const itemDoc = await getDoc(itemRef);
+	const { dateLastPurchased, totalPurchases } = itemDoc.data();
+
+	try {
+		return updateDoc(itemRef, {
+			dateLastPurchased: checked ? new Date() : dateLastPurchased,
+			totalPurchases: checked ? totalPurchases + 1 : totalPurchases,
+			checked: checked,
+		});
+	} catch (error) {
+		console.log('updateDoc error', error);
+	}
 }
 
 export async function deleteItem() {
