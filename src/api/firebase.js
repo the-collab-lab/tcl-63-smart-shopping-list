@@ -17,9 +17,8 @@ export function useShoppingListData(listId) {
 	const [data, setData] = useState(initialState);
 
 	useEffect(() => {
-		// "/" is used by Firestore as a path separator and causes the app to crash when enter into the token field
-		// this restriction prevents communication with the database when "/" is used
-		if (!listId || listId.includes("/")) return;
+		// in the Home component an invalid token is set to null and any calls to Firestore are skipped
+		if (!listId) return;
 
 		// When we get a listId, we use it to subscribe to real-time updates
 		// from Firestore.

@@ -42,7 +42,6 @@ export function Home({ setListToken }) {
 		setIsTokenValid(tokenWords.length === 3);
 
 		// test for all non-letter characters; 
-		// please note: it does not work for '/', but do not panic! see useShoppingListData function in firestore.js for solution
 		if (/[^a-zA-Z\s]/.test(tokenInput)) {
 			setErrorMessage("Please use only letters!");
 			setIsTokenValid(false);
@@ -63,8 +62,8 @@ export function Home({ setListToken }) {
 	
 	// trim spaces at both ends of the token; keep only one space between words; turn all letters to lower case
 	const token = tokenInput.trim().replace(/\s+/g, ' ').toLowerCase();
-	// IMPORT useShoppingListData FROM Firebase.js TO TEST WHETHER THE tokenInput IS VALID
-	const sharedListData = useShoppingListData(token)
+	// allow calls to Firebase only if the token is valid
+	const sharedListData = useShoppingListData(isTokenValid ? token : null)
 
 	const submitTokenInput = (event) => {
 		event.preventDefault();
