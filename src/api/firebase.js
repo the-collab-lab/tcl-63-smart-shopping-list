@@ -24,6 +24,7 @@ export function useShoppingListData(listId) {
 	const [data, setData] = useState(initialState);
 
 	useEffect(() => {
+		// in the Home component an invalid token is set to null and any calls to Firestore are skipped
 		if (!listId) return;
 
 		// When we get a listId, we use it to subscribe to real-time updates
