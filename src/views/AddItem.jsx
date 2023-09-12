@@ -37,7 +37,9 @@ export function AddItem({ listToken, data }) {
 		event.preventDefault();
 		// check if user has entered an empty string or whitespace
 		if (formData.itemName.trim() === '') {
-			setSubmissionStatus('Please enter an item name.');
+			setSubmissionStatus(
+				'An item name cannot be empty. Please enter an item name.',
+			);
 			setTimeout(() => {
 				setSubmissionStatus('');
 			}, 7000);
