@@ -1,7 +1,19 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
 
-export function AddItem({ listToken }) {
+export function AddItem({ listToken, data }) {
+	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
+	const nonAlphanumRegex = /[^A-Za-z0-9]/g;
+	const specialCharRegex = /[^A-Za-z0-9\s]/g;
+	const normalizeItemName = (name) => {
+		return name.normalize().toLowerCase().replace(nonAlphanumRegex, '');
+	};
+
+	// get the list of item names from existing list from firebase, filter is necessary to remove the empty item when the list is first created
+	const existingItems = data
+		.filter((item) => item.name !== undefined)
+		.map((item) => normalizeItemName(item.name));
+
 	// Initialize formData state to store user input
 	const [formData, setFormData] = useState({
 		itemName: '',
@@ -20,16 +32,33 @@ export function AddItem({ listToken }) {
 			[name]: type === 'radio' ? parseInt(value) : value,
 		}));
 	}
-
 	// This async handleSubmit function sends the data to firebase and displays a user message
 	async function handleSubmit(event) {
 		event.preventDefault();
 		// check if user has entered an empty string or whitespace
 		if (formData.itemName.trim() === '') {
 			setSubmissionStatus('Please enter an item name.');
+			setTimeout(() => {
+				setSubmissionStatus('');
+			}, 7000);
 			return;
 		}
-
+		// prompts the user to remove any nonalpha-numeric characters before submission
+		else if (specialCharRegex.test(formData.itemName)) {
+			setSubmissionStatus('Please remove any special characters and try again');
+			setTimeout(() => {
+				setSubmissionStatus('');
+			}, 7000);
+			return;
+		}
+		// check if the item user entered is already on the list
+		else if (existingItems.includes(normalizeItemName(formData.itemName))) {
+			setSubmissionStatus('The item is already in the list');
+			setTimeout(() => {
+				setSubmissionStatus('');
+			}, 7000);
+			return;
+		}
 		try {
 			await addItem(listToken, formData); // add formData to firebase
 			setSubmissionStatus(

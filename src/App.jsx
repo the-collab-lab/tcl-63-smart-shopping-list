@@ -37,7 +37,7 @@ export function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Layout listToken={listToken}/>}>
+				<Route path="/" element={<Layout listToken={listToken} />}>
 					<Route
 						index
 						element={
@@ -58,7 +58,10 @@ export function App() {
 							)
 						}
 					/>
-					<Route path="/add-item" element={<AddItem listToken={listToken} />} />
+					<Route
+						path="/add-item"
+						element={<AddItem listToken={listToken} data={data} />}
+					/>
 				</Route>
 			</Routes>
 		</Router>
