@@ -8,7 +8,8 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
  * A custom hook that subscribes to a shopping list in our Firestore database
@@ -92,16 +93,86 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 export async function updateItem(listId, itemId, checked) {
 	const itemRef = doc(db, listId, itemId);
 	const itemDoc = await getDoc(itemRef);
-	const { dateLastPurchased, totalPurchases } = itemDoc.data();
+	const { dateCreated, dateLastPurchased, dateNextPurchased, totalPurchases } =
+		itemDoc.data();
 
-	try {
-		return updateDoc(itemRef, {
-			dateLastPurchased: checked ? new Date() : dateLastPurchased,
-			totalPurchases: checked ? totalPurchases + 1 : totalPurchases,
-			checked: checked,
-		});
-	} catch (error) {
-		console.log('updateDoc error', error);
+	const checkedDateLastPurchased = checked ? new Date() : dateLastPurchased;
+
+	if (checkedDateLastPurchased) {
+		// Convert dateNextPurchased from Timestamp to a JS Date
+		const dateNextPurchasedAsDate = dateNextPurchased.toDate();
+
+		/**
+		 * Calculate the previous estimate for purchase
+		 * based on historical data
+		 */
+		const previousEstimate = getDaysBetweenDates(
+			checkedDateLastPurchased,
+			dateNextPurchasedAsDate,
+		);
+
+		console.log('previous estimate', previousEstimate);
+
+		/**
+		 * Calculate the days since the last transaction,
+		 * considering either last purchased or the created date
+		 */
+		const daysSinceLastTransaction = getDaysBetweenDates(
+			new Date(),
+			checkedDateLastPurchased || dateCreated,
+		);
+
+		console.log('days since last transaction', daysSinceLastTransaction);
+
+		// Calculate the remaining days until the next purchase
+		let remainingDays = calculateEstimate(
+			previousEstimate,
+			daysSinceLastTransaction,
+			totalPurchases,
+		);
+
+		// Ensure that the next purchase date is at least one day in the future
+		if (remainingDays <= 0) {
+			remainingDays = 1;
+		}
+
+		console.log('remaining days', remainingDays);
+
+		console.log('get future date', getFutureDate(remainingDays));
+
+		if (dateNextPurchasedAsDate < checkedDateLastPurchased) {
+			// Set checked to false so the item can be purchased again
+			checked = false;
+		}
+
+		try {
+			return updateDoc(itemRef, {
+				dateLastPurchased: checkedDateLastPurchased,
+				dateNextPurchased: getFutureDate(remainingDays),
+				totalPurchases: totalPurchases + 1,
+				checked: checked,
+			});
+		} catch (error) {
+			console.log('updateDoc error', error);
+		}
+	} else {
+		try {
+			/**
+			 * Prevent dateNextPurchased from being overridden
+			 * with the current date or dateCreated
+			 */
+			const newDateNextPurchased =
+				dateNextPurchased && dateNextPurchased.toDate();
+
+			return updateDoc(itemRef, {
+				dateLastPurchased: dateLastPurchased,
+				dateNextPurchased: newDateNextPurchased,
+				totalPurchases: totalPurchases,
+				checked: checked,
+			});
+		} catch (error) {
+			console.log('Unchecked item update error:', error);
+		}
 	}
 }
 
