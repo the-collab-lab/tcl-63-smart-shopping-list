@@ -11,6 +11,8 @@ import { useShoppingListData } from './api';
 
 import { useStateWithStorage } from './utils';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export function App() {
 	/**
 	 * This custom hook takes a token pointing to a shopping list

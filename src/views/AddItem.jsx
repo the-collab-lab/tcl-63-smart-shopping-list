@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
+import { ToastContainer, toast } from 'react-toastify'; // Import Toastify to display alert messages
 
 export function AddItem({ listToken, data }) {
 	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
@@ -19,8 +20,6 @@ export function AddItem({ listToken, data }) {
 		itemName: '',
 		daysUntilNextPurchase: 7,
 	});
-	// Initialize submission message to display after user submission
-	const [submissionStatus, setSubmissionStatus] = useState('');
 
 	// This handleChange function updates the formData object as we receive user inputs
 	// It converts radio button value from string to integer type for calculation of "nextPurchasedDate"
@@ -37,33 +36,22 @@ export function AddItem({ listToken, data }) {
 		event.preventDefault();
 		// check if user has entered an empty string or whitespace
 		if (formData.itemName.trim() === '') {
-			setSubmissionStatus(
-				'An item name cannot be empty. Please enter an item name.',
-			);
-			setTimeout(() => {
-				setSubmissionStatus('');
-			}, 7000);
+			toast.error('An item name cannot be empty. Please enter an item name.');
 			return;
 		}
 		// prompts the user to remove any nonalpha-numeric characters before submission
 		else if (specialCharRegex.test(formData.itemName)) {
-			setSubmissionStatus('Please remove any special characters and try again');
-			setTimeout(() => {
-				setSubmissionStatus('');
-			}, 7000);
+			toast.error('Please remove any special characters and try again');
 			return;
 		}
 		// check if the item user entered is already on the list
 		else if (existingItems.includes(normalizeItemName(formData.itemName))) {
-			setSubmissionStatus('The item is already in the list');
-			setTimeout(() => {
-				setSubmissionStatus('');
-			}, 7000);
+			toast.error('The item is already in the list');
 			return;
 		}
 		try {
 			await addItem(listToken, formData); // add formData to firebase
-			setSubmissionStatus(
+			toast.success(
 				`${formData.itemName} was successfully added to the database`,
 			);
 			setFormData({
@@ -71,7 +59,7 @@ export function AddItem({ listToken, data }) {
 				daysUntilNextPurchase: 7,
 			}); // clear the itemName field after submission
 		} catch (error) {
-			setSubmissionStatus(
+			toast.error(
 				`fail to save the item ${formData.itemName}, please try again`,
 			);
 			console.log(error);
@@ -135,10 +123,8 @@ export function AddItem({ listToken, data }) {
 				</fieldset>
 				<button type="submit">Add Item</button>
 			</form>
-			{/* Give feedback when the item is added, including for screen reader users */}
-			<div aria-live="polite">
-				{submissionStatus && <p>{submissionStatus}</p>}
-			</div>
+			{/* Prompt users with alert message, including for screen reader users */}
+			<ToastContainer position="top-center" />
 		</>
 	);
 }
