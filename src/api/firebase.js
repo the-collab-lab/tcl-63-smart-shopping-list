@@ -111,8 +111,6 @@ export async function updateItem(listId, itemId, checked) {
 			dateNextPurchasedAsDate,
 		);
 
-		console.log('previous estimate', previousEstimate);
-
 		/**
 		 * Calculate the days since the last transaction,
 		 * considering either last purchased or the created date
@@ -121,8 +119,6 @@ export async function updateItem(listId, itemId, checked) {
 			new Date(),
 			checkedDateLastPurchased || dateCreated,
 		);
-
-		console.log('days since last transaction', daysSinceLastTransaction);
 
 		// Calculate the remaining days until the next purchase
 		let remainingDays = calculateEstimate(
@@ -135,10 +131,6 @@ export async function updateItem(listId, itemId, checked) {
 		if (remainingDays <= 0) {
 			remainingDays = 1;
 		}
-
-		console.log('remaining days', remainingDays);
-
-		console.log('get future date', getFutureDate(remainingDays));
 
 		if (dateNextPurchasedAsDate < checkedDateLastPurchased) {
 			// Set checked to false so the item can be purchased again
