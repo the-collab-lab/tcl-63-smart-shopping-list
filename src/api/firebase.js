@@ -160,7 +160,6 @@ export async function updateItem(listId, itemId, checked) {
 				dateLastPurchased: dateLastPurchased,
 				dateNextPurchased: newDateNextPurchased,
 				totalPurchases: totalPurchases,
-				checked: checked,
 			});
 		} catch (error) {
 			console.log('Unchecked item update error:', error);
