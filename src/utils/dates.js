@@ -29,7 +29,9 @@ export function getDaysBetweenDates(startDate, endDate) {
 				endDate.getTime() - startDate.getTime();
 
 			// Using Math.round() to ensure that fractional days are rounded to the nearest whole day
-			return Math.round(days_between_in_milliseconds / ONE_DAY_IN_MILLISECONDS);
+			return Math.abs(
+				Math.round(days_between_in_milliseconds / ONE_DAY_IN_MILLISECONDS),
+			);
 		} else {
 			console.log(
 				`Not a date\nstartDate is of type: ${typeof startDate}\nendDate is of type: ${typeof endDate}`,
