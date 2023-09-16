@@ -25,12 +25,11 @@ export function getFutureDate(offset) {
 export function getDaysBetweenDates(startDate, endDate) {
 	try {
 		if (startDate instanceof Date && endDate instanceof Date) {
-			const days_between_in_milliseconds =
-				endDate.getTime() - startDate.getTime();
+			const daysBetweenInMilliseconds = endDate.getTime() - startDate.getTime();
 
 			// Using Math.round() to ensure that fractional days are rounded to the nearest whole day
 			return Math.abs(
-				Math.round(days_between_in_milliseconds / ONE_DAY_IN_MILLISECONDS),
+				Math.round(daysBetweenInMilliseconds / ONE_DAY_IN_MILLISECONDS),
 			);
 		} else {
 			console.log(
