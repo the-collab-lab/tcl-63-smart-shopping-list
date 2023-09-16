@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify'; // Import Toastify to di
 export function AddItem({ listToken, data }) {
 	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
 	const nonAlphanumRegex = /[^A-Za-z0-9]/g;
-	const specialCharRegex = /[^A-Za-z0-9\s]/g;
 	const normalizeItemName = (name) => {
 		return name.normalize().toLowerCase().replace(nonAlphanumRegex, '');
 	};
@@ -39,11 +38,7 @@ export function AddItem({ listToken, data }) {
 			toast.error('An item name cannot be empty. Please enter an item name.');
 			return;
 		}
-		// prompts the user to remove any nonalpha-numeric characters before submission
-		else if (specialCharRegex.test(formData.itemName)) {
-			toast.error('Please remove any special characters and try again');
-			return;
-		}
+
 		// check if the item user entered is already on the list
 		else if (existingItems.includes(normalizeItemName(formData.itemName))) {
 			toast.error('The item is already in the list');
