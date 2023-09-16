@@ -96,10 +96,11 @@ export async function updateItem(listId, itemId, checked) {
 	const { dateCreated, dateLastPurchased, dateNextPurchased, totalPurchases } =
 		itemDoc.data();
 
-	const checkedDateLastPurchased = checked ? new Date() : dateLastPurchased;
+	const today = new Date();
+
+	const checkedDateLastPurchased = checked ? today : dateLastPurchased;
 
 	if (checkedDateLastPurchased) {
-		// Convert dateNextPurchased from Timestamp to a JS Date
 		const dateNextPurchasedAsDate = dateNextPurchased.toDate();
 
 		/**
@@ -113,23 +114,22 @@ export async function updateItem(listId, itemId, checked) {
 
 		/**
 		 * Calculate the days since the last transaction,
-		 * considering either last purchased or the created date
+		 * considering either date last purchased or the created date
 		 */
 		const daysSinceLastTransaction = getDaysBetweenDates(
-			new Date(),
+			today,
 			checkedDateLastPurchased || dateCreated,
 		);
 
-		// Calculate the remaining days until the next purchase
-		let remainingDays = calculateEstimate(
+		let daysTillNextPurchase = calculateEstimate(
 			previousEstimate,
 			daysSinceLastTransaction,
 			totalPurchases,
 		);
 
 		// Ensure that the next purchase date is at least one day in the future
-		if (remainingDays <= 0) {
-			remainingDays = 1;
+		if (daysTillNextPurchase <= 0) {
+			daysTillNextPurchase = 1;
 		}
 
 		if (dateNextPurchasedAsDate < checkedDateLastPurchased) {
@@ -140,29 +140,12 @@ export async function updateItem(listId, itemId, checked) {
 		try {
 			return updateDoc(itemRef, {
 				dateLastPurchased: checkedDateLastPurchased,
-				dateNextPurchased: getFutureDate(remainingDays),
+				dateNextPurchased: getFutureDate(daysTillNextPurchase),
 				totalPurchases: totalPurchases + 1,
 				checked: checked,
 			});
 		} catch (error) {
 			console.log('updateDoc error', error);
-		}
-	} else {
-		try {
-			/**
-			 * Prevent dateNextPurchased from being overridden
-			 * with the current date or dateCreated
-			 */
-			const newDateNextPurchased =
-				dateNextPurchased && dateNextPurchased.toDate();
-
-			return updateDoc(itemRef, {
-				dateLastPurchased: dateLastPurchased,
-				dateNextPurchased: newDateNextPurchased,
-				totalPurchases: totalPurchases,
-			});
-		} catch (error) {
-			console.log('Unchecked item update error:', error);
 		}
 	}
 }
