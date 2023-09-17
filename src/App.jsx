@@ -11,6 +11,8 @@ import { useShoppingListData } from './api';
 
 import { useStateWithStorage } from './utils';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export function App() {
 	/**
 	 * This custom hook takes a token pointing to a shopping list
@@ -37,7 +39,7 @@ export function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Layout listToken={listToken}/>}>
+				<Route path="/" element={<Layout listToken={listToken} />}>
 					<Route
 						index
 						element={
@@ -58,7 +60,10 @@ export function App() {
 							)
 						}
 					/>
-					<Route path="/add-item" element={<AddItem listToken={listToken} />} />
+					<Route
+						path="/add-item"
+						element={<AddItem listToken={listToken} data={data} />}
+					/>
 				</Route>
 			</Routes>
 		</Router>
