@@ -1,12 +1,15 @@
 import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
-import { updateItem } from '../api/firebase';
+import { updateItem, deleteItem } from '../api/firebase';
 import { getFutureDate } from '../utils';
+import ReactModal from 'react-modal'
 import Button from "./Button"
+ReactModal.setAppElement('#root');
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
+	const [modalStatus, setModalStatus] = useState(false);
 
 	/**
 	 * If 24 hours has passed or the item is unchecked,
@@ -46,6 +49,19 @@ export function ListItem({ listToken, item, itemId }) {
 	}, [is24HoursPassed, itemId, listToken, checked]);
 
 
+	const handleDelete = async() => {
+		try {
+			await deleteItem(listToken, itemId)
+			setModalStatus(true)
+			console.log(modalStatus)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const openModal = () => setModalStatus(true)
+
+	const closeModal = () => setModalStatus(false)
 
 	return (
 		<>
@@ -65,9 +81,28 @@ export function ListItem({ listToken, item, itemId }) {
 						label="Delete"
 						ariaLabel={`Delete ${name} from your list`}
 						type="button"
-						onClick={handleDelete}
+						onClick={openModal}
 				/>
+				<ReactModal
+					isOpen={modalStatus}
+					onRequestClose={closeModal}
+				>
+					<h2>{`Are you sure you want to delete ${name} from your list?`}</h2>
+					<p>Press CONFIRM if yes, press CANCEL to return to your shopping list.</p>
+					<Button 
+						label="Confirm"
+						ariaLabel={`Confirm deleting ${name} from your list`}
+						type="button"
+						onClick={handleDelete}
+					/>
+					<Button 
+						label="Cancel"
+						ariaLabel={`Cancel deleting ${name} from your list`}
+						type="button"
+						onClick={closeModal}
+					/>
 
+				</ReactModal>
 
 			</li>
 		</>
