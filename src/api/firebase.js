@@ -93,77 +93,63 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 export async function updateItem(listId, itemId, checked) {
 	const itemRef = doc(db, listId, itemId);
 	const itemDoc = await getDoc(itemRef);
-	const { dateCreated, dateLastPurchased, dateNextPurchased, totalPurchases } =
+	const { dateLastPurchased, dateNextPurchased, totalPurchases } =
 		itemDoc.data();
 
-	const checkedDateLastPurchased = checked ? new Date() : dateLastPurchased;
+	const today = new Date();
 
-	if (checkedDateLastPurchased) {
-		// Convert dateNextPurchased from Timestamp to a JS Date
-		const dateNextPurchasedAsDate = dateNextPurchased.toDate();
+	const checkedDateLastPurchased = checked ? today : dateLastPurchased;
 
-		/**
-		 * Calculate the previous estimate for purchase
-		 * based on historical data
-		 */
-		const previousEstimate = getDaysBetweenDates(
-			checkedDateLastPurchased,
-			dateNextPurchasedAsDate,
-		);
+	if (!checkedDateLastPurchased) {
+		console.error('Could not update');
+		return;
+	}
 
-		/**
-		 * Calculate the days since the last transaction,
-		 * considering either last purchased or the created date
-		 */
-		const daysSinceLastTransaction = getDaysBetweenDates(
-			new Date(),
-			checkedDateLastPurchased || dateCreated,
-		);
+	const dateNextPurchasedAsDate = dateNextPurchased.toDate();
 
-		// Calculate the remaining days until the next purchase
-		let remainingDays = calculateEstimate(
-			previousEstimate,
-			daysSinceLastTransaction,
-			totalPurchases,
-		);
+	/**
+	 * Calculate the previous estimate for purchase
+	 * based on historical data
+	 */
+	const previousEstimate = getDaysBetweenDates(
+		checkedDateLastPurchased,
+		dateNextPurchasedAsDate,
+	);
 
-		// Ensure that the next purchase date is at least one day in the future
-		if (remainingDays <= 0) {
-			remainingDays = 1;
-		}
+	/**
+	 * Calculate the days since the last transaction,
+	 * considering either date last purchased or the created date
+	 */
+	const daysSinceLastTransaction = getDaysBetweenDates(
+		today,
+		checkedDateLastPurchased,
+	);
 
-		if (dateNextPurchasedAsDate < checkedDateLastPurchased) {
-			// Set checked to false so the item can be purchased again
-			checked = false;
-		}
+	let daysTillNextPurchase = calculateEstimate(
+		previousEstimate,
+		daysSinceLastTransaction,
+		totalPurchases,
+	);
 
-		try {
-			return updateDoc(itemRef, {
-				dateLastPurchased: checkedDateLastPurchased,
-				dateNextPurchased: getFutureDate(remainingDays),
-				totalPurchases: totalPurchases + 1,
-				checked: checked,
-			});
-		} catch (error) {
-			console.log('updateDoc error', error);
-		}
-	} else {
-		try {
-			/**
-			 * Prevent dateNextPurchased from being overridden
-			 * with the current date or dateCreated
-			 */
-			const newDateNextPurchased =
-				dateNextPurchased && dateNextPurchased.toDate();
+	// Ensure that the next purchase date is at least one day in the future
+	if (daysTillNextPurchase <= 0) {
+		daysTillNextPurchase = 1;
+	}
 
-			return updateDoc(itemRef, {
-				dateLastPurchased: dateLastPurchased,
-				dateNextPurchased: newDateNextPurchased,
-				totalPurchases: totalPurchases,
-			});
-		} catch (error) {
-			console.log('Unchecked item update error:', error);
-		}
+	if (dateNextPurchasedAsDate < checkedDateLastPurchased) {
+		// Set checked to false so the item can be purchased again
+		checked = false;
+	}
+
+	try {
+		return updateDoc(itemRef, {
+			dateLastPurchased: checkedDateLastPurchased,
+			dateNextPurchased: getFutureDate(daysTillNextPurchase),
+			totalPurchases: totalPurchases + 1,
+			checked: checked,
+		});
+	} catch (error) {
+		console.log('updateDoc error', error);
 	}
 }
 
