@@ -8,7 +8,8 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate } from '../utils';
+import { getFutureDate, getDaysBetweenDates } from '../utils';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
  * A custom hook that subscribes to a shopping list in our Firestore database
@@ -92,12 +93,59 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 export async function updateItem(listId, itemId, checked) {
 	const itemRef = doc(db, listId, itemId);
 	const itemDoc = await getDoc(itemRef);
-	const { dateLastPurchased, totalPurchases } = itemDoc.data();
+	const { dateLastPurchased, dateNextPurchased, totalPurchases } =
+		itemDoc.data();
+
+	const today = new Date();
+
+	const checkedDateLastPurchased = checked ? today : dateLastPurchased;
+
+	if (!checkedDateLastPurchased) {
+		console.error('Could not update');
+		return;
+	}
+
+	const dateNextPurchasedAsDate = dateNextPurchased.toDate();
+
+	/**
+	 * Calculate the previous estimate for purchase
+	 * based on historical data
+	 */
+	const previousEstimate = getDaysBetweenDates(
+		checkedDateLastPurchased,
+		dateNextPurchasedAsDate,
+	);
+
+	/**
+	 * Calculate the days since the last transaction,
+	 * considering either date last purchased or the created date
+	 */
+	const daysSinceLastTransaction = getDaysBetweenDates(
+		today,
+		checkedDateLastPurchased,
+	);
+
+	let daysTillNextPurchase = calculateEstimate(
+		previousEstimate,
+		daysSinceLastTransaction,
+		totalPurchases,
+	);
+
+	// Ensure that the next purchase date is at least one day in the future
+	if (daysTillNextPurchase <= 0) {
+		daysTillNextPurchase = 1;
+	}
+
+	if (dateNextPurchasedAsDate < checkedDateLastPurchased) {
+		// Set checked to false so the item can be purchased again
+		checked = false;
+	}
 
 	try {
 		return updateDoc(itemRef, {
-			dateLastPurchased: checked ? new Date() : dateLastPurchased,
-			totalPurchases: checked ? totalPurchases + 1 : totalPurchases,
+			dateLastPurchased: checkedDateLastPurchased,
+			dateNextPurchased: getFutureDate(daysTillNextPurchase),
+			totalPurchases: totalPurchases + 1,
 			checked: checked,
 		});
 	} catch (error) {
