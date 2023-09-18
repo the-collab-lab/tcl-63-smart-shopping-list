@@ -93,14 +93,16 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 export async function updateItem(listId, itemId, checked) {
 	const itemRef = doc(db, listId, itemId);
 	const itemDoc = await getDoc(itemRef);
-	const { dateCreated, dateLastPurchased, dateNextPurchased, totalPurchases } =
+	const { dateLastPurchased, dateNextPurchased, totalPurchases } =
 		itemDoc.data();
 
 	const today = new Date();
 
 	const checkedDateLastPurchased = checked ? today : dateLastPurchased;
 
-	if (checkedDateLastPurchased) {
+	if (!checkedDateLastPurchased) {
+		return;
+	} else {
 		const dateNextPurchasedAsDate = dateNextPurchased.toDate();
 
 		/**
@@ -118,7 +120,7 @@ export async function updateItem(listId, itemId, checked) {
 		 */
 		const daysSinceLastTransaction = getDaysBetweenDates(
 			today,
-			checkedDateLastPurchased || dateCreated,
+			checkedDateLastPurchased,
 		);
 
 		let daysTillNextPurchase = calculateEstimate(
