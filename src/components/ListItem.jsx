@@ -84,6 +84,7 @@ export function ListItem({ listToken, item, itemId }) {
 						onClick={openModal}
 				/>
 				<ReactModal
+					className="delete-modal"
 					isOpen={modalStatus}
 					onRequestClose={closeModal}
 				>
@@ -95,6 +96,7 @@ export function ListItem({ listToken, item, itemId }) {
 						type="button"
 						onClick={handleDelete}
 					/>
+					&nbsp;
 					<Button 
 						label="Cancel"
 						ariaLabel={`Cancel deleting ${name} from your list`}
