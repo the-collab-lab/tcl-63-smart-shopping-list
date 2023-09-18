@@ -2,6 +2,7 @@ import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
 import { updateItem } from '../api/firebase';
 import { getFutureDate } from '../utils';
+import Button from "./Button"
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, checked } = item;
@@ -44,6 +45,8 @@ export function ListItem({ listToken, item, itemId }) {
 		}
 	}, [is24HoursPassed, itemId, listToken, checked]);
 
+
+
 	return (
 		<>
 			<li className="ListItem">
@@ -57,6 +60,15 @@ export function ListItem({ listToken, item, itemId }) {
 					/>
 					{name}
 				</label>
+				&nbsp;
+				<Button 
+						label="Delete"
+						ariaLabel={`Delete ${name} from your list`}
+						type="button"
+						onClick={handleDelete}
+				/>
+
+
 			</li>
 		</>
 	);

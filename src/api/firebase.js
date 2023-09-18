@@ -5,6 +5,7 @@ import {
 	doc,
 	getDoc,
 	updateDoc,
+	deleteDoc
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
@@ -18,7 +19,7 @@ import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
 
-export function useShoppingListData(listId) {
+export function useShoppingListData(listId, itemId) {
 	// Start with an empty array for our data.
 	/** @type {import('firebase/firestore').DocumentData[]} */
 	const initialState = [];
@@ -153,10 +154,12 @@ export async function updateItem(listId, itemId, checked) {
 	}
 }
 
-export async function deleteItem() {
-	/**
-	 * TODO: Fill this out so that it uses the correct Firestore function
-	 * to delete an existing item. You'll need to figure out what arguments
-	 * this function must accept!
-	 */
+export async function deleteItem(listId, itemId) {
+	const itemRef = doc(db, listId, itemId);
+	try {
+		return await deleteDoc(itemRef);
+	} catch (error) {
+		console.log('Delete item error', error);
+	}
+	
 }
