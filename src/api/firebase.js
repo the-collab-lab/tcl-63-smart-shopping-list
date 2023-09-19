@@ -5,7 +5,7 @@ import {
 	doc,
 	getDoc,
 	updateDoc,
-	deleteDoc
+	deleteDoc,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
@@ -19,7 +19,7 @@ import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
  * @see https://firebase.google.com/docs/firestore/query-data/listen
  */
 
-export function useShoppingListData(listId, itemId) {
+export function useShoppingListData(listId) {
 	// Start with an empty array for our data.
 	/** @type {import('firebase/firestore').DocumentData[]} */
 	const initialState = [];
@@ -161,5 +161,4 @@ export async function deleteItem(listId, itemId) {
 	} catch (error) {
 		console.log('Delete item error', error);
 	}
-	
 }

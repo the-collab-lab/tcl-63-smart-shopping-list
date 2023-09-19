@@ -2,10 +2,8 @@ import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
 import { updateItem, deleteItem } from '../api/firebase';
 import { getFutureDate } from '../utils';
-import ReactModal from 'react-modal'
-import Button from "./Button"
-// important for users of screenreaders to page content while modal is open
-ReactModal.setAppElement('#root');
+import Button from './Button';
+import DeleteItemModal from './DeleteItemModal';
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, checked } = item;
@@ -49,19 +47,17 @@ export function ListItem({ listToken, item, itemId }) {
 		}
 	}, [is24HoursPassed, itemId, listToken, checked]);
 
-
-	const handleDelete = async() => {
+	const handleDelete = async () => {
 		try {
-			await deleteItem(listToken, itemId)
-			setModalStatus(true)
+			await deleteItem(listToken, itemId);
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
-	}
+	};
 
-	const openModal = () => setModalStatus(true)
-
-	const closeModal = () => setModalStatus(false)
+	const toggleDeleteModal = () => {
+		setModalStatus(!modalStatus);
+	};
 
 	return (
 		<>
@@ -77,36 +73,18 @@ export function ListItem({ listToken, item, itemId }) {
 					{name}
 				</label>
 				&nbsp;
-				<Button 
-						label="Delete"
-						ariaLabel={`Delete ${name} from your list`}
-						type="button"
-						onClick={openModal}
+				<Button
+					label="Delete"
+					ariaLabel={`Delete ${name} from your list`}
+					type="button"
+					onClick={toggleDeleteModal}
 				/>
-				<ReactModal
-					className="delete-modal"
-					isOpen={modalStatus}
-					// alows users to close modal by pressing ESC or clicking outside the modal
-					onRequestClose={closeModal}
-				>
-					<h2>{`Are you sure you want to delete ${name} from your list?`}</h2>
-					<p>Press CONFIRM if yes, press CANCEL to return to your shopping list.</p>
-					<Button 
-						label="Confirm"
-						ariaLabel={`Confirm deleting ${name} from your list`}
-						type="button"
-						onClick={handleDelete}
-					/>
-					&nbsp;
-					<Button 
-						label="Cancel"
-						ariaLabel={`Cancel deleting ${name} from your list`}
-						type="button"
-						onClick={closeModal}
-					/>
-
-				</ReactModal>
-
+				<DeleteItemModal
+					modalStatus={modalStatus}
+					closeModal={toggleDeleteModal}
+					confirmDelete={handleDelete}
+					itemName={name}
+				/>
 			</li>
 		</>
 	);
