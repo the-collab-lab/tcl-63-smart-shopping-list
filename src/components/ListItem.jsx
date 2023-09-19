@@ -48,11 +48,7 @@ export function ListItem({ listToken, item, itemId }) {
 	}, [is24HoursPassed, itemId, listToken, checked]);
 
 	const handleDelete = async () => {
-		try {
-			await deleteItem(listToken, itemId);
-		} catch (error) {
-			console.log(error);
-		}
+		await deleteItem(listToken, itemId);
 	};
 
 	const toggleDeleteModal = () => {
