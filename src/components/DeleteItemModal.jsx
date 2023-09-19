@@ -1,5 +1,6 @@
 import Button from './Button';
 import ReactModal from 'react-modal';
+// for accessibility enhancement: while modal is open, the pages is inactive and focus stays within modal
 ReactModal.setAppElement('#root');
 
 const DeleteItemModal = ({
@@ -12,6 +13,7 @@ const DeleteItemModal = ({
 		<ReactModal
 			className="delete-modal"
 			isOpen={modalStatus}
+			// built-in attribute: modal can be closed with ESC key or by clicking outside the modal
 			onRequestClose={closeModal}
 		>
 			<h2>{`Are you sure you want to delete ${itemName} from your list?`}</h2>
