@@ -4,6 +4,7 @@ import { updateItem, deleteItem } from '../api/firebase';
 import { getFutureDate } from '../utils';
 import ReactModal from 'react-modal'
 import Button from "./Button"
+// important for users of screenreaders to page content while modal is open
 ReactModal.setAppElement('#root');
 
 export function ListItem({ listToken, item, itemId }) {
@@ -53,7 +54,6 @@ export function ListItem({ listToken, item, itemId }) {
 		try {
 			await deleteItem(listToken, itemId)
 			setModalStatus(true)
-			console.log(modalStatus)
 		} catch (error) {
 			console.log(error)
 		}
@@ -86,6 +86,7 @@ export function ListItem({ listToken, item, itemId }) {
 				<ReactModal
 					className="delete-modal"
 					isOpen={modalStatus}
+					// alows users to close modal by pressing ESC or clicking outside the modal
 					onRequestClose={closeModal}
 				>
 					<h2>{`Are you sure you want to delete ${name} from your list?`}</h2>
