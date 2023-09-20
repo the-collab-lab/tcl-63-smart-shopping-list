@@ -7,7 +7,7 @@ import {
 
 import { AddItem, Home, Layout, List } from './views';
 
-import { useShoppingListData } from './api';
+import { useShoppingListData, comparePurchaseUrgency } from './api';
 
 import { useStateWithStorage } from './utils';
 
@@ -35,6 +35,7 @@ export function App() {
 	 * Check ./api/firestore.js for its implementation.
 	 */
 	const data = useShoppingListData(listToken);
+	const sortedData = comparePurchaseUrgency(data);
 
 	return (
 		<Router>
@@ -54,7 +55,7 @@ export function App() {
 						path="/list"
 						element={
 							listToken ? (
-								<List data={data} listToken={listToken} />
+								<List data={sortedData} listToken={listToken} />
 							) : (
 								<Navigate to="/" />
 							)

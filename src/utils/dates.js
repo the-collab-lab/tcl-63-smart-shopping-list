@@ -40,3 +40,39 @@ export function getDaysBetweenDates(startDate, endDate) {
 		console.error('An error happened', error);
 	}
 }
+
+export function purchaseSchedule(dateLastPurchased, dateNextPurchased) {
+	const today = new Date();
+	const dateNextPurchased_formatted = dateNextPurchased.toDate();
+	let daysFromLastPurchase = 0; //in case when new item is added, by default daysFromLastPurchase == null, so assign a dummy value to proceed
+	if (dateLastPurchased) {
+		const dateLastPurchased_formatted = dateLastPurchased.toDate();
+		daysFromLastPurchase = getDaysBetweenDates(
+			dateLastPurchased_formatted,
+			today,
+		);
+	}
+
+	const daysTillNextPurchase = getDaysBetweenDates(
+		today,
+		dateNextPurchased_formatted,
+	);
+	let schedule = '';
+	if (dateHasPassed(dateNextPurchased) && daysFromLastPurchase < 60) {
+		schedule = 'overdue';
+	} else if (daysFromLastPurchase >= 60) {
+		schedule = 'inactive';
+	} else if (daysTillNextPurchase <= 7) {
+		schedule = 'soon';
+	} else if (daysTillNextPurchase > 7 && daysTillNextPurchase < 30) {
+		schedule = 'kind-of-soon';
+	} else if (daysTillNextPurchase >= 30) {
+		schedule = 'not-soon';
+	}
+	return schedule;
+}
+export function dateHasPassed(dateNextPurchased) {
+	const today = new Date();
+	const dateNextPurchased_formatted = dateNextPurchased.toDate();
+	return dateNextPurchased_formatted.getTime() - today.getTime() < 0;
+}
