@@ -1,12 +1,7 @@
 import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
 import { updateItem } from '../api/firebase';
-import {
-	getFutureDate,
-	getDaysBetweenDates,
-	dateHasPassed,
-	purchaseSchedule,
-} from '../utils';
+import { getFutureDate, purchaseSchedule } from '../utils';
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
@@ -16,7 +11,12 @@ export function ListItem({ listToken, item, itemId }) {
 		dateLastPurchased,
 		dateNextPurchased,
 	);
-
+	// The dash is necessary for CSS class naming convention, but on UI we still want to display normal text
+	const urgencyText = {
+		'kind-of-soon': 'kind of soon',
+		'not-soon': 'not soon',
+	};
+	const displayUrgency = urgencyText[purchaseUrgency] || purchaseUrgency;
 	/**
 	 * If 24 hours has passed or the item is unchecked,
 	 * we change the state of the item and send to the database
@@ -67,7 +67,7 @@ export function ListItem({ listToken, item, itemId }) {
 					/>
 					{name}
 					<span className={`urgency-tag ${purchaseUrgency}`}>
-						{purchaseUrgency}
+						{displayUrgency}
 					</span>
 				</label>
 			</li>
