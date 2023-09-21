@@ -1,11 +1,21 @@
 import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
 import { updateItem } from '../api/firebase';
-import { getFutureDate } from '../utils';
+import {
+	getFutureDate,
+	getDaysBetweenDates,
+	dateHasPassed,
+	purchaseSchedule,
+} from '../utils';
 
 export function ListItem({ listToken, item, itemId }) {
-	const { name, dateLastPurchased, checked } = item;
+	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
+
+	const purchaseUrgency = purchaseSchedule(
+		dateLastPurchased,
+		dateNextPurchased,
+	);
 
 	/**
 	 * If 24 hours has passed or the item is unchecked,
@@ -56,6 +66,9 @@ export function ListItem({ listToken, item, itemId }) {
 						onChange={handleChange}
 					/>
 					{name}
+					<span className={`urgency-tag ${purchaseUrgency}`}>
+						{purchaseUrgency}
+					</span>
 				</label>
 			</li>
 		</>
