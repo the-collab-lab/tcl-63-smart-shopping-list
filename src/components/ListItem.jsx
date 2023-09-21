@@ -8,7 +8,7 @@ import DeleteItemModal from './DeleteItemModal';
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
-	const [modalStatus, setModalStatus] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	/**
 	 * If 24 hours has passed or the item is unchecked,
@@ -52,7 +52,7 @@ export function ListItem({ listToken, item, itemId }) {
 	};
 
 	const toggleDeleteModal = () => {
-		setModalStatus(!modalStatus);
+		setIsModalOpen(!isModalOpen);
 	};
 
 	return (
@@ -76,7 +76,7 @@ export function ListItem({ listToken, item, itemId }) {
 					onClick={toggleDeleteModal}
 				/>
 				<DeleteItemModal
-					modalStatus={modalStatus}
+					isModalOpen={isModalOpen}
 					closeModal={toggleDeleteModal}
 					confirmDelete={handleDelete}
 					itemName={name}

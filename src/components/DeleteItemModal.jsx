@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 ReactModal.setAppElement('#root');
 
 const DeleteItemModal = ({
-	modalStatus,
+	isModalOpen,
 	closeModal,
 	confirmDelete,
 	itemName,
@@ -12,7 +12,7 @@ const DeleteItemModal = ({
 	return (
 		<ReactModal
 			className="delete-modal"
-			isOpen={modalStatus}
+			isOpen={isModalOpen}
 			// React-modal built-in attribute: modal can be closed with ESC key or by clicking outside the modal
 			onRequestClose={closeModal}
 		>
