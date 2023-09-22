@@ -1,11 +1,14 @@
 import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
-import { updateItem } from '../api/firebase';
+import { updateItem, deleteItem } from '../api/firebase';
 import { getFutureDate } from '../utils';
+import Button from './Button';
+import DeleteItemModal from './DeleteItemModal';
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	/**
 	 * If 24 hours has passed or the item is unchecked,
@@ -44,6 +47,14 @@ export function ListItem({ listToken, item, itemId }) {
 		}
 	}, [is24HoursPassed, itemId, listToken, checked]);
 
+	const handleDelete = async () => {
+		await deleteItem(listToken, itemId);
+	};
+
+	const toggleDeleteModal = () => {
+		setIsModalOpen(!isModalOpen);
+	};
+
 	return (
 		<>
 			<li className="ListItem">
@@ -57,6 +68,19 @@ export function ListItem({ listToken, item, itemId }) {
 					/>
 					{name}
 				</label>
+				&nbsp;
+				<Button
+					label="Delete"
+					ariaLabel={`Delete ${name} from your list`}
+					type="button"
+					onClick={toggleDeleteModal}
+				/>
+				<DeleteItemModal
+					isModalOpen={isModalOpen}
+					closeModal={toggleDeleteModal}
+					confirmDelete={handleDelete}
+					itemName={name}
+				/>
 			</li>
 		</>
 	);
