@@ -8,7 +8,12 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate, getDaysBetweenDates, purchaseSchedule } from '../utils';
+import {
+	getFutureDate,
+	getDaysBetweenDates,
+	purchaseSchedule,
+	sortItemsByDate,
+} from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
@@ -174,31 +179,7 @@ export function comparePurchaseUrgency(data) {
 			item.dateNextPurchased.toDate(),
 		),
 	}));
-	const compareFn = (a, b) => {
-		// overdue item at the top of the list
-		if (a.purchaseUrgency === 'overdue' && b.purchaseUrgency !== 'overdue') {
-			return -1;
-		}
-		if (a.purchaseUrgency !== 'overdue' && b.purchaseUrgency === 'overdue') {
-			return 1;
-		}
-		// active item first, inactive item last
-		if (a.purchaseUrgency !== 'inactive' && b.purchaseUrgency === 'inactive') {
-			return -1;
-		}
-		if (a.purchaseUrgency === 'inactive' && b.purchaseUrgency !== 'inactive') {
-			return 1;
-		}
-		// ascending order of days until nextPurchase
-		if (a.daysTillNextPurchase < b.daysTillNextPurchase) {
-			return -1;
-		}
-		if (a.daysTillNextPurchase > b.daysTillNextPurchase) {
-			return 1;
-		}
-		// item name alphabetically within the same days until purchase
-		return a.name.localeCompare(b.name);
-	};
-	const sortedData = newData.sort(compareFn);
+
+	const sortedData = newData.sort(sortItemsByDate);
 	return sortedData;
 }

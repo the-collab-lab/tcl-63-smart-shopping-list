@@ -43,19 +43,19 @@ export function getDaysBetweenDates(startDate, endDate) {
 
 export function purchaseSchedule(dateLastPurchased, dateNextPurchased) {
 	const today = new Date();
-	const dateNextPurchased_formatted = dateNextPurchased.toDate();
+	const dateNextPurchasedFormatted = dateNextPurchased.toDate();
 	let daysFromLastPurchase = 0; //in case when new item is added, by default daysFromLastPurchase == null, so assign a dummy value to proceed
 	if (dateLastPurchased) {
-		const dateLastPurchased_formatted = dateLastPurchased.toDate();
+		const dateLastPurchasedFormatted = dateLastPurchased.toDate();
 		daysFromLastPurchase = getDaysBetweenDates(
-			dateLastPurchased_formatted,
+			dateLastPurchasedFormatted,
 			today,
 		);
 	}
 
 	const daysTillNextPurchase = getDaysBetweenDates(
 		today,
-		dateNextPurchased_formatted,
+		dateNextPurchasedFormatted,
 	);
 	let schedule = '';
 	if (dateHasPassed(dateNextPurchased) && daysFromLastPurchase < 60) {
@@ -73,6 +73,32 @@ export function purchaseSchedule(dateLastPurchased, dateNextPurchased) {
 }
 export function dateHasPassed(dateNextPurchased) {
 	const today = new Date();
-	const dateNextPurchased_formatted = dateNextPurchased.toDate();
-	return dateNextPurchased_formatted.getTime() - today.getTime() < 0;
+	const dateNextPurchasedFormatted = dateNextPurchased.toDate();
+	return dateNextPurchasedFormatted.getTime() - today.getTime() < 0;
 }
+
+export const sortItemsByDate = (a, b) => {
+	// overdue item at the top of the list
+	if (a.purchaseUrgency === 'overdue' && b.purchaseUrgency !== 'overdue') {
+		return -1;
+	}
+	if (a.purchaseUrgency !== 'overdue' && b.purchaseUrgency === 'overdue') {
+		return 1;
+	}
+	// active item first, inactive item last
+	if (a.purchaseUrgency !== 'inactive' && b.purchaseUrgency === 'inactive') {
+		return -1;
+	}
+	if (a.purchaseUrgency === 'inactive' && b.purchaseUrgency !== 'inactive') {
+		return 1;
+	}
+	// ascending order of days until nextPurchase
+	if (a.daysTillNextPurchase < b.daysTillNextPurchase) {
+		return -1;
+	}
+	if (a.daysTillNextPurchase > b.daysTillNextPurchase) {
+		return 1;
+	}
+	// item name alphabetically within the same days until purchase
+	return a.name.localeCompare(b.name);
+};
