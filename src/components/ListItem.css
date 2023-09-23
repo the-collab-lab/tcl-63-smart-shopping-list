@@ -13,6 +13,20 @@
 	margin-left: 0.2em;
 }
 
+.delete-modal {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 20%;
+	margin-inline: auto;
+	width: 40rem;
+	height: 30rem;
+	background-color: lightgray;
+	padding: 1.25rem;
+	text-align: center;
+	border-radius: 5px;
+}
+
 .urgency-tag {
 	margin-left: 0.2em;
 	padding: 0.05em;

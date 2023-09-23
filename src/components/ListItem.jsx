@@ -1,11 +1,14 @@
 import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
-import { updateItem } from '../api/firebase';
 import { getFutureDate, purchaseSchedule } from '../utils';
+import { updateItem, deleteItem } from '../api/firebase';
+import Button from './Button';
+import DeleteItemModal from './DeleteItemModal';
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const purchaseUrgency = purchaseSchedule(
 		dateLastPurchased,
@@ -54,6 +57,14 @@ export function ListItem({ listToken, item, itemId }) {
 		}
 	}, [is24HoursPassed, itemId, listToken, checked]);
 
+	const handleDelete = async () => {
+		await deleteItem(listToken, itemId);
+	};
+
+	const toggleDeleteModal = () => {
+		setIsModalOpen(!isModalOpen);
+	};
+
 	return (
 		<>
 			<li className="ListItem">
@@ -70,6 +81,19 @@ export function ListItem({ listToken, item, itemId }) {
 						{displayUrgency}
 					</span>
 				</label>
+				&nbsp;
+				<Button
+					label="Delete"
+					ariaLabel={`Delete ${name} from your list`}
+					type="button"
+					onClick={toggleDeleteModal}
+				/>
+				<DeleteItemModal
+					isModalOpen={isModalOpen}
+					closeModal={toggleDeleteModal}
+					confirmDelete={handleDelete}
+					itemName={name}
+				/>
 			</li>
 		</>
 	);
