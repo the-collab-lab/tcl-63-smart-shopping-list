@@ -1,22 +1,25 @@
 import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
-import { updateItem } from '../api/firebase';
-import {
-	getFutureDate,
-	getDaysBetweenDates,
-	dateHasPassed,
-	purchaseSchedule,
-} from '../utils';
+import { getFutureDate, purchaseSchedule } from '../utils';
+import { updateItem, deleteItem } from '../api/firebase';
+import Button from './Button';
+import DeleteItemModal from './DeleteItemModal';
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const purchaseUrgency = purchaseSchedule(
 		dateLastPurchased,
 		dateNextPurchased,
 	);
-
+	// The dash is necessary for CSS class naming convention, but on UI we still want to display normal text
+	const urgencyText = {
+		'kind-of-soon': 'kind of soon',
+		'not-soon': 'not soon',
+	};
+	const displayUrgency = urgencyText[purchaseUrgency] || purchaseUrgency;
 	/**
 	 * If 24 hours has passed or the item is unchecked,
 	 * we change the state of the item and send to the database
@@ -54,6 +57,14 @@ export function ListItem({ listToken, item, itemId }) {
 		}
 	}, [is24HoursPassed, itemId, listToken, checked]);
 
+	const handleDelete = async () => {
+		await deleteItem(listToken, itemId);
+	};
+
+	const toggleDeleteModal = () => {
+		setIsModalOpen(!isModalOpen);
+	};
+
 	return (
 		<>
 			<li className="ListItem">
@@ -67,9 +78,22 @@ export function ListItem({ listToken, item, itemId }) {
 					/>
 					{name}
 					<span className={`urgency-tag ${purchaseUrgency}`}>
-						{purchaseUrgency}
+						{displayUrgency}
 					</span>
 				</label>
+				&nbsp;
+				<Button
+					label="Delete"
+					ariaLabel={`Delete ${name} from your list`}
+					type="button"
+					onClick={toggleDeleteModal}
+				/>
+				<DeleteItemModal
+					isModalOpen={isModalOpen}
+					closeModal={toggleDeleteModal}
+					confirmDelete={handleDelete}
+					itemName={name}
+				/>
 			</li>
 		</>
 	);
