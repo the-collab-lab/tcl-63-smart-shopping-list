@@ -9,7 +9,12 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from './config';
-import { getFutureDate, getDaysBetweenDates } from '../utils';
+import {
+	getFutureDate,
+	getDaysBetweenDates,
+	purchaseSchedule,
+	sortItemsByDate,
+} from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 /**
@@ -161,4 +166,22 @@ export async function deleteItem(listId, itemId) {
 	} catch (error) {
 		console.log('Delete item error', error);
 	}
+}
+
+export function comparePurchaseUrgency(data) {
+	const today = new Date();
+	const newData = data.map((item) => ({
+		...item,
+		purchaseUrgency: purchaseSchedule(
+			item.dateLastPurchased,
+			item.dateNextPurchased,
+		),
+		daysTillNextPurchase: getDaysBetweenDates(
+			today,
+			item.dateNextPurchased.toDate(),
+		),
+	}));
+
+	const sortedData = newData.sort(sortItemsByDate);
+	return sortedData;
 }

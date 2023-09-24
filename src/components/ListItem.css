@@ -15,14 +15,40 @@
 
 .delete-modal {
 	position: absolute;
-	left: 0; 
-	right: 0; 
+	left: 0;
+	right: 0;
 	top: 20%;
-	margin-inline: auto; 
+	margin-inline: auto;
 	width: 40rem;
 	height: 30rem;
 	background-color: lightgray;
 	padding: 1.25rem;
 	text-align: center;
 	border-radius: 5px;
+}
+
+.urgency-tag {
+	margin-left: 0.2em;
+	padding: 0.05em;
+	border: 1px solid gray;
+	border-radius: 0.5rem;
+}
+
+.overdue {
+	background-color: #ea5f89;
+}
+
+.soon {
+	background-color: #cc79a7;
+}
+.kind-of-soon {
+	background-color: #f7b7a3;
+}
+
+.not-soon {
+	background-color: #c6d68f;
+}
+
+.inactive {
+	background-color: lightgray;
 }
