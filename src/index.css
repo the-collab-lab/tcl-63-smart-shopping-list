@@ -80,9 +80,14 @@ body {
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
 }
 
-code {
+.btn-neutral {
+	@apply text-xl btn-lg text-white;
+}
+
+åcode {
 	--color-bg: var(--color-gray-dark);
 	--color-text: var(--color-accent);
 

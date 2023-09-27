@@ -1,5 +1,6 @@
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import Button from '../components/Button';
+import ClearButton from '../components/ClearButton';
 import './Home.css';
 import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
@@ -92,10 +93,10 @@ export function Home({ setListToken }) {
 	};
 
 	return (
-		<div className="Home">
+		<div className="Home h-screen flex flex-col items-center pt-4">
 			<Button label="Create New List" onClick={createNewList} />
 			<p>-or-</p>
-			<p className="text-blue-600 font-bold">Join an existing shopping list.</p>
+			<p className="font-bold">Join an existing shopping list.</p>
 
 			<form onSubmit={submitTokenInput}>
 				<label htmlFor="tokenInput">
@@ -109,14 +110,16 @@ export function Home({ setListToken }) {
 						onChange={handleInputChange}
 						onKeyDown={handleEnterKey}
 						ref={tokenInputRef}
+						className="input input-bordered input-primary w-full max-w-xs mr-2 my-2"
 					/>
 				</label>
-				<Button
+				<ClearButton
 					label="X"
 					type="reset"
 					ariaLabel="Clear token input"
 					onClick={clearTokenInput}
 				/>
+
 				<br />
 				<Button
 					label="Join"

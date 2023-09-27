@@ -29,9 +29,9 @@
 
 .urgency-tag {
 	margin-left: 0.2em;
-	padding: 0.05em;
-	border: 1px solid gray;
+	padding: 0.1em 0.4em;
 	border-radius: 0.5rem;
+	font-size: 15px;
 }
 
 .overdue {

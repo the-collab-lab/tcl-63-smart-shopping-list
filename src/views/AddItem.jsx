@@ -65,7 +65,7 @@ export function AddItem({ listToken, data }) {
 		<>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="itemName">
-					<p>Item name:</p>
+					<p className="font-bold">Item name:</p>
 					<input
 						type="text"
 						name="itemName"
@@ -73,10 +73,11 @@ export function AddItem({ listToken, data }) {
 						value={formData.itemName}
 						onChange={handleChange}
 						placeholder="add item here"
-					></input>
+						className="input input-bordered my-3"
+					/>
 				</label>
 				<fieldset style={{ border: 'none' }}>
-					<p className="text-3xl font-bold underline">
+					<p className="text-3xl font-bold">
 						How soon will you buy this again?
 					</p>
 					<label htmlFor="soon">
@@ -89,6 +90,7 @@ export function AddItem({ listToken, data }) {
 							value="7"
 							onChange={handleChange}
 							checked={formData.daysUntilNextPurchase === 7}
+							className="radio radio-info mr-2"
 							required // ensures the user makes a selection before proceeding
 						/>
 						Soon
@@ -102,6 +104,7 @@ export function AddItem({ listToken, data }) {
 							value="14"
 							checked={formData.daysUntilNextPurchase === 14}
 							onChange={handleChange}
+							className="radio radio-info mr-2"
 						/>
 						Kind of Soon
 					</label>
@@ -114,11 +117,12 @@ export function AddItem({ listToken, data }) {
 							value="30"
 							checked={formData.daysUntilNextPurchase === 30}
 							onChange={handleChange}
+							className="radio radio-info mr-2"
 						/>
 						Not Soon
 					</label>
 				</fieldset>
-				<button type="submit" className="btn btn-neutral">
+				<button type="submit" className="btn btn-neutral mt-3">
 					Add Item
 				</button>
 			</form>
