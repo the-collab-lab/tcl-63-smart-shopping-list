@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 :root {
 	--color-black: hsla(220, 13%, 18%, 1);
 	--color-gray-dark: hsla(220, 13%, 25%, 1);
@@ -57,8 +61,19 @@ html {
 body {
 	background-color: var(--color-bg);
 	color: var(--color-text);
-	font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
-		helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+	font-family:
+		-apple-system,
+		BlinkMacSystemFont,
+		avenir next,
+		avenir,
+		segoe ui,
+		helvetica neue,
+		helvetica,
+		Ubuntu,
+		roboto,
+		noto,
+		arial,
+		sans-serif;
 	font-size: 1.8rem;
 	line-height: 1.4;
 	margin: 0;
@@ -75,7 +90,12 @@ code {
 	border-radius: 4px;
 	color: var(--color-text);
 	display: inline-block;
-	font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console,
+	font-family:
+		Menlo,
+		Consolas,
+		Monaco,
+		Liberation Mono,
+		Lucida Console,
 		monospace;
 	font-size: 0.9em;
 	padding: 0.15em 0.15em;

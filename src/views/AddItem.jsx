@@ -76,7 +76,9 @@ export function AddItem({ listToken, data }) {
 					></input>
 				</label>
 				<fieldset style={{ border: 'none' }}>
-					<p>How soon will you buy this again?</p>
+					<p className="text-3xl font-bold underline">
+						How soon will you buy this again?
+					</p>
 					<label htmlFor="soon">
 						{/* this <br> is necessary for the screen reader to read first radio button */}
 						<br />
@@ -116,7 +118,9 @@ export function AddItem({ listToken, data }) {
 						Not Soon
 					</label>
 				</fieldset>
-				<button type="submit">Add Item</button>
+				<button type="submit" className="btn btn-neutral">
+					Add Item
+				</button>
 			</form>
 			{/* Prompt users with alert message, including for screen reader users */}
 			<ToastContainer position="top-center" />
