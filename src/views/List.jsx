@@ -4,6 +4,8 @@ import { ListItem } from '../components';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import ClearButton from '../components/ClearButton';
 import './List.css';
+import { ClipboardDocumentIcon } from '@heroicons/react/24/solid';
+import { ToastContainer, toast } from 'react-toastify';
 
 export function List({ data, listToken }) {
 	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
@@ -40,14 +42,28 @@ export function List({ data, listToken }) {
 		setShowDetails(!showDetails);
 	};
 
+	const copyToken = () => {
+		navigator.clipboard.writeText(`${listToken}`);
+		toast.success('Token Copied');
+	};
+
 	return (
 		<div className="flex flex-col flex-grow max-h-screen">
 			<div className="mb-4">
 				<p>Friends who shop together, stay together!</p>
-				<p>
-					Your token is: <span className="font-bold">{listToken}</span>
-				</p>
-				<p>Please feel free to share it with your friends and family</p>
+				<div>
+					<ToastContainer position="top-center" />
+					<p>
+						Your token is:{' '}
+						<span className="font-bold">
+							{listToken}
+							<button onClick={copyToken}>
+								<ClipboardDocumentIcon className="ml-1 h-6 w-6 inline" />
+							</button>
+						</span>
+					</p>
+					<p>Please feel free to share it with your friends and family</p>
+				</div>
 				<button
 					className="font-bold hover:text-red-600"
 					onClick={toggleDetails}
