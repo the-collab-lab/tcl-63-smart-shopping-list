@@ -66,35 +66,39 @@ export function ListItem({ listToken, item, itemId }) {
 	};
 
 	return (
-		<div className="card w-fit py-3 px-8 bg-base-100 shadow-lg flex flex-col gap-y-4 my-3">
-			<li className="ListItem">
-				<label aria-label={`Mark ${name} as purchased`}>
-					<input
-						id={name}
-						name={name}
-						type="checkbox"
-						checked={isPurchased}
-						onChange={handleChange}
-						className="mr-2"
+		<div className="card w-[50rem] py-3 px-8 bg-base-100 shadow-lg my-3">
+			<>
+				<li className="ListItem flex flex-row items-center justify-between gap-4">
+					<label aria-label={`Mark ${name} as purchased`}>
+						<input
+							id={name}
+							name={name}
+							type="checkbox"
+							checked={isPurchased}
+							onChange={handleChange}
+							className="mr-2"
+						/>
+						{name}
+					</label>
+					<div>
+						<span className={`urgency-tag ${purchaseUrgency}`}>
+							{displayUrgency}
+						</span>
+						&nbsp;
+						<DeleteButton
+							ariaLabel={`Delete ${name} from your list`}
+							type="button"
+							onClick={toggleDeleteModal}
+						/>
+					</div>
+					<DeleteItemModal
+						isModalOpen={isModalOpen}
+						closeModal={toggleDeleteModal}
+						confirmDelete={handleDelete}
+						itemName={name}
 					/>
-					{name}
-					<span className={`urgency-tag ${purchaseUrgency}`}>
-						{displayUrgency}
-					</span>
-				</label>
-				&nbsp;
-				<DeleteButton
-					ariaLabel={`Delete ${name} from your list`}
-					type="button"
-					onClick={toggleDeleteModal}
-				/>
-				<DeleteItemModal
-					isModalOpen={isModalOpen}
-					closeModal={toggleDeleteModal}
-					confirmDelete={handleDelete}
-					itemName={name}
-				/>
-			</li>
+				</li>
+			</>
 		</div>
 	);
 }

@@ -28,6 +28,9 @@
 }
 
 .urgency-tag {
+	display: inline-block;
+	text-align: center;
+	width: 10rem;
 	margin-left: 0.2em;
 	padding: 0.1em 0.4em;
 	border-radius: 0.5rem;
@@ -41,6 +44,7 @@
 .soon {
 	background-color: #cc79a7;
 }
+
 .kind-of-soon {
 	background-color: #f7b7a3;
 }
