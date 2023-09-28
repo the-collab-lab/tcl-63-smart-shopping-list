@@ -11,36 +11,18 @@ export function Layout({ listToken }) {
 	});
 
 	function handleNavLinkClick(linkName) {
-		setIsActive((prevState) => ({
+		setIsActive(() => ({
 			home: linkName === 'home' ? true : false,
 			list: linkName === 'list' ? true : false,
 			addItem: linkName === 'addItem' ? true : false,
 		}));
 	}
 
-	const navLinkStyles = `
-    text-aquamarine-blue 
-    text-center 
-    py-6 
-    md:px-6 
-    md:pb-2
-    hover:underline
-    hover:decoration-4
-    hover:underline-offset-[10px]
-  `;
-
-	const activeNavLinkStyles = `
-  ${navLinkStyles}
-  underline
-  decoration-4
-  underline-offset-[10px]
-`;
-
 	return (
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
-					<h1 className="text-5xl">Smart shopping list</h1>
+					<h1 className="text-5xl font-bold pb-2">Smart shopping list</h1>
 				</header>
 				<main className="Layout-main">
 					<Outlet />
@@ -51,7 +33,7 @@ export function Layout({ listToken }) {
 						{!listToken && (
 							<NavLink
 								to="/"
-								className={`Nav-link text-slate-950 hover:text-slate-500 ${
+								className={`Nav-link text-slate-950 hover:text-slate-700 ${
 									isActive['home'] &&
 									'font-bold underline decoration-red-400 underline-offset-2'
 								}`}
@@ -62,7 +44,7 @@ export function Layout({ listToken }) {
 						)}
 						<NavLink
 							to="/list"
-							className={`Nav-link text-slate-950 hover:text-slate-500 ${
+							className={`Nav-link text-slate-950 hover:text-slate-700 ${
 								isActive['list'] &&
 								'font-bold underline decoration-red-400 underline-offset-2'
 							}`}
@@ -72,7 +54,7 @@ export function Layout({ listToken }) {
 						</NavLink>
 						<NavLink
 							to="/add-item"
-							className={`Nav-link text-slate-950 hover:text-slate-500 ${
+							className={`Nav-link text-slate-950 hover:text-slate-700 ${
 								isActive['addItem'] &&
 								'font-bold underline decoration-red-400 underline-offset-2'
 							}`}
