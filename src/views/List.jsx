@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { ListItem } from '../components';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import ClearButton from '../components/ClearButton';
+import Button from '../components/Button';
 import './List.css';
 
 export function List({ data, listToken }) {
@@ -10,6 +11,7 @@ export function List({ data, listToken }) {
 	// FILTER OUT THE DATA THAT CONTAINS AN OBJECT WITH NO NAME PROPERTY
 	const realData = data.filter((item) => item.name);
 	const [inputItem, setInputItem] = useState('');
+	const [showDetails, setShowDetails] = useState(false);
 
 	// Initialize a useRef to bring focus back to input field
 	const filterInputRef = useRef(null);
@@ -35,14 +37,25 @@ export function List({ data, listToken }) {
 		stringMatch(inputItem, listItem.name),
 	);
 
+	const toggleDetails = () => {
+		setShowDetails(!showDetails);
+	};
+
 	return (
 		<div className="flex flex-col flex-grow max-h-screen">
-			<p>Friends who shop together, stay together!</p>
-			<p>
-				Your token is: <span className="font-bold">{listToken}</span>
-			</p>
-			<p>Please feel free to share it with your friends and family</p>
-			<br />
+			<div className="mb-3">
+				<p>Friends who shop together, stay together!</p>
+				<p>
+					Your token is: <span className="font-bold">{listToken}</span>
+				</p>
+				<p>Please feel free to share it with your friends and family</p>
+				<button
+					className="font-bold hover:text-red-600"
+					onClick={toggleDetails}
+				>
+					{showDetails ? 'Hide item details' : 'Show item details'}
+				</button>
+			</div>
 			{realData.length === 0 ? (
 				<>
 					<p>Your shopping list is empty.</p>
@@ -89,6 +102,7 @@ export function List({ data, listToken }) {
 									listToken={listToken}
 									item={item}
 									itemId={item.id}
+									showDetails={showDetails}
 								/>
 						  ))
 						: realData.length > 0 && <p aria-live="polite">No item found!</p>}

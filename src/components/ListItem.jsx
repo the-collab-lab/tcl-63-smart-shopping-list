@@ -5,7 +5,7 @@ import { updateItem, deleteItem } from '../api/firebase';
 import DeleteItemModal from './DeleteItemModal';
 import DeleteButton from './DeleteButton';
 
-export function ListItem({ listToken, item, itemId }) {
+export function ListItem({ listToken, item, itemId, showDetails }) {
 	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -81,9 +81,11 @@ export function ListItem({ listToken, item, itemId }) {
 						{name}
 					</label>
 					<div>
-						<span className={`urgency-tag ${purchaseUrgency}`}>
-							{displayUrgency}
-						</span>
+						{showDetails && (
+							<span className={`urgency-tag ${purchaseUrgency}`}>
+								{displayUrgency}
+							</span>
+						)}
 						&nbsp;
 						<DeleteButton
 							ariaLabel={`Delete ${name} from your list`}
