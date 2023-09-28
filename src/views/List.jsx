@@ -2,8 +2,8 @@ import { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ListItem } from '../components';
 import { sanitizeInput } from '../utils/sanitizeInput';
-import Button from '../components/Button';
-import "./List.css"
+import ClearButton from '../components/ClearButton';
+import './List.css';
 
 export function List({ data, listToken }) {
 	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
@@ -36,9 +36,11 @@ export function List({ data, listToken }) {
 	);
 
 	return (
-		<>
+		<div className="flex flex-col flex-grow max-h-screen">
 			<p>Friends who shop together, stay together!</p>
-			<p>Your token is: {listToken}</p>
+			<p>
+				Your token is: <span className="font-bold">{listToken}</span>
+			</p>
 			<p>Please feel free to share it with your friends and family</p>
 			<br />
 			{realData.length === 0 ? (
@@ -46,11 +48,15 @@ export function List({ data, listToken }) {
 					<p>Your shopping list is empty.</p>
 					{/* a NavLink is semantically a better element than a button because
 					it links to another page, and it is compatible with screen readers */}
-					<NavLink to="/add-item" className="addItemButton">Add Item</NavLink>
+					<NavLink to="/add-item" className="addItemButton">
+						Add Item
+					</NavLink>
 				</>
 			) : (
 				<form onSubmit={(e) => e.preventDefault()}>
-					<label htmlFor="filterItems">Filter items</label>
+					<label htmlFor="filterItems" className="font-bold">
+						Filter items
+					</label>
 					<br />
 					<input
 						type="text"
@@ -60,8 +66,9 @@ export function List({ data, listToken }) {
 						onChange={handleInput}
 						ref={filterInputRef}
 						placeholder="Start typing here..."
+						className="input input-bordered input-primary w-full max-w-xs my-3 mr-2"
 					/>
-					<Button
+					<ClearButton
 						ariaLabel={'clear input field'}
 						label={'x'}
 						type={'reset'}
@@ -70,7 +77,10 @@ export function List({ data, listToken }) {
 				</form>
 			)}
 			{/* Accessibility feature: added the aria-live attribute for screenreaders */}
-			<div aria-live="polite">
+			<div
+				aria-live="polite"
+				className="my-10 px-5 h-full overflow-y-scroll pb-[30rem]"
+			>
 				<ul>
 					{filterData.length > 0
 						? filterData.map((item) => (
@@ -84,6 +94,6 @@ export function List({ data, listToken }) {
 						: realData.length > 0 && <p aria-live="polite">No item found!</p>}
 				</ul>
 			</div>
-		</>
+		</div>
 	);
 }

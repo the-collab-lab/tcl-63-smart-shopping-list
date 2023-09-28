@@ -2,8 +2,8 @@ import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
 import { getFutureDate, purchaseSchedule } from '../utils';
 import { updateItem, deleteItem } from '../api/firebase';
-import Button from './Button';
 import DeleteItemModal from './DeleteItemModal';
+import DeleteButton from './DeleteButton';
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
@@ -66,7 +66,7 @@ export function ListItem({ listToken, item, itemId }) {
 	};
 
 	return (
-		<>
+		<div className="card w-fit py-3 px-8 bg-base-100 shadow-lg flex flex-col gap-y-4 my-3">
 			<li className="ListItem">
 				<label aria-label={`Mark ${name} as purchased`}>
 					<input
@@ -75,6 +75,7 @@ export function ListItem({ listToken, item, itemId }) {
 						type="checkbox"
 						checked={isPurchased}
 						onChange={handleChange}
+						className="mr-2"
 					/>
 					{name}
 					<span className={`urgency-tag ${purchaseUrgency}`}>
@@ -82,8 +83,7 @@ export function ListItem({ listToken, item, itemId }) {
 					</span>
 				</label>
 				&nbsp;
-				<Button
-					label="Delete"
+				<DeleteButton
 					ariaLabel={`Delete ${name} from your list`}
 					type="button"
 					onClick={toggleDeleteModal}
@@ -95,6 +95,6 @@ export function ListItem({ listToken, item, itemId }) {
 					itemName={name}
 				/>
 			</li>
-		</>
+		</div>
 	);
 }

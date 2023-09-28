@@ -65,7 +65,7 @@ export function AddItem({ listToken, data }) {
 		<>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="itemName">
-					<p>Item name:</p>
+					<p className="font-bold">Item name:</p>
 					<input
 						type="text"
 						name="itemName"
@@ -73,10 +73,13 @@ export function AddItem({ listToken, data }) {
 						value={formData.itemName}
 						onChange={handleChange}
 						placeholder="add item here"
-					></input>
+						className="input input-bordered my-3"
+					/>
 				</label>
 				<fieldset style={{ border: 'none' }}>
-					<p>How soon will you buy this again?</p>
+					<p className="text-3xl font-bold">
+						How soon will you buy this again?
+					</p>
 					<label htmlFor="soon">
 						{/* this <br> is necessary for the screen reader to read first radio button */}
 						<br />
@@ -87,6 +90,7 @@ export function AddItem({ listToken, data }) {
 							value="7"
 							onChange={handleChange}
 							checked={formData.daysUntilNextPurchase === 7}
+							className="radio radio-info mr-2"
 							required // ensures the user makes a selection before proceeding
 						/>
 						Soon
@@ -100,6 +104,7 @@ export function AddItem({ listToken, data }) {
 							value="14"
 							checked={formData.daysUntilNextPurchase === 14}
 							onChange={handleChange}
+							className="radio radio-info mr-2"
 						/>
 						Kind of Soon
 					</label>
@@ -112,11 +117,14 @@ export function AddItem({ listToken, data }) {
 							value="30"
 							checked={formData.daysUntilNextPurchase === 30}
 							onChange={handleChange}
+							className="radio radio-info mr-2"
 						/>
 						Not Soon
 					</label>
 				</fieldset>
-				<button type="submit">Add Item</button>
+				<button type="submit" className="btn btn-neutral mt-3">
+					Add Item
+				</button>
 			</form>
 			{/* Prompt users with alert message, including for screen reader users */}
 			<ToastContainer position="top-center" />
