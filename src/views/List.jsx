@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { ListItem } from '../components';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import ClearButton from '../components/ClearButton';
-import Button from '../components/Button';
 import './List.css';
 
 export function List({ data, listToken }) {
@@ -43,7 +42,7 @@ export function List({ data, listToken }) {
 
 	return (
 		<div className="flex flex-col flex-grow max-h-screen">
-			<div className="mb-3">
+			<div className="mb-4">
 				<p>Friends who shop together, stay together!</p>
 				<p>
 					Your token is: <span className="font-bold">{listToken}</span>
