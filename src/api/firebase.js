@@ -169,19 +169,21 @@ export async function deleteItem(listId, itemId) {
 }
 
 export function comparePurchaseUrgency(data) {
-	const today = new Date();
-	const newData = data.map((item) => ({
-		...item,
-		purchaseUrgency: purchaseSchedule(
-			item.dateLastPurchased,
-			item.dateNextPurchased,
-		),
-		daysTillNextPurchase: getDaysBetweenDates(
-			today,
-			item.dateNextPurchased.toDate(),
-		),
-	}));
+	if (data.length > 1) {
+		const today = new Date();
+		const newData = data.map((item) => ({
+			...item,
+			purchaseUrgency: purchaseSchedule(
+				item.dateLastPurchased,
+				item.dateNextPurchased,
+			),
+			daysTillNextPurchase: getDaysBetweenDates(
+				today,
+				item.dateNextPurchased.toDate(),
+			),
+		}));
 
-	const sortedData = newData.sort(sortItemsByDate);
-	return sortedData;
+		const sortedData = newData.sort(sortItemsByDate);
+		return sortedData;
+	} else return [];
 }
