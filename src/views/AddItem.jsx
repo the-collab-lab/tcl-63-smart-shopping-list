@@ -63,9 +63,9 @@ export function AddItem({ listToken, data }) {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="grid justify-items-center">
 				<label htmlFor="itemName">
-					<p className="font-bold">Item name:</p>
+					<h1 className="text-3xl font-bold mt-10">Add New Item</h1>
 					<input
 						type="text"
 						name="itemName"
@@ -73,10 +73,10 @@ export function AddItem({ listToken, data }) {
 						value={formData.itemName}
 						onChange={handleChange}
 						placeholder="add item here"
-						className="input input-bordered my-3"
+						className="input input-bordered my-3 w-full"
 					/>
 				</label>
-				<fieldset style={{ border: 'none' }}>
+				<fieldset className="grid border-4 border-y-red-200 px-10 py-5 my-5 shadow-sm">
 					<p className="text-3xl font-bold">
 						How soon will you buy this again?
 					</p>
@@ -122,7 +122,7 @@ export function AddItem({ listToken, data }) {
 						Not Soon
 					</label>
 				</fieldset>
-				<button type="submit" className="btn btn-neutral mt-3">
+				<button type="submit" className="btn btn-neutral mt-3 w-44">
 					Add Item
 				</button>
 			</form>
