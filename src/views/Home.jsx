@@ -95,7 +95,7 @@ export function Home({ setListToken }) {
 	return (
 		<div className="Home h-screen flex flex-col items-center pt-4 text-center gap-6">
 			<Button label="Create New List" onClick={createNewList} />
-			<p>-or-</p>
+			<div className="divider before:bg-secondary after:bg-secondary">OR</div>
 			<p className="font-bold text-3xl">Join an existing shopping list</p>
 			<form onSubmit={submitTokenInput} className="flex flex-col items-center">
 				<label htmlFor="tokenInput">
