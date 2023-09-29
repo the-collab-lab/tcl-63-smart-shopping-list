@@ -34,8 +34,10 @@ export function App() {
 	 * This custom hook takes our token and fetches the data for our list.
 	 * Check ./api/firestore.js for its implementation.
 	 */
+	// FILTER OUT THE DATA THAT CONTAINS AN OBJECT WITH NO NAME PROPERTY
 	const data = useShoppingListData(listToken);
-	const sortedData = comparePurchaseUrgency(data);
+	const realData = data.filter((item) => item.name);
+	const sortedData = comparePurchaseUrgency(realData);
 
 	return (
 		<Router>
