@@ -22,7 +22,7 @@ export function Layout({ listToken }) {
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
-					<h1 className="text-5xl font-bold pb-2">Smart shopping list</h1>
+					<h1 className="text-5xl font-bold pb-2 pt-10">Smart shopping list</h1>
 				</header>
 				<main className="Layout-main">
 					<Outlet />

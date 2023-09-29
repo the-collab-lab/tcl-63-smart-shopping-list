@@ -65,7 +65,7 @@ export function AddItem({ listToken, data }) {
 		<>
 			<form onSubmit={handleSubmit} className="grid justify-items-center">
 				<label htmlFor="itemName">
-					<h1 className="text-3xl font-bold mt-10">Add New Item</h1>
+					<h1 className="text-3xl font-bold mt-10 text-center">Add New Item</h1>
 					<input
 						type="text"
 						name="itemName"
@@ -73,7 +73,7 @@ export function AddItem({ listToken, data }) {
 						value={formData.itemName}
 						onChange={handleChange}
 						placeholder="add item here"
-						className="input input-bordered my-3 w-full"
+						className="input input-bordered input-lg text-2xl w-full max-w-sm my-3"
 					/>
 				</label>
 				<fieldset className="grid border-4 border-y-red-200 px-10 py-5 my-5 shadow-sm">
