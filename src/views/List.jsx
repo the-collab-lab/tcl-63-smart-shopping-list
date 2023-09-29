@@ -54,8 +54,12 @@ export function List({ data, listToken }) {
 						Your token is:{' '}
 						<span className="font-bold">
 							{listToken}
-							<button onClick={copyToken} aria-label="copy to clipboard">
-								<ClipboardDocumentIcon className="ml-1 h-6 w-6 inline" />
+							<button
+								onClick={copyToken}
+								aria-label="copy to clipboard"
+								className="pl-2 rounded-md transition-all duration-400 ease-in-out hover:px-2 hover:ml-1 hover:bg-gray-200"
+							>
+								<ClipboardDocumentIcon className="h-6 w-6 inline" />
 							</button>
 						</span>
 					</p>
