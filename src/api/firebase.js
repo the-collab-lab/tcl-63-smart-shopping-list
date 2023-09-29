@@ -56,7 +56,9 @@ export function useShoppingListData(listId) {
 	}, [listId]);
 
 	// Return the data so it can be used by our React components.
-	return data;
+	// FILTER OUT THE DATA THAT CONTAINS AN OBJECT WITH NO NAME PROPERTY
+	const realData = data.filter((item) => item.name);
+	return realData;
 }
 
 // OPTION B: NEWLY CREATED LIST IS ADDED TO FIRESTORE
