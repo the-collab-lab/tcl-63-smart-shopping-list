@@ -65,7 +65,7 @@ export function List({ data, listToken }) {
 					</p>
 					<p>Please feel free to share it with your friends and family</p>
 				</div>
-				{data.length > 1 && (
+				{data.length >= 1 && (
 					<button
 						className="font-bold hover:text-red-600"
 						onClick={toggleDetails}
