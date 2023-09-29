@@ -93,15 +93,15 @@ export function Home({ setListToken }) {
 	};
 
 	return (
-		<div className="Home h-screen flex flex-col items-center pt-4">
+		<div className="Home h-screen flex flex-col items-center pt-4 text-center gap-6">
 			<Button label="Create New List" onClick={createNewList} />
 			<p>-or-</p>
-			<p className="font-bold">Join an existing shopping list.</p>
-
-			<form onSubmit={submitTokenInput}>
+			<p className="font-bold text-3xl">Join an existing shopping list</p>
+			<form onSubmit={submitTokenInput} className="flex flex-col items-center">
 				<label htmlFor="tokenInput">
 					Enter a 3-word token (example: "word word word"):
-					<br />
+				</label>
+				<div className="flex items-center my-6 w-full justify-center">
 					<input
 						type="text"
 						name="tokenInput"
@@ -110,19 +110,17 @@ export function Home({ setListToken }) {
 						onChange={handleInputChange}
 						onKeyDown={handleEnterKey}
 						ref={tokenInputRef}
-						className="input input-bordered input-primary w-full max-w-xs mr-2 my-2"
+						className="input input-bordered input-primary input-lg w-full max-w-sm mr-2 ml-[10%]"
 					/>
-				</label>
-				<ClearButton
-					label="X"
-					type="reset"
-					ariaLabel="Clear token input"
-					onClick={clearTokenInput}
-				/>
-
-				<br />
+					<ClearButton
+						label="X"
+						type="reset"
+						ariaLabel="Clear token input"
+						onClick={clearTokenInput}
+					/>
+				</div>
 				<Button
-					label="Join"
+					label="Join Existing List"
 					type="submit"
 					ariaLabel="Join shared shopping list"
 					isDisabled={!isTokenValid}

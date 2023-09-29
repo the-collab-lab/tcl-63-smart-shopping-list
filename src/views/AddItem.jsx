@@ -122,7 +122,7 @@ export function AddItem({ listToken, data }) {
 						Not Soon
 					</label>
 				</fieldset>
-				<button type="submit" className="btn btn-neutral mt-3 w-44">
+				<button type="submit" className="btn btn-neutral mt-3 w-80">
 					Add Item
 				</button>
 			</form>
