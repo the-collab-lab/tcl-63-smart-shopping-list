@@ -110,7 +110,7 @@ export function Home({ setListToken }) {
 						onChange={handleInputChange}
 						onKeyDown={handleEnterKey}
 						ref={tokenInputRef}
-						className="input input-bordered input-primary input-lg w-full max-w-sm mr-2 ml-[10%]"
+						className="input input-bordered input-primary input-lg text-2xl w-full max-w-sm mr-2 ml-[10%]"
 					/>
 					<ClearButton
 						label="X"
