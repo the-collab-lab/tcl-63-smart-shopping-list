@@ -35,9 +35,7 @@ export function App() {
 	 * Check ./api/firestore.js for its implementation.
 	 */
 	const data = useShoppingListData(listToken);
-	// FILTER OUT THE DATA THAT CONTAINS AN OBJECT WITH NO NAME PROPERTY
-	const realData = data.filter((item) => item.name);
-	const sortedData = comparePurchaseUrgency(realData);
+	const sortedData = comparePurchaseUrgency(data);
 
 	return (
 		<Router>
