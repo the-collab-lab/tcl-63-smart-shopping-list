@@ -4,20 +4,6 @@ import './Layout.css';
 import { useState } from 'react';
 
 export function Layout({ listToken }) {
-	const [isActive, setIsActive] = useState({
-		home: false,
-		list: false,
-		addItem: false,
-	});
-
-	function handleNavLinkClick(linkName) {
-		setIsActive(() => ({
-			home: linkName === 'home' ? true : false,
-			list: linkName === 'list' ? true : false,
-			addItem: linkName === 'addItem' ? true : false,
-		}));
-	}
-
 	return (
 		<>
 			<div className="Layout">
@@ -35,32 +21,23 @@ export function Layout({ listToken }) {
 							{!listToken && (
 								<NavLink
 									to="/"
-									className={`Nav-link text-slate-950 hover:text-slate-700 ${
-										isActive['home'] &&
-										'font-bold underline decoration-red-400 underline-offset-2'
-									}`}
-									onClick={() => handleNavLinkClick('home')}
+									className="Nav-link text-slate-950 hover:text-slate-700"
+									activeClassName="active"
 								>
 									Home
 								</NavLink>
 							)}
 							<NavLink
 								to="/list"
-								className={`Nav-link text-slate-950 hover:text-slate-700 ${
-									isActive['list'] &&
-									'font-bold underline decoration-red-400 underline-offset-2'
-								}`}
-								onClick={() => handleNavLinkClick('list')}
+								className="Nav-link text-slate-950 hover:text-slate-700"
+								activeClassName="active"
 							>
 								List
 							</NavLink>
 							<NavLink
 								to="/add-item"
-								className={`Nav-link text-slate-950 hover:text-slate-700 ${
-									isActive['addItem'] &&
-									'font-bold underline decoration-red-400 underline-offset-2'
-								}`}
-								onClick={() => handleNavLinkClick('addItem')}
+								className="Nav-link text-slate-950 hover:text-slate-700"
+								activeClassName="active"
 							>
 								Add Item
 							</NavLink>

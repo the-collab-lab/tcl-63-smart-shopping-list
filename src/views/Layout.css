@@ -68,5 +68,7 @@
 
 .Nav-link.active {
 	text-decoration-thickness: 0.22em;
-	text-underline-offset: 0.1em;
+	text-underline-offset: 0.2em;
+	font-weight: bold;
+	text-decoration: underline #f87171 6px;
 }

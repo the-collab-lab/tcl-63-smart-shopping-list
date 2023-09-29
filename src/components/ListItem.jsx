@@ -5,7 +5,7 @@ import { updateItem, deleteItem } from '../api/firebase';
 import DeleteItemModal from './DeleteItemModal';
 import DeleteButton from './DeleteButton';
 
-export function ListItem({ listToken, item, itemId, showDetails }) {
+export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
 	const [isPurchased, setIsPurchased] = useState(checked);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,7 +66,7 @@ export function ListItem({ listToken, item, itemId, showDetails }) {
 	};
 
 	return (
-		<div className="card w-[50rem] py-3 px-8 bg-base-100 shadow-lg my-3">
+		<div className="card md:w-[50rem] max-md:w-[30rem] pb-3 pl-8 bg-base-100 shadow-lg my-3">
 			<>
 				<li className="ListItem flex flex-row items-center justify-between gap-4">
 					<label aria-label={`Mark ${name} as purchased`}>
@@ -80,13 +80,12 @@ export function ListItem({ listToken, item, itemId, showDetails }) {
 						/>
 						{name}
 					</label>
-					<div>
-						{showDetails && (
-							<span className={`urgency-tag ${purchaseUrgency}`}>
-								{displayUrgency}
-							</span>
-						)}
-						&nbsp;
+					<div className="flex flex-col items-center">
+						<span
+							className={`urgency-tag ${purchaseUrgency} mb-3 rounded-bl-lg text-[12px] w-[8rem]`}
+						>
+							{displayUrgency}
+						</span>
 						<DeleteButton
 							ariaLabel={`Delete ${name} from your list`}
 							type="button"

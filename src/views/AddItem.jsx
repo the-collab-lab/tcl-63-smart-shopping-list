@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
-import { ToastContainer, toast } from 'react-toastify'; // Import Toastify to display alert messages
+import { ToastContainer, toast } from 'react-toastify';
 
 export function AddItem({ listToken, data }) {
 	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
@@ -90,10 +90,10 @@ export function AddItem({ listToken, data }) {
 							value="7"
 							onChange={handleChange}
 							checked={formData.daysUntilNextPurchase === 7}
-							className="radio radio-info mr-2"
+							className="radio checked:bg-red-400 mr-2"
 							required // ensures the user makes a selection before proceeding
 						/>
-						Soon
+						Soon - 7 days
 					</label>
 					<br />
 					<label htmlFor="kindsoon">
@@ -104,9 +104,9 @@ export function AddItem({ listToken, data }) {
 							value="14"
 							checked={formData.daysUntilNextPurchase === 14}
 							onChange={handleChange}
-							className="radio radio-info mr-2"
+							className="radio checked:bg-red-400 mr-2"
 						/>
-						Kind of Soon
+						Kind of Soon - 14 days
 					</label>
 					<br />
 					<label htmlFor="notsoon">
@@ -117,9 +117,9 @@ export function AddItem({ listToken, data }) {
 							value="30"
 							checked={formData.daysUntilNextPurchase === 30}
 							onChange={handleChange}
-							className="radio radio-info mr-2"
+							className="radio checked:bg-red-400 mr-2"
 						/>
-						Not Soon
+						Not Soon - 30 days
 					</label>
 				</fieldset>
 				<button type="submit" className="btn btn-neutral mt-3 w-80">

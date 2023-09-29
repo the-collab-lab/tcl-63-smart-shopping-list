@@ -4,13 +4,13 @@ import ClearButton from '../components/ClearButton';
 import './Home.css';
 import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
+import { ToastContainer, toast } from 'react-toastify';
 
 export function Home({ setListToken }) {
 	// CREATE A REFERENCE TO THE TOKEN INPUT IN ORDER TO DIRECT FOCUS TO IT AFTER IT'S CLEARED
 	const tokenInputRef = useRef(null);
 
 	const [tokenInput, setTokenInput] = useState('');
-	const [errorMessage, setErrorMessage] = useState('');
 	const [isTokenValid, setIsTokenValid] = useState(false);
 
 	// OPTION: A - NEW (EMPTY) LIST IS ONLY SAVED TO LOCAL STORAGE
@@ -42,11 +42,8 @@ export function Home({ setListToken }) {
 
 		// test for all non-letter characters;
 		if (/[^a-zA-Z\s]/.test(tokenInput)) {
-			setErrorMessage('Please use only letters!');
+			toast.error('Please use only letters!');
 			setIsTokenValid(false);
-			setTimeout(() => {
-				setErrorMessage('');
-			}, 7000);
 		}
 		setTokenInput(tokenInput);
 	};
@@ -66,10 +63,7 @@ export function Home({ setListToken }) {
 		event.preventDefault();
 
 		if (sharedListData.length === 0) {
-			setErrorMessage('The list does not exist. Please try again.');
-			setTimeout(() => {
-				setErrorMessage('');
-			}, 7000);
+			toast.error('The list does not exist. Please try again.');
 			return;
 		}
 
@@ -80,12 +74,9 @@ export function Home({ setListToken }) {
 		if (event.key === 'Enter') {
 			event.preventDefault();
 			if (!isTokenValid) {
-				setErrorMessage(
+				toast.error(
 					'A token must contain exactly three words separated by a space.',
 				);
-				setTimeout(() => {
-					setErrorMessage('');
-				}, 7000);
 			} else {
 				submitTokenInput(event);
 			}
@@ -94,6 +85,7 @@ export function Home({ setListToken }) {
 
 	return (
 		<div className="Home h-screen flex flex-col items-center pt-4 text-center gap-6">
+			<p>Friends who shop together, stay together!</p>
 			<Button label="Create New List" onClick={createNewList} />
 			<div className="divider before:bg-secondary after:bg-secondary">OR</div>
 			<p className="font-bold text-3xl">Join an existing shopping list</p>
@@ -126,8 +118,8 @@ export function Home({ setListToken }) {
 					isDisabled={!isTokenValid}
 				/>
 			</form>
-
-			<div aria-live="polite">{errorMessage && <p>{errorMessage}</p>}</div>
+			{/* Prompt users with alert message, including for screen reader users */}
+			<ToastContainer position="top-center" />
 		</div>
 	);
 }

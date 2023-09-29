@@ -60,20 +60,8 @@ html {
 
 body {
 	background-color: var(--color-bg);
+	font-family: 'Poppins', sans-serif;
 	color: var(--color-text);
-	font-family:
-		-apple-system,
-		BlinkMacSystemFont,
-		avenir next,
-		avenir,
-		segoe ui,
-		helvetica neue,
-		helvetica,
-		Ubuntu,
-		roboto,
-		noto,
-		arial,
-		sans-serif;
 	font-size: 1.8rem;
 	line-height: 1.4;
 	margin: 0;
@@ -85,7 +73,7 @@ body {
 }
 
 .btn-neutral {
-	@apply text-xl btn-lg text-white;
+	@apply text-xl btn-lg;
 }
 
 åcode {

@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 export function List({ data, listToken }) {
 	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
 	const [inputItem, setInputItem] = useState('');
-	const [showDetails, setShowDetails] = useState(false);
 
 	// Initialize a useRef to bring focus back to input field
 	const filterInputRef = useRef(null);
@@ -35,10 +34,6 @@ export function List({ data, listToken }) {
 		stringMatch(inputItem, listItem.name),
 	);
 
-	const toggleDetails = () => {
-		setShowDetails(!showDetails);
-	};
-
 	const copyToken = () => {
 		navigator.clipboard.writeText(`${listToken}`);
 		toast.success('Token Copied');
@@ -47,7 +42,6 @@ export function List({ data, listToken }) {
 	return (
 		<div className="flex flex-col items-center text-center max-h-screen">
 			<div className="mb-4">
-				<p>Friends who shop together, stay together!</p>
 				<div>
 					<ToastContainer position="top-center" />
 					<p>
@@ -65,14 +59,6 @@ export function List({ data, listToken }) {
 					</p>
 					<p>Please feel free to share it with your friends and family</p>
 				</div>
-				{data.length >= 1 && (
-					<button
-						className="font-bold hover:text-red-600"
-						onClick={toggleDetails}
-					>
-						{showDetails ? 'Hide item details' : 'Show item details'}
-					</button>
-				)}
 			</div>
 			{data.length === 0 ? (
 				<>
@@ -109,9 +95,37 @@ export function List({ data, listToken }) {
 				</form>
 			)}
 			{/* Accessibility feature: added the aria-live attribute for screenreaders */}
+			{data.length > 0 && (
+				<div className="card max-md:w-[30rem] bg-base-100 shadow-lg my-3 py-3 px-6">
+					<h2 className="font-bold">Legend</h2>
+					<ul className="text-left">
+						<li>
+							{' '}
+							<div class="w-4 h-4 rounded-full bg-[#cc79a7] inline-block mr-2"></div>
+							soon: 7 days
+						</li>
+						<li>
+							<div class="w-4 h-4 rounded-full bg-[#f7b7a3] inline-block mr-2"></div>
+							kind of soon: 14 days
+						</li>
+						<li>
+							<div class="w-4 h-4 rounded-full bg-[#c6d68f] inline-block mr-2"></div>
+							not soon: 30 days
+						</li>
+						<li>
+							<div class="w-4 h-4 rounded-full bg-gray-300 inline-block mr-2"></div>
+							inactive: 60 days since last purchase
+						</li>
+						<li>
+							<div class="w-4 h-4 rounded-full bg-[#ea5f89] inline-block mr-2"></div>
+							overdue
+						</li>
+					</ul>
+				</div>
+			)}
 			<div
 				aria-live="polite"
-				className="my-9 px-5 h-full overflow-y-scroll pb-[30rem]"
+				className="my-9 px-5 h-full overflow-auto pb-[30rem]"
 			>
 				<ul>
 					{filterData.length > 0
@@ -121,7 +135,6 @@ export function List({ data, listToken }) {
 									listToken={listToken}
 									item={item}
 									itemId={item.id}
-									showDetails={showDetails}
 								/>
 						  ))
 						: data.length > 0 && <p aria-live="polite">No item found!</p>}
