@@ -105,7 +105,7 @@ export function List({ data, listToken }) {
 			{/* Accessibility feature: added the aria-live attribute for screenreaders */}
 			<div
 				aria-live="polite"
-				className="my-10 px-5 h-full overflow-y-scroll pb-[30rem]"
+				className="my-9 px-5 h-full overflow-y-scroll pb-[30rem]"
 			>
 				<ul>
 					{filterData.length > 0
