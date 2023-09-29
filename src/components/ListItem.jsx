@@ -76,7 +76,7 @@ export function ListItem({ listToken, item, itemId, showDetails }) {
 							type="checkbox"
 							checked={isPurchased}
 							onChange={handleChange}
-							className="mr-2"
+							className="mr-2 checkbox checkbox-success"
 						/>
 						{name}
 					</label>
