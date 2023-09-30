@@ -76,7 +76,7 @@ export function AddItem({ listToken, data }) {
 						className="input input-bordered input-lg text-2xl w-full max-w-sm my-3"
 					/>
 				</label>
-				<fieldset className="grid border-4 border-y-red-200 px-10 py-5 my-5 shadow-sm">
+				<fieldset className="grid border-4 border-y-red-200 px-10 py-5 my-5 shadow-sm rounded-2xl">
 					<p className="text-3xl font-bold">
 						How soon will you buy this again?
 					</p>

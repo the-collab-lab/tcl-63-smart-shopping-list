@@ -43,20 +43,12 @@
 	padding-bottom: max(env(safe-area-inset-bottom), 1rem);
 	padding-top: 1rem;
 	place-content: center;
-	position: fixed;
+	position: absolute;
 	width: 100%;
-}
-
-.Nav-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	width: min(72ch, 100%);
 }
 
 .Nav-link {
 	--color-text: var(--color-accent);
-
 	color: var(--color-text);
 	font-size: 1.4em;
 	flex: 0 1 auto;

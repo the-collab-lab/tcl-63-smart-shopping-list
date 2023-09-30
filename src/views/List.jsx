@@ -40,8 +40,8 @@ export function List({ data, listToken }) {
 	};
 
 	return (
-		<div className="flex flex-col items-center text-center max-h-screen">
-			<div className="mb-4">
+		<div className="flex flex-col flex-grow gap-4 items-center text-center max-h-screen h-75vh overflow-y-auto">
+			<div className="pt-10">
 				<div>
 					<ToastContainer position="top-center" />
 					<p>
