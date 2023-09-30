@@ -40,7 +40,7 @@ export function List({ data, listToken }) {
 	};
 
 	return (
-		<div className="flex flex-col flex-grow gap-4 items-center text-center max-h-screen h-75vh overflow-y-auto">
+		<div className="flex flex-col flex-grow gap-4 items-center text-center max-h-screen">
 			<div className="pt-10">
 				<div>
 					<ToastContainer position="top-center" />
@@ -123,10 +123,7 @@ export function List({ data, listToken }) {
 					</ul>
 				</div>
 			)}
-			<div
-				aria-live="polite"
-				className="my-9 px-5 h-full overflow-auto pb-[30rem]"
-			>
+			<div aria-live="polite" className="my-9 px-5 h-full pb-[30rem]">
 				<ul>
 					{filterData.length > 0
 						? filterData.map((item) => (
