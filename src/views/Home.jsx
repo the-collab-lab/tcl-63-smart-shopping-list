@@ -84,7 +84,7 @@ export function Home({ setListToken }) {
 	};
 
 	return (
-		<div className="Home h-screen flex flex-col items-center pt-4 text-center gap-6">
+		<div className="Home flex flex-col items-center pt-10 text-center gap-6">
 			<p>Friends who shop together, stay together!</p>
 			<Button label="Create New List" onClick={createNewList} />
 			<div className="divider before:bg-secondary after:bg-secondary">OR</div>
