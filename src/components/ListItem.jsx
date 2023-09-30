@@ -66,7 +66,7 @@ export function ListItem({ listToken, item, itemId }) {
 	};
 
 	return (
-		<div className="card md:w-[50rem] max-md:w-[30rem] pb-3 pl-8 bg-base-100 shadow-lg my-3">
+		<div className="card md:w-[50rem] max-md:w-[30rem] pb-3 pl-8 bg-base-100 shadow-lg hover:shadow-2xl duration-300 my-3">
 			<>
 				<li className="ListItem flex flex-row items-center justify-between gap-4">
 					<label aria-label={`Mark ${name} as purchased`}>
@@ -82,7 +82,7 @@ export function ListItem({ listToken, item, itemId }) {
 					</label>
 					<div className="flex flex-col items-center">
 						<span
-							className={`urgency-tag ${purchaseUrgency} mb-3 rounded-bl-lg text-[12px] w-[8rem]`}
+							className={`urgency-tag ${purchaseUrgency} mb-3 rounded-bl-lg text-[12px] w-[8rem] hover:scale-125 hover:mr-5 hover:mt-1`}
 						>
 							{displayUrgency}
 						</span>
