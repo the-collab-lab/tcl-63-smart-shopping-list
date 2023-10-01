@@ -73,7 +73,7 @@ body {
 }
 
 .btn-neutral {
-	@apply text-xl btn-lg;
+	@apply text-2xl btn-lg text-white;
 }
 
 åcode {
