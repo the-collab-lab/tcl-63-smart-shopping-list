@@ -12,7 +12,6 @@ export function Home({ setListToken }) {
 
 	const [tokenInput, setTokenInput] = useState('');
 	const [isTokenValid, setIsTokenValid] = useState(false);
-
 	// NEW LIST IS ADDED TO FIREBASE
 	const createNewList = async () => {
 		const newToken = generateToken();
