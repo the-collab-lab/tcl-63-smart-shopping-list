@@ -4,10 +4,9 @@ import { ListItem } from '../components';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import ClearButton from '../components/ClearButton';
 import { ClipboardDocumentIcon } from '@heroicons/react/24/solid';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 export function List({ data, listToken, setListToken }) {
-	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
 	const [inputItem, setInputItem] = useState('');
 	const navigate = useNavigate();
 	// Initialize a useRef to bring focus back to input field
@@ -48,7 +47,7 @@ export function List({ data, listToken, setListToken }) {
 		<div className="flex flex-col flex-grow gap-4 items-center text-center max-h-screen">
 			<div className="pt-10">
 				<div>
-					<ToastContainer position="top-center" />
+					<ToastContainer position="top-center" transition={Slide} />
 					<div className="text-right">
 						{/* LOGOUT */}
 						<button className="btn btn-lg btn-outline" onClick={deleteStorage}>

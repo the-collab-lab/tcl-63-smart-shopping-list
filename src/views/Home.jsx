@@ -4,7 +4,7 @@ import ClearButton from '../components/ClearButton';
 import './Home.css';
 import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 export function Home({ setListToken }) {
 	// CREATE A REFERENCE TO THE TOKEN INPUT IN ORDER TO DIRECT FOCUS TO IT AFTER IT'S CLEARED
@@ -13,16 +13,7 @@ export function Home({ setListToken }) {
 	const [tokenInput, setTokenInput] = useState('');
 	const [isTokenValid, setIsTokenValid] = useState(false);
 
-	// OPTION: A - NEW (EMPTY) LIST IS ONLY SAVED TO LOCAL STORAGE
-	// IT IS ADDED TO FIREBASE ONLY WHEN THE FIRST ITEM IS ADDED TO THE LIST
-	// FUNCTION INHERITED FROM PR TO ISSUE #3
-	// const createNewList = () => {
-	// 	const newToken = generateToken();
-	// 	setListToken(newToken);
-	// };
-
-	// OPTION: B - NEW LIST IS ADDED TO FIREBASE (GOES WITH OPTION B IN Firebase.js and OPTION B IN List.jsx)
-	// IT USES THE FUNCTION addNewListToFirestore FROM Firebase.js WHICH ADDS A NEW LIST CONTAINING AN EMPTY DOC
+	// NEW LIST IS ADDED TO FIREBASE
 	const createNewList = async () => {
 		const newToken = generateToken();
 		try {
@@ -61,26 +52,11 @@ export function Home({ setListToken }) {
 
 	const submitTokenInput = (event) => {
 		event.preventDefault();
-
 		if (sharedListData.length === 0) {
 			toast.error('The list does not exist. Please try again.');
 			return;
 		}
-
 		setListToken(token);
-	};
-
-	const handleEnterKey = (event) => {
-		if (event.key === 'Enter') {
-			event.preventDefault();
-			if (!isTokenValid) {
-				toast.error(
-					'A token must contain exactly three words separated by a space.',
-				);
-			} else {
-				submitTokenInput(event);
-			}
-		}
 	};
 
 	return (
@@ -100,7 +76,6 @@ export function Home({ setListToken }) {
 						id="tokenInput"
 						value={tokenInput}
 						onChange={handleInputChange}
-						onKeyDown={handleEnterKey}
 						ref={tokenInputRef}
 						className="input input-bordered input-primary input-lg text-2xl w-full max-w-sm mr-2 ml-[10%]"
 					/>
@@ -115,11 +90,10 @@ export function Home({ setListToken }) {
 					label="Join Existing List"
 					type="submit"
 					ariaLabel="Join shared shopping list"
-					isDisabled={!isTokenValid}
 				/>
 			</form>
 			{/* Prompt users with alert message, including for screen reader users */}
-			<ToastContainer position="top-center" />
+			<ToastContainer position="top-center" transition={Slide} />
 		</div>
 	);
 }

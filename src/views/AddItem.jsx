@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 export function AddItem({ listToken, data }) {
 	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
@@ -127,7 +127,7 @@ export function AddItem({ listToken, data }) {
 				</button>
 			</form>
 			{/* Prompt users with alert message, including for screen reader users */}
-			<ToastContainer position="top-center" />
+			<ToastContainer position="top-center" transition={Slide} />
 		</>
 	);
 }
