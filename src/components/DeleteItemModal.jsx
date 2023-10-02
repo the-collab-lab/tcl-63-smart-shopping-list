@@ -17,6 +17,7 @@ const DeleteItemModal = ({
 			onRequestClose={closeModal}
 			style={{
 				overlay: {
+					zIndex: 1000,
 					position: 'fixed',
 					top: 0,
 					left: 0,

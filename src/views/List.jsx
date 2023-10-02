@@ -112,23 +112,23 @@ export function List({ data, listToken, setListToken }) {
 					<ul className="text-left">
 						<li>
 							{' '}
-							<div class="w-4 h-4 rounded-full bg-[#cc79a7] inline-block mr-2"></div>
+							<div className="w-4 h-4 rounded-full bg-[#da9fbe] inline-block mr-2"></div>
 							soon: 7 days
 						</li>
 						<li>
-							<div class="w-4 h-4 rounded-full bg-[#f7b7a3] inline-block mr-2"></div>
+							<div className="w-4 h-4 rounded-full bg-[#f7b7a3] inline-block mr-2"></div>
 							kind of soon: 14 days
 						</li>
 						<li>
-							<div class="w-4 h-4 rounded-full bg-[#c6d68f] inline-block mr-2"></div>
+							<div className="w-4 h-4 rounded-full bg-[#c6d68f] inline-block mr-2"></div>
 							not soon: 30 days
 						</li>
 						<li>
-							<div class="w-4 h-4 rounded-full bg-gray-300 inline-block mr-2"></div>
+							<div className="w-4 h-4 rounded-full bg-gray-300 inline-block mr-2"></div>
 							inactive: 60 days since last purchase
 						</li>
 						<li>
-							<div class="w-4 h-4 rounded-full bg-[#ea5f89] inline-block mr-2"></div>
+							<div className="w-4 h-4 rounded-full bg-[#e66e92] inline-block mr-2"></div>
 							overdue
 						</li>
 					</ul>

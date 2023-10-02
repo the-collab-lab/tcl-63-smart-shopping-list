@@ -17,10 +17,10 @@ export function Layout({ listToken }) {
 				<main className="relative z-10 mx-auto w-[min(72ch,100%)] h-[65vh] overflow-y-auto border rounded-2xl bg-white pb-10">
 					<Outlet />
 				</main>
-				<div className='absolute right-0 bg-right bg-[url("../../img/berry-bg.png")] bg-cover inset-0' />
+				<div className='absolute z-0 right-0 bg-right bg-[url("../../img/berry-bg.png")] bg-cover inset-0' />
 				{/* remove navbar from Home when there is no list token */}
 				{listToken && (
-					<nav className="z-10 flex fixed py-4 bottom-0 w-full justify-center bg-red-100">
+					<nav className="z-5 flex fixed py-4 bottom-0 w-full justify-center bg-red-100">
 						<div className="flex gap-20">
 							{/* this removes the Home navlink from the List and AddItem pages when there is a token assigned */}
 							{!listToken && (

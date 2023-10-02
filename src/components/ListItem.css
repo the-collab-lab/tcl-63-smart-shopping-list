@@ -28,12 +28,11 @@
 }
 
 .overdue {
-	background-color: #ea5f89;
+	background-color: #e66e92;
 }
 
 .soon {
-	background-color: #cc79a7;
-	color: white;
+	background-color: #da9fbe;
 }
 
 .kind-of-soon {
