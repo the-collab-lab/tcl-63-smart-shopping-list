@@ -5,7 +5,7 @@ const Button = ({ ariaLabel, label, onClick, type, isDisabled }) => {
 			type={type}
 			onClick={onClick}
 			disabled={isDisabled}
-			className="btn btn-neutral mt-3 w-60"
+			className={'btn btn-neutral mt-3'}
 		>
 			{label}
 		</button>

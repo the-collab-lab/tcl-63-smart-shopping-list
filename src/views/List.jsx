@@ -1,15 +1,15 @@
 import { useState, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ListItem } from '../components';
 import { sanitizeInput } from '../utils/sanitizeInput';
 import ClearButton from '../components/ClearButton';
 import { ClipboardDocumentIcon } from '@heroicons/react/24/solid';
 import { ToastContainer, toast } from 'react-toastify';
 
-export function List({ data, listToken }) {
+export function List({ data, listToken, setListToken }) {
 	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
 	const [inputItem, setInputItem] = useState('');
-
+	const navigate = useNavigate();
 	// Initialize a useRef to bring focus back to input field
 	const filterInputRef = useRef(null);
 
@@ -39,12 +39,23 @@ export function List({ data, listToken }) {
 		toast.success('Token Copied');
 	};
 
+	const deleteStorage = () => {
+		localStorage.removeItem(listToken);
+		setListToken('');
+		navigate('/');
+	};
 	return (
 		<div className="flex flex-col flex-grow gap-4 items-center text-center max-h-screen">
 			<div className="pt-10">
 				<div>
 					<ToastContainer position="top-center" />
-					<p>
+					<div className="text-right">
+						{/* LOGOUT */}
+						<button className="btn btn-lg btn-outline" onClick={deleteStorage}>
+							logout
+						</button>
+					</div>
+					<div className="text-center">
 						Your token is:{' '}
 						<span className="font-bold">
 							{listToken}
@@ -56,7 +67,7 @@ export function List({ data, listToken }) {
 								<ClipboardDocumentIcon className="h-6 w-6 inline" />
 							</button>
 						</span>
-					</p>
+					</div>
 					<p>Please feel free to share it with your friends and family</p>
 				</div>
 			</div>

@@ -57,7 +57,11 @@ export function App() {
 						path="/list"
 						element={
 							listToken ? (
-								<List data={sortedData} listToken={listToken} />
+								<List
+									data={sortedData}
+									listToken={listToken}
+									setListToken={setListToken}
+								/>
 							) : (
 								<Navigate to="/" />
 							)
