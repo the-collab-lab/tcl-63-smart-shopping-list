@@ -33,6 +33,10 @@ export function List({ data, listToken, setListToken }) {
 		stringMatch(inputItem, listItem.name),
 	);
 
+	const checkedItemCount = data.filter(
+		(listItem) => listItem.checked === true,
+	).length;
+
 	const copyToken = () => {
 		navigator.clipboard.writeText(`${listToken}`);
 		toast.success('Token Copied');
@@ -104,34 +108,49 @@ export function List({ data, listToken, setListToken }) {
 					</div>
 				</form>
 			)}
-			{/* Accessibility feature: added the aria-live attribute for screenreaders */}
 			{data.length > 0 && (
-				<div className="card max-md:w-[30rem] bg-base-100 shadow-lg my-3 py-3 px-6">
-					<h2 className="font-bold">Legend</h2>
-					<ul className="text-left">
-						<li>
-							{' '}
-							<div className="w-4 h-4 rounded-full bg-[#da9fbe] inline-block mr-2"></div>
-							soon: 7 days
-						</li>
-						<li>
-							<div className="w-4 h-4 rounded-full bg-[#f7b7a3] inline-block mr-2"></div>
-							kind of soon: 14 days
-						</li>
-						<li>
-							<div className="w-4 h-4 rounded-full bg-[#c6d68f] inline-block mr-2"></div>
-							not soon: 30 days
-						</li>
-						<li>
-							<div className="w-4 h-4 rounded-full bg-gray-300 inline-block mr-2"></div>
-							inactive: 60 days since last purchase
-						</li>
-						<li>
-							<div className="w-4 h-4 rounded-full bg-[#e66e92] inline-block mr-2"></div>
-							overdue
-						</li>
-					</ul>
-				</div>
+				<>
+					{/* URGENCY TAG LEGEND */}
+					<div className="card max-md:w-[30rem] bg-base-100 shadow-lg my-3 py-3 px-6">
+						<h2 className="font-bold">Legend</h2>
+						<ul className="text-left">
+							<li>
+								{' '}
+								<div className="w-4 h-4 rounded-full bg-[#da9fbe] inline-block mr-2"></div>
+								soon: 7 days
+							</li>
+							<li>
+								<div className="w-4 h-4 rounded-full bg-[#f7b7a3] inline-block mr-2"></div>
+								kind of soon: 14 days
+							</li>
+							<li>
+								<div className="w-4 h-4 rounded-full bg-[#c6d68f] inline-block mr-2"></div>
+								not soon: 30 days
+							</li>
+							<li>
+								<div className="w-4 h-4 rounded-full bg-gray-300 inline-block mr-2"></div>
+								inactive: 60 days since last purchase
+							</li>
+							<li>
+								<div className="w-4 h-4 rounded-full bg-[#e66e92] inline-block mr-2"></div>
+								overdue
+							</li>
+						</ul>
+					</div>
+					{/* COMPLETED ITEM COUNT DISPLAY */}
+					<p className="text-left">
+						Total:{' '}
+						<span className="bg-primary px-1 rounded-sm">{data.length}</span>{' '}
+						Completed:{' '}
+						<span className="bg-accent px-1 rounded-sm">
+							{checkedItemCount}
+						</span>{' '}
+						Active:{' '}
+						<span className="bg-base-300 px-1 rounded-sm">
+							{data.length - checkedItemCount}
+						</span>
+					</p>
+				</>
 			)}
 			<div aria-live="polite" className="my-9 px-5 h-full pb-[30rem]">
 				<ul>
