@@ -69,7 +69,10 @@ export function ListItem({ listToken, item, itemId }) {
 		<div className="card md:w-[50rem] max-md:w-[30rem] pb-3 pl-8 bg-base-100 shadow-lg hover:shadow-2xl duration-300 my-3">
 			<>
 				<li className="ListItem flex flex-row items-center justify-between gap-4">
-					<label aria-label={`Mark ${name} as purchased`}>
+					<label
+						aria-label={`Mark ${name} as purchased`}
+						className={`${isPurchased ? 'line-through' : ''}`}
+					>
 						<input
 							id={name}
 							name={name}
