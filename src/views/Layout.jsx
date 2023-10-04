@@ -1,7 +1,7 @@
 import { Outlet, NavLink } from 'react-router-dom';
 
 import './Layout.css';
-import logo from '../../public/img/logo-bluebg.png';
+import logo from '../assets/logo-bluebg.png';
 
 export function Layout({ listToken }) {
 	return (
