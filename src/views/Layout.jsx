@@ -14,7 +14,7 @@ export function Layout({ listToken }) {
 						className="h-20 md:h-64 relative z-10"
 					/>
 				</header>
-				<main className="relative z-10 mx-auto w-[min(72ch,100%)] h-[80vh] lg:h-[65vh] md:h-[70vh] overflow-y-auto border rounded-2xl bg-white pb-10">
+				<main className="relative z-10 mx-auto w-[min(72ch,95%)] h-[80vh] lg:h-[65vh] md:h-[70vh] overflow-y-auto border rounded-2xl bg-white pb-10">
 					<Outlet />
 				</main>
 				<div className='absolute z-0 right-0 bg-right bg-[url("../../img/berry-bg.png")] bg-cover inset-0' />
