@@ -2,40 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--color-black: hsla(220, 13%, 18%, 1);
-	--color-gray-dark: hsla(220, 13%, 25%, 1);
-	--color-white: hsla(220, 13%, 98%, 1);
-	--color-gray-light: hsla(220, 13%, 94%, 1);
-	--color-emerald-green: hsla(168, 92%, 25%, 1);
-	--color-vermillion-green: hsla(168, 92%, 43%, 1);
-	--color-cobalt-blue: hsla(215, 100%, 34%, 1);
-	--color-pastel-blue: hsla(215, 100%, 73%, 1);
-	--color-red: hsl(0, 68%, 42%);
-
-	--color-accent: var(--color-pastel-blue);
-	--color-bg: var(--color-black);
-	--color-border: hsla(220, 13%, 32%, 1);
-	--color-error: var(--color-red);
-	--color-text: var(--color-white);
-}
-
-@media screen and (prefers-color-scheme: light) {
-	:root {
-		--color-accent: var(--color-cobalt-blue);
-		--color-bg: var(--color-white);
-		--color-border: hsla(220, 13%, 78%, 1);
-		--color-text: var(--color-black);
-	}
-}
-
-:root.theme-light {
-	--color-accent: var(--color-cobalt-blue);
-	--color-bg: var(--color-white);
-	--color-border: hsla(220, 13%, 78%, 1);
-	--color-text: var(--color-black);
-}
-
 *,
 *::after,
 *::before {
@@ -59,9 +25,7 @@ html {
 }
 
 body {
-	background-color: var(--color-bg);
 	font-family: 'Poppins', sans-serif;
-	color: var(--color-text);
 	font-size: 1.8rem;
 	line-height: 1.4;
 	margin: 0;
@@ -74,33 +38,4 @@ body {
 
 .btn-neutral {
 	@apply text-2xl btn-lg text-white;
-}
-
-åcode {
-	--color-bg: var(--color-gray-dark);
-	--color-text: var(--color-accent);
-
-	background-color: var(--color-bg);
-	border-radius: 4px;
-	color: var(--color-text);
-	display: inline-block;
-	font-family:
-		Menlo,
-		Consolas,
-		Monaco,
-		Liberation Mono,
-		Lucida Console,
-		monospace;
-	font-size: 0.9em;
-	padding: 0.15em 0.15em;
-}
-
-@media screen and (prefers-color-scheme: light) {
-	code {
-		--color-bg: var(--color-gray-light);
-	}
-}
-
-:root.theme-light code {
-	--color-bg: var(--color-gray-light);
 }
