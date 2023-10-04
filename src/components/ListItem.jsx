@@ -71,7 +71,7 @@ export function ListItem({ listToken, item, itemId }) {
 				<li className="ListItem flex flex-row items-center justify-between gap-4">
 					<label
 						aria-label={`Mark ${name} as purchased`}
-						className={`${isPurchased ? 'line-through' : ''}`}
+						className={`capitalize ${isPurchased ? 'line-through' : ''}`}
 					>
 						<input
 							id={name}

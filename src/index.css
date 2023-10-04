@@ -39,3 +39,11 @@ body {
 .btn-neutral {
 	@apply text-2xl btn-lg text-white;
 }
+
+@media screen and (max-width: 480px) {
+	.Toastify__toast-container--top-center {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}

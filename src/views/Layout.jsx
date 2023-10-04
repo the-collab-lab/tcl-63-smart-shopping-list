@@ -20,7 +20,7 @@ export function Layout({ listToken }) {
 				<div className='absolute z-0 right-0 bg-right bg-[url("../../img/berry-bg.png")] bg-cover inset-0' />
 				{/* remove navbar from Home when there is no list token */}
 				{listToken && (
-					<nav className="z-5 flex fixed py-4 bottom-0 w-full justify-center bg-red-100">
+					<nav className="z-5 flex fixed py-1 md:py-2 lg:py-4 bottom-0 w-full justify-center bg-red-100">
 						<div className="flex gap-20">
 							{/* this removes the Home navlink from the List and AddItem pages when there is a token assigned */}
 							{!listToken && (

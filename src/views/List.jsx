@@ -51,7 +51,6 @@ export function List({ data, listToken, setListToken }) {
 		<div className="flex flex-col flex-grow gap-4 items-center text-center max-h-screen">
 			<div className="pt-10">
 				<div>
-					<ToastContainer position="top-center" transition={Slide} />
 					<div className="text-right">
 						{/* LOGOUT */}
 						<button className="btn btn-lg btn-outline" onClick={deleteStorage}>
@@ -72,6 +71,7 @@ export function List({ data, listToken, setListToken }) {
 						</span>
 					</div>
 					<p>Please feel free to share it with your friends and family</p>
+					<ToastContainer position="top-center" transition={Slide} />
 				</div>
 			</div>
 			{data.length === 0 ? (
@@ -110,6 +110,37 @@ export function List({ data, listToken, setListToken }) {
 			)}
 			{data.length > 0 && (
 				<>
+					{/* COMPLETED ITEM COUNT DISPLAY */}
+					<p className="text-left">
+						Total:{' '}
+						<span className="bg-primary px-1 rounded-sm">{data.length}</span>{' '}
+						Completed:{' '}
+						<span className="bg-accent px-1 rounded-sm">
+							{checkedItemCount}
+						</span>{' '}
+						Active:{' '}
+						<span className="bg-base-300 px-1 rounded-sm">
+							{data.length - checkedItemCount}
+						</span>
+					</p>
+				</>
+			)}
+			<div aria-live="polite" className="my-9 px-5 h-full">
+				<ul>
+					{filterData.length > 0
+						? filterData.map((item) => (
+								<ListItem
+									key={item.id}
+									listToken={listToken}
+									item={item}
+									itemId={item.id}
+								/>
+						  ))
+						: data.length > 0 && <p aria-live="polite">No item found!</p>}
+				</ul>
+			</div>
+			{data.length > 0 && (
+				<>
 					{/* URGENCY TAG LEGEND */}
 					<div className="card max-md:w-[30rem] bg-base-100 shadow-lg my-3 py-3 px-6">
 						<h2 className="font-bold">Legend</h2>
@@ -137,35 +168,8 @@ export function List({ data, listToken, setListToken }) {
 							</li>
 						</ul>
 					</div>
-					{/* COMPLETED ITEM COUNT DISPLAY */}
-					<p className="text-left">
-						Total:{' '}
-						<span className="bg-primary px-1 rounded-sm">{data.length}</span>{' '}
-						Completed:{' '}
-						<span className="bg-accent px-1 rounded-sm">
-							{checkedItemCount}
-						</span>{' '}
-						Active:{' '}
-						<span className="bg-base-300 px-1 rounded-sm">
-							{data.length - checkedItemCount}
-						</span>
-					</p>
 				</>
 			)}
-			<div aria-live="polite" className="my-9 px-5 h-full pb-[30rem]">
-				<ul>
-					{filterData.length > 0
-						? filterData.map((item) => (
-								<ListItem
-									key={item.id}
-									listToken={listToken}
-									item={item}
-									itemId={item.id}
-								/>
-						  ))
-						: data.length > 0 && <p aria-live="polite">No item found!</p>}
-				</ul>
-			</div>
 		</div>
 	);
 }
