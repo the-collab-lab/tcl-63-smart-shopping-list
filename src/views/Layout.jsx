@@ -27,7 +27,6 @@ export function Layout({ listToken }) {
 								<NavLink
 									to="/"
 									className="Nav-link text-slate-950 hover:text-slate-700"
-									activeClassName="active"
 								>
 									Home
 								</NavLink>
@@ -35,14 +34,12 @@ export function Layout({ listToken }) {
 							<NavLink
 								to="/list"
 								className="Nav-link text-slate-950 hover:text-slate-700"
-								activeClassName="active"
 							>
 								List
 							</NavLink>
 							<NavLink
 								to="/add-item"
 								className="Nav-link text-slate-950 hover:text-slate-700"
-								activeClassName="active"
 							>
 								Add Item
 							</NavLink>
