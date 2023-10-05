@@ -22,7 +22,7 @@ export function Layout({ listToken }) {
 			{/* remove navbar from Home when there is no list token */}
 			{listToken && (
 				<nav className="z-5 flex fixed py-1 md:py-2 lg:py-4 bottom-0 w-full justify-center bg-red-100 mt-5">
-					<div className="flex gap-20">
+					<div className="flex gap-20 text-base md:text-md lg:text-xl">
 						{/* this removes the Home navlink from the List and AddItem pages when there is a token assigned */}
 						{!listToken && (
 							<NavLink
