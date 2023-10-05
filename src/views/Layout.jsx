@@ -44,6 +44,12 @@ export function Layout({ listToken }) {
 						>
 							Add Item
 						</NavLink>
+						<NavLink
+							to="/about"
+							className="Nav-link text-slate-950 hover:text-slate-700"
+						>
+							User Guide
+						</NavLink>
 					</div>
 				</nav>
 			)}

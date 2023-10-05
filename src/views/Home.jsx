@@ -5,6 +5,7 @@ import './Home.css';
 import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
 import { ToastContainer, toast, Slide } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 export function Home({ setListToken }) {
 	// CREATE A REFERENCE TO THE TOKEN INPUT IN ORDER TO DIRECT FOCUS TO IT AFTER IT'S CLEARED
@@ -93,6 +94,9 @@ export function Home({ setListToken }) {
 			</form>
 			{/* Prompt users with alert message, including for screen reader users */}
 			<ToastContainer position="top-center" transition={Slide} />
+			<Link to="/about" className="underline hover:font-bold">
+				Learn how BerryCart works
+			</Link>
 		</div>
 	);
 }

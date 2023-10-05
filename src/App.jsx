@@ -5,7 +5,7 @@ import {
 	Navigate,
 } from 'react-router-dom';
 
-import { AddItem, Home, Layout, List } from './views';
+import { AddItem, Home, Layout, List, About } from './views';
 
 import { useShoppingListData, comparePurchaseUrgency } from './api';
 
@@ -71,6 +71,7 @@ export function App() {
 						path="/add-item"
 						element={<AddItem listToken={listToken} data={data} />}
 					/>
+					<Route path="/about" element={<About />} />
 				</Route>
 			</Routes>
 		</Router>
