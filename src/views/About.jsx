@@ -8,8 +8,8 @@ export const About = () => {
 	return (
 		<>
 			<div className="pt-10 text-center">
-				<h1 className="font-bold text-4xl mb-4">How BerryCart Works</h1>
-				<section className="chat chat-start">
+				<h1 className="font-bold text-4xl mb-6">How BerryCart Works</h1>
+				<section className="chat chat-start centered-section pb-6">
 					<p className="chat-bubble chat-bubble-secondary w-1/2">
 						BerryCart is a personalized shopping list. You can manage your
 						grocery items in one app.
@@ -25,7 +25,7 @@ export const About = () => {
 					</section>
 				</div>
 				<div className="flex justify-center items-center">
-					<section className="chat chat-start">
+					<section className="chat chat-end pr-10">
 						<p className="chat-bubble chat-bubble-secondary">
 							You can easily add a new item to the list, and choose how soon you
 							will buy this item again.{' '}
@@ -40,7 +40,7 @@ export const About = () => {
 				<div className="flex justify-center items-center">
 					<img src={listImg} alt="list page mockup" className="h-[500px]" />
 					<div className="flex flex-col gap-7">
-						<section className="chat chat-end">
+						<section className="chat chat-start">
 							<p className="chat-bubble chat-bubble-secondary">
 								Your newly added item will appear in the List view. You can mark
 								an item as purchased by checking it off from the list.{' '}
@@ -54,7 +54,7 @@ export const About = () => {
 						</section>
 					</div>
 				</div>
-				<section className="chat chat-start">
+				<section className="centered-section">
 					<p className="chat-bubble chat-bubble-secondary w-1/2">
 						Simply share your three-word token with friends and family to shop
 						together!
