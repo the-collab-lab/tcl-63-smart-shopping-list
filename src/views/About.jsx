@@ -27,7 +27,7 @@ export const About = ({ listToken }) => {
 						grocery items in one app.
 					</p>
 				</section>
-				<div className="flex justify-center items-center mt-2">
+				<div className="lg:flex justify-center items-center mt-2">
 					<img src={homeImg} alt="home page mockup" className="h-[500px]" />
 					<section className="chat chat-start">
 						<p className="chat-bubble chat-bubble-secondary">
@@ -36,7 +36,7 @@ export const About = ({ listToken }) => {
 						</p>
 					</section>
 				</div>
-				<div className="flex justify-center items-center">
+				<div className="lg:flex justify-center items-center mt-5">
 					<section className="chat chat-end pr-10">
 						<p className="chat-bubble chat-bubble-secondary">
 							You can easily add a new item to the list, and choose how soon you
@@ -46,10 +46,10 @@ export const About = ({ listToken }) => {
 					<img
 						src={addItemImg}
 						alt="add item page mockup"
-						className="h-[500px]"
+						className="h-[500px] mt-2"
 					/>
 				</div>
-				<div className="flex justify-center items-center">
+				<div className="lg:flex justify-center items-center">
 					<img src={listImg} alt="list page mockup" className="h-[500px]" />
 					<div className="flex flex-col gap-7">
 						<section className="chat chat-start">
@@ -66,8 +66,8 @@ export const About = ({ listToken }) => {
 						</section>
 					</div>
 				</div>
-				<section className="centered-section">
-					<p className="chat-bubble chat-bubble-secondary w-1/2">
+				<section className="centered-section mt-5">
+					<p className="chat-bubble chat-bubble-secondary lg:w-1/2">
 						Simply share your three-word token with friends and family to shop
 						together!
 					</p>
