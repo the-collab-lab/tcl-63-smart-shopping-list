@@ -3,11 +3,23 @@ import { NavLink } from 'react-router-dom';
 import homeImg from '../assets/mockup-homepage.png';
 import addItemImg from '../assets/mockup-additem.png';
 import listImg from '../assets/mockup-listpage.png';
+import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 
-export const About = () => {
+export const About = ({ listToken }) => {
 	return (
 		<>
 			<div className="pt-10 text-center">
+				{listToken ? (
+					<NavLink to="/list">
+						{' '}
+						<ArrowLeftIcon className="h-10 w-10 hover:text-red-400" />
+					</NavLink>
+				) : (
+					<NavLink to="/">
+						{' '}
+						<ArrowLeftIcon className="h-10 w-10 hover:text-red-400" />
+					</NavLink>
+				)}
 				<h1 className="font-bold text-4xl mb-6">How BerryCart Works</h1>
 				<section className="chat chat-start centered-section pb-6">
 					<p className="chat-bubble chat-bubble-secondary w-1/2">
