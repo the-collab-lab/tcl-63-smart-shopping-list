@@ -29,7 +29,17 @@ Frontend: React, TypeScript
 <br>UI/UX Design: CSS, Tailwind, Figma
 <br>Libraries: React Modal, DaisyUI
 
-## Team
+## Getting Started:
+
+1. Clone the repo: git clone https://github.com/the-collab-lab/tcl-63-smart-shopping-list.git
+
+2. Navigate to the project directory: cd tcl-63-smart-shopping-list
+
+3. Install the dependencies: npm install
+
+4. Start the development server: npm start
+
+## Developer Team
 
 - [Shangguan Wang](https://github.com/shangguanwang) 🌉
 - [Raquel Pfeifle](https://github.com/rdpfeifle) 🌄
