@@ -4,7 +4,7 @@ Welcome to BerryCart, the app designed to simplify and personalize your grocery 
 
 Live Site [BerryCart Shopping List](https://tcl-63-smart-shopping-list.web.app/list)
 
-![Screenshot of an example of a BerryCart shopping list.](image.png)
+<img width=500px alt="Screenshot of an example of a BerryCart shopping list" src="image.png">
 
 ## Features
 
@@ -24,9 +24,9 @@ Live Site [BerryCart Shopping List](https://tcl-63-smart-shopping-list.web.app/l
 ## Technologies
 
 Frontend: React, TypeScript
-Backend: Firebase, NodeJS
-UI/UX Design: CSS, Tailwind, Figma
-Libraries: React Modal, DaisyUI
+<br>Backend: Firebase, NodeJS
+<br>UI/UX Design: CSS, Tailwind, Figma
+<br>Libraries: React Modal, DaisyUI
 
 ## Team
 
