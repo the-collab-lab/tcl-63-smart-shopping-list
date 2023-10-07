@@ -24,28 +24,17 @@ Live Site: [BerryCart Shopping List](https://tcl-63-smart-shopping-list.web.app/
 
 ## Technologies
 
-Frontend: React, TypeScript
-<br>Backend: Firebase, NodeJS
+Frontend: React
+<br>Backend: Firebase
 <br>UI/UX Design: CSS, Tailwind, Figma
-<br>Libraries: React Modal, DaisyUI
+<br>Libraries: React Modal, DaisyUI, Toastify
 
-<div>
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-  <img src='https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E' />
-  <img src="https://img.shields.io/static/v1?style=for-the-badge&message=React+Router&color=CA4245&logo=React+Router&logoColor=FFFFFF&label=">
-   <img src='https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white' />
-  <img src='https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white' />
-  <img src='https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white' />
-  <img src='https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white' />
-  <img src='https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white' />
-</div>
-
-<div>
-  <img src='https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white' />
-   <img src='https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white' />
-  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
-  <img src="https://img.shields.io/badge/Canva-%2300C4CC.svg?&style=for-the-badge&logo=Canva&logoColor=white" />
-</div>
+| 🖥 🔧        |
+| ------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Frontend     | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) |
+| Backend      | ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)   |
+| Libraries    | ![CSS](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3 logoColor=white)         | [Toastify] (https://img.shields.io/badge/toastify-blue) |
+| UI/UX Design | ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)     |
 
 ## Getting Started:
 
