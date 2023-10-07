@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { addItem } from '../api/firebase';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 
 export function AddItem({ listToken, data }) {
+	// Initialize a useRef to bring focus back to input field
+	const inputRef = useRef(null);
+
 	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
 	const nonAlphanumRegex = /[^A-Za-z0-9]/g;
 	const normalizeItemName = (name) => {
@@ -53,6 +56,7 @@ export function AddItem({ listToken, data }) {
 				itemName: '',
 				daysUntilNextPurchase: 7,
 			}); // clear the itemName field after submission
+			inputRef.current.focus(); // bring focus back to input field
 		} catch (error) {
 			toast.error(
 				`fail to save the item ${formData.itemName}, please try again`,
@@ -68,6 +72,7 @@ export function AddItem({ listToken, data }) {
 					<h1 className="text-3xl font-bold mt-10 text-center">Add New Item</h1>
 					<input
 						type="text"
+						ref={inputRef}
 						name="itemName"
 						id="itemName"
 						value={formData.itemName}
