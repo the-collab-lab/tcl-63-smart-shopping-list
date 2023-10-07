@@ -5,9 +5,8 @@ import { ToastContainer, toast, Slide } from 'react-toastify';
 export function AddItem({ listToken, data }) {
 	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
 	const nonAlphanumRegex = /[^A-Za-z0-9]/g;
-	// add 'NFD' to decompose characters like "ê" into "e" and a combining circumflex accent
 	const normalizeItemName = (name) => {
-		return name.normalize('NFD').toLowerCase().replace(nonAlphanumRegex, '');
+		return name.normalize().toLowerCase().replace(nonAlphanumRegex, '');
 	};
 
 	// get the list of item names from existing list from firebase, filter is necessary to remove the empty item when the list is first created
