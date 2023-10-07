@@ -92,7 +92,7 @@ export const About = ({ listToken }) => {
 						Can I add the same item twice?
 					</div>
 					<div className="collapse-content">
-						<p>You can't add identicial item to the same list twice.</p>
+						<p>You can't add identical items to the same list twice.</p>
 					</div>
 				</div>
 				<div className="collapse collapse-arrow join-item border border-base-300">

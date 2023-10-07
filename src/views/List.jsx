@@ -70,7 +70,7 @@ export function List({ data, listToken, setListToken }) {
 							</button>
 						</span>
 					</div>
-					<p>Please feel free to share it with your friends and family</p>
+					<p>Please feel free to share it with your friends and family!</p>
 					<ToastContainer position="top-center" transition={Slide} />
 				</div>
 			</div>
