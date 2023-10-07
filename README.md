@@ -1,6 +1,7 @@
 # BerryCart: Your Personalized Shopping List
 
-Welcome to BerryCart, the app designed to simplify and personalize your grocery shopping experience. Say goodbye to traditional shopping lists and hello to smart, adaptive shopping with BerryCart.
+Welcome to BerryCart, the app designed to simplify and personalize your grocery shopping experience!
+<br>Say goodbye to traditional shopping lists and hello to smart, adaptive shopping with BerryCart. 🍓
 
 Live Site [BerryCart Shopping List](https://tcl-63-smart-shopping-list.web.app/list)
 
