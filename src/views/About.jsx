@@ -85,7 +85,7 @@ export const About = ({ listToken }) => {
 			</div>
 			{/* ACCORDIAN */}
 			<div className="join join-vertical w-full my-4">
-				<h1 className="font-bold text-4xl text-center my-4">FAQ</h1>
+				<h2 className="font-bold text-4xl text-center my-4">FAQ</h2>
 				<div className="collapse collapse-arrow join-item border border-base-300">
 					<input type="radio" name="my-accordion-4" />
 					<div className="collapse-title text-2xl font-medium">
@@ -95,6 +95,7 @@ export const About = ({ listToken }) => {
 						<p>You can't add identical items to the same list twice.</p>
 					</div>
 				</div>
+
 				<div className="collapse collapse-arrow join-item border border-base-300">
 					<input type="radio" name="my-accordion-4" />
 					<div className="collapse-title text-2xl font-medium">
