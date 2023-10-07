@@ -24,27 +24,40 @@ Live Site: [BerryCart Shopping List](https://tcl-63-smart-shopping-list.web.app/
 
 ## Technologies
 
-Frontend: React
-<br>Backend: Firebase
-<br>UI/UX Design: CSS, Tailwind, Figma
-<br>Libraries: React Modal, DaisyUI, Toastify
+| 🖥           | 🔧                                                                                                                                                                                                                                                                                                                                      |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend     | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)                                                                                                                                                                                                                           |
+| Backend      | ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)                                                                                                                     |
+| UI/UX Design | ![CSS](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/tailwindcss-272b33?style=for-the-badge&logo=tailwind-css&logoColor=07b0ce) ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) |
+| Libraries    | ![Daisy UI](https://img.shields.io/badge/daisyUI-1ad1a5?style=for-the-badge&logo=daisyui&logoColor=white) ![React Modal](https://img.shields.io/badge/ReactModal-272b33?logo=circle&logoColor=white&style=for-the-badge) ![Toastify](https://img.shields.io/badge/Toastify-272b33?logo=square&logoColor=white&style=for-the-badge)      |
 
-| 🖥           | 🔧                                                                                                                                                                                                               |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Frontend     | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)                                                                                                    |
-| Backend      | ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)                                                                                                      |
-| Libraries    |                                                                                                                                                                                                                  |
-| UI/UX Design | ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) |
+## Instructions:
 
-## Getting Started:
+If you want to run this project on your local computer, follow these steps:
 
-1. Clone the repo: git clone https://github.com/the-collab-lab/tcl-63-smart-shopping-list.git
+1. Clone the repo:
 
-2. Navigate to the project directory: cd tcl-63-smart-shopping-list
+```
+git clone https://github.com/the-collab-lab/tcl-63-smart-shopping-list.git
+```
 
-3. Install the dependencies: npm install
+2. Navigate to the project directory:
 
-4. Start the development server: npm start
+```
+cd tcl-63-smart-shopping-list
+```
+
+3. Install the dependencies:
+
+```
+npm install
+```
+
+4. Start the development server:
+
+```
+npm start
+```
 
 ## Developer Team
 
