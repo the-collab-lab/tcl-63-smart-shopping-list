@@ -86,52 +86,44 @@ export const About = ({ listToken }) => {
 			{/* ACCORDIAN */}
 			<div className="join join-vertical w-full my-4">
 				<h2 className="font-bold text-4xl text-center my-4">FAQ</h2>
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
+				<details className="collapse collapse-arrow join-item border border-base-300">
+					<summary className="collapse-title text-2xl font-medium">
 						Can I add the same item twice?
-					</div>
-					<div className="collapse-content">
-						<p>You can't add identical items to the same list twice.</p>
-					</div>
-				</div>
+					</summary>
+					<p className="collapse-content">
+						You can't add identical items to the same list twice.
+					</p>
+				</details>
 
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
+				<details className="collapse collapse-arrow join-item border border-base-300">
+					<summary className="collapse-title text-2xl font-medium">
 						Why does my urgency tag flip to "soon" after I marked an item as
 						purchased?
-					</div>
-					<div className="collapse-content">
-						<p>
-							When you first add a new item, it will take us some time to learn
-							how soon you may need this item again. Overtime, BerryCart will
-							adjust the tags according to your purchasing frequency.
-						</p>
-					</div>
-				</div>
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
+					</summary>
+					<p className="collapse-content">
+						When you first add a new item, it will take us some time to learn
+						how soon you may need this item again. Overtime, BerryCart will
+						adjust the tags according to your purchasing frequency.
+					</p>
+				</details>
+
+				<details className="collapse collapse-arrow join-item border border-base-300">
+					<summary className="collapse-title text-2xl font-medium">
 						Why can't I uncheck an item immediately after I marked it as
 						purchased?
-					</div>
-					<div className="collapse-content">
-						<p>
-							We assume you wouldn't need the same item within the next 24
-							hours. After 24 hours, the item will uncheck itself.
-						</p>
-					</div>
-				</div>
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
+					</summary>
+					<p className="collapse-content">
+						We assume you wouldn't need the same item within the next 24 hours.
+						After 24 hours, the item will uncheck itself.
+					</p>
+				</details>
+
+				<details className="collapse collapse-arrow join-item border border-base-300">
+					<summary className="collapse-title text-2xl font-medium">
 						Can I add non-english words as item name?
-					</div>
-					<div className="collapse-content">
-						<p>We currently only support English.</p>
-					</div>
-				</div>
+					</summary>
+					<p className="collapse-content">We currently only support English.</p>
+				</details>
 			</div>
 			{/* BUTTON */}
 			<div className="text-center">
