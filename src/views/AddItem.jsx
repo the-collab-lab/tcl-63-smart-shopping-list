@@ -3,10 +3,15 @@ import { addItem } from '../api/firebase';
 import { ToastContainer, toast } from 'react-toastify'; // Import Toastify to display alert messages
 
 export function AddItem({ listToken, data }) {
-	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
-	const nonAlphanumRegex = /[^A-Za-z0-9]/g;
+	// This regex will match most punctuation and control characters but will allow letters and numbers in any script.
+	const unwantedCharsRegex = /[^\p{L}\p{N}\s]/gu;
+
 	const normalizeItemName = (name) => {
-		return name.normalize().toLowerCase().replace(nonAlphanumRegex, '');
+		return name
+			.normalize('NFD')
+			.toLowerCase()
+			.replace(unwantedCharsRegex, '')
+			.trim();
 	};
 
 	// get the list of item names from existing list from firebase, filter is necessary to remove the empty item when the list is first created
