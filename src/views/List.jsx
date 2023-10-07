@@ -7,8 +7,6 @@ import './List.css';
 
 export function List({ data, listToken }) {
 	// OPTION B - GOES WITH OPTION B IN Firebase.js and OPTION B IN Home.jsx
-	// FILTER OUT THE DATA THAT CONTAINS AN OBJECT WITH NO NAME PROPERTY
-	const realData = data.filter((item) => item.name);
 	const [inputItem, setInputItem] = useState('');
 
 	// Initialize a useRef to bring focus back to input field
@@ -31,7 +29,7 @@ export function List({ data, listToken }) {
 	};
 
 	// Applies the helper function to narrow down the data
-	const filterData = realData.filter((listItem) =>
+	const filterData = data.filter((listItem) =>
 		stringMatch(inputItem, listItem.name),
 	);
 
@@ -43,7 +41,7 @@ export function List({ data, listToken }) {
 			</p>
 			<p>Please feel free to share it with your friends and family</p>
 			<br />
-			{realData.length === 0 ? (
+			{data.length === 0 ? (
 				<>
 					<p>Your shopping list is empty.</p>
 					{/* a NavLink is semantically a better element than a button because
@@ -91,7 +89,7 @@ export function List({ data, listToken }) {
 									itemId={item.id}
 								/>
 						  ))
-						: realData.length > 0 && <p aria-live="polite">No item found!</p>}
+						: data.length > 0 && <p aria-live="polite">No item found!</p>}
 				</ul>
 			</div>
 		</div>
