@@ -29,11 +29,11 @@ Frontend: React
 <br>UI/UX Design: CSS, Tailwind, Figma
 <br>Libraries: React Modal, DaisyUI, Toastify
 
-| 🖥 🔧        |
-| ------------ | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| 🖥           | 🔧                                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
 | Frontend     | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) |
 | Backend      | ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)   |
-| Libraries    | ![CSS](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3 logoColor=white)         | [Toastify] (https://img.shields.io/badge/toastify-blue) |
+| Libraries    | ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3 logoColor=white)        |
 | UI/UX Design | ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)     |
 
 ## Getting Started:
