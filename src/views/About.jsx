@@ -9,7 +9,6 @@ import listImg from '../assets/mockup-listpage.png';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Accordion from './Accordion';
 import { accordionData } from './accordionData';
-import './About.css';
 
 export const About = ({ listToken }) => {
 	return (
