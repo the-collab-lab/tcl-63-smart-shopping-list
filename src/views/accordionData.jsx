@@ -1,24 +1,24 @@
 export const accordionData = [
 	{
-		title: 'Section 1',
-		content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis sapiente
-      laborum cupiditate possimus labore, hic temporibus velit dicta earum
-      suscipit commodi eum enim atque at? Et perspiciatis dolore iure
-      voluptatem.`,
+		title: 'Can I add the same item twice?',
+		content: `You can not add identical items to the same list twice`,
 	},
 	{
-		title: 'Section 2',
-		content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia veniam
-      reprehenderit nam assumenda voluptatem ut. Ipsum eius dicta, officiis
-      quaerat iure quos dolorum accusantium ducimus in illum vero commodi
-      pariatur? Impedit autem esse nostrum quasi, fugiat a aut error cumque
-      quidem maiores doloremque est numquam praesentium eos voluptatem amet!
-      Repudiandae, mollitia id reprehenderit a ab odit!`,
+		title:
+			'The urgency tag flips to "soon" after I marked an item as purchased. Why?',
+		content: `After you add your first item, BerryCart begins to learn your purchase patterns. 
+        Overtime, it will adjust the tags based on your purchasing frequency.
+        `,
 	},
 	{
-		title: 'Section 3',
-		content: `Sapiente expedita hic obcaecati, laboriosam similique omnis architecto ducimus magnam accusantium corrupti
-      quam sint dolore pariatur perspiciatis, necessitatibus rem vel dignissimos
-      dolor ut sequi minus iste? Quas?`,
+		title:
+			'I am not allowed to uncheck an item immediately after I marked it as purchased. Why?',
+		content: `BerryCart assumes you wouldn't need the same item within the next 24 hours. 
+        After 24 hours, the item will be unchecked automatically.`,
+	},
+	{
+		title: 'Can I add non-English words as item names?',
+		content: `Right now, BerryCart only supports English, 
+        but support for multiple languages will be available soon. Stay tuned!`,
 	},
 ];

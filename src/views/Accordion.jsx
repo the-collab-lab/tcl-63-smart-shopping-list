@@ -6,14 +6,14 @@ const Accordion = ({ title, content }) => {
 	const [isActive, setIsActive] = useState(false);
 
 	return (
-		<details className="accordion-item">
+		<details className="collapse collapse-arrow join-item border border-base-300">
 			<summary
-				className="accordion-title"
+				className="collapse-title text-2xl font-medium"
 				onClick={() => setIsActive(!isActive)}
 			>
 				{title}
 			</summary>
-			{isActive && <p className="accordion-content">{content}</p>}
+			{isActive && <p className="collapse-content">{content}</p>}
 		</details>
 	);
 };

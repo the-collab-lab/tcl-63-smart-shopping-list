@@ -90,12 +90,13 @@ export const About = ({ listToken }) => {
 				</section>
 			</div>
 			{/* ACCORDIAN */}
-
-			<h1>React Accordion Demo</h1>
-			<div className="accordion">
-				{accordionData.map(({ title, content }) => (
-					<Accordion title={title} content={content} />
-				))}
+			<div className="join join-vertical w-full my-4">
+				<h2 className="font-bold text-4xl text-center my-4">FAQ</h2>
+				<div>
+					{accordionData.map(({ title, content }) => (
+						<Accordion title={title} content={content} />
+					))}
+				</div>
 			</div>
 
 			{/* BUTTON */}
