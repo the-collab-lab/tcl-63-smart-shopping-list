@@ -91,9 +91,9 @@ export const About = ({ listToken }) => {
 				</section>
 			</div>
 			{/* ACCORDIAN */}
-			<div className="join join-vertical w-full my-4">
+			<div className="w-full my-4">
 				<h2 className="font-bold text-4xl text-center my-4">FAQ</h2>
-				<div>
+				<div className="space-y-3">
 					{accordionData.map(({ title, content }, index) => (
 						<Accordion
 							title={title}

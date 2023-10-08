@@ -6,7 +6,7 @@ import React from 'react';
 const Accordion = ({ title, content, index, activeIndex, setActiveIndex }) => {
 	return (
 		<details
-			className="collapse collapse-arrow join-item border border-base-300"
+			className="collapse collapse-arrow border border-base-300"
 			aria-live="polite"
 		>
 			<summary
