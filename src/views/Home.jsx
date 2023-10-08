@@ -4,25 +4,16 @@ import ClearButton from '../components/ClearButton';
 import './Home.css';
 import { useState, useRef } from 'react';
 import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 export function Home({ setListToken }) {
 	// CREATE A REFERENCE TO THE TOKEN INPUT IN ORDER TO DIRECT FOCUS TO IT AFTER IT'S CLEARED
 	const tokenInputRef = useRef(null);
 
 	const [tokenInput, setTokenInput] = useState('');
-	const [errorMessage, setErrorMessage] = useState('');
 	const [isTokenValid, setIsTokenValid] = useState(false);
-
-	// OPTION: A - NEW (EMPTY) LIST IS ONLY SAVED TO LOCAL STORAGE
-	// IT IS ADDED TO FIREBASE ONLY WHEN THE FIRST ITEM IS ADDED TO THE LIST
-	// FUNCTION INHERITED FROM PR TO ISSUE #3
-	// const createNewList = () => {
-	// 	const newToken = generateToken();
-	// 	setListToken(newToken);
-	// };
-
-	// OPTION: B - NEW LIST IS ADDED TO FIREBASE (GOES WITH OPTION B IN Firebase.js and OPTION B IN List.jsx)
-	// IT USES THE FUNCTION addNewListToFirestore FROM Firebase.js WHICH ADDS A NEW LIST CONTAINING AN EMPTY DOC
+	// NEW LIST IS ADDED TO FIREBASE
 	const createNewList = async () => {
 		const newToken = generateToken();
 		try {
@@ -42,11 +33,8 @@ export function Home({ setListToken }) {
 
 		// test for all non-letter characters;
 		if (/[^a-zA-Z\s]/.test(tokenInput)) {
-			setErrorMessage('Please use only letters!');
+			toast.error('Please use only letters!');
 			setIsTokenValid(false);
-			setTimeout(() => {
-				setErrorMessage('');
-			}, 7000);
 		}
 		setTokenInput(tokenInput);
 	};
@@ -64,72 +52,51 @@ export function Home({ setListToken }) {
 
 	const submitTokenInput = (event) => {
 		event.preventDefault();
-
 		if (sharedListData.length === 0) {
-			setErrorMessage('The list does not exist. Please try again.');
-			setTimeout(() => {
-				setErrorMessage('');
-			}, 7000);
+			toast.error('The list does not exist. Please try again.');
 			return;
 		}
-
 		setListToken(token);
 	};
 
-	const handleEnterKey = (event) => {
-		if (event.key === 'Enter') {
-			event.preventDefault();
-			if (!isTokenValid) {
-				setErrorMessage(
-					'A token must contain exactly three words separated by a space.',
-				);
-				setTimeout(() => {
-					setErrorMessage('');
-				}, 7000);
-			} else {
-				submitTokenInput(event);
-			}
-		}
-	};
-
 	return (
-		<div className="Home h-screen flex flex-col items-center pt-4">
+		<div className="Home flex flex-col items-center pt-10 text-center gap-6">
+			<p>Friends who shop together, stay together!</p>
 			<Button label="Create New List" onClick={createNewList} />
-			<p>-or-</p>
-			<p className="font-bold">Join an existing shopping list.</p>
-
-			<form onSubmit={submitTokenInput}>
+			<div className="divider before:bg-secondary after:bg-secondary">OR</div>
+			<p className="font-bold text-3xl">Join an existing shopping list</p>
+			<form onSubmit={submitTokenInput} className="flex flex-col items-center">
 				<label htmlFor="tokenInput">
 					Enter a 3-word token (example: "word word word"):
-					<br />
+				</label>
+				<div className="flex items-center my-6 w-full justify-center">
 					<input
 						type="text"
 						name="tokenInput"
 						id="tokenInput"
 						value={tokenInput}
 						onChange={handleInputChange}
-						onKeyDown={handleEnterKey}
 						ref={tokenInputRef}
-						className="input input-bordered input-primary w-full max-w-xs mr-2 my-2"
+						className="input input-bordered input-primary input-lg text-2xl w-full max-w-sm mr-2 ml-[10%]"
 					/>
-				</label>
-				<ClearButton
-					label="X"
-					type="reset"
-					ariaLabel="Clear token input"
-					onClick={clearTokenInput}
-				/>
-
-				<br />
+					<ClearButton
+						label="X"
+						type="reset"
+						ariaLabel="Clear token input"
+						onClick={clearTokenInput}
+					/>
+				</div>
 				<Button
-					label="Join"
+					label="Join Existing List"
 					type="submit"
 					ariaLabel="Join shared shopping list"
-					isDisabled={!isTokenValid}
 				/>
 			</form>
-
-			<div aria-live="polite">{errorMessage && <p>{errorMessage}</p>}</div>
+			{/* Prompt users with alert message, including for screen reader users */}
+			<ToastContainer position="top-center" transition={Slide} />
+			<Link to="/about" className="underline hover:font-bold">
+				Learn how BerryCart works
+			</Link>
 		</div>
 	);
 }

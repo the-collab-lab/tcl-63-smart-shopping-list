@@ -5,7 +5,7 @@ import {
 	Navigate,
 } from 'react-router-dom';
 
-import { AddItem, Home, Layout, List } from './views';
+import { AddItem, Home, Layout, List, About } from './views';
 
 import { useShoppingListData, comparePurchaseUrgency } from './api';
 
@@ -34,8 +34,10 @@ export function App() {
 	 * This custom hook takes our token and fetches the data for our list.
 	 * Check ./api/firestore.js for its implementation.
 	 */
+	// FILTER OUT THE DATA THAT CONTAINS AN OBJECT WITH NO NAME PROPERTY
 	const data = useShoppingListData(listToken);
-	const sortedData = comparePurchaseUrgency(data);
+	const realData = data.filter((item) => item.name);
+	const sortedData = comparePurchaseUrgency(realData);
 
 	return (
 		<Router>
@@ -55,7 +57,11 @@ export function App() {
 						path="/list"
 						element={
 							listToken ? (
-								<List data={sortedData} listToken={listToken} />
+								<List
+									data={sortedData}
+									listToken={listToken}
+									setListToken={setListToken}
+								/>
 							) : (
 								<Navigate to="/" />
 							)
@@ -65,6 +71,7 @@ export function App() {
 						path="/add-item"
 						element={<AddItem listToken={listToken} data={data} />}
 					/>
+					<Route path="/about" element={<About />} listToken={listToken} />
 				</Route>
 			</Routes>
 		</Router>

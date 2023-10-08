@@ -5,7 +5,7 @@ const ClearButton = ({ ariaLabel, label, onClick, type, isDisabled }) => {
 			type={type}
 			onClick={onClick}
 			disabled={isDisabled}
-			className="btn btn-circle btn-outline btn-primary btn-md"
+			className="btn btn-circle btn-outline btn-primary btn-lg"
 		>
 			{label}
 		</button>
