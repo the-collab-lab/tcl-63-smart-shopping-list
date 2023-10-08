@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-undef */
 import React from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import homeImg from '../assets/mockup-homepage.png';
 import addItemImg from '../assets/mockup-additem.png';
@@ -11,6 +12,7 @@ import Accordion from './Accordion';
 import { accordionData } from './accordionData';
 
 export const About = ({ listToken }) => {
+	const [activeAccordionIndex, setActiveAccordionIndex] = useState(null);
 	return (
 		<>
 			<div className="pt-10 text-center">
@@ -92,8 +94,14 @@ export const About = ({ listToken }) => {
 			<div className="join join-vertical w-full my-4">
 				<h2 className="font-bold text-4xl text-center my-4">FAQ</h2>
 				<div>
-					{accordionData.map(({ title, content }) => (
-						<Accordion title={title} content={content} />
+					{accordionData.map(({ title, content }, index) => (
+						<Accordion
+							title={title}
+							content={content}
+							index={index}
+							activeIndex={activeAccordionIndex}
+							setActiveIndex={setActiveAccordionIndex}
+						/>
 					))}
 				</div>
 			</div>
