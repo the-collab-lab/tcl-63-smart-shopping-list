@@ -1,11 +1,18 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-undef */
 import React from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import homeImg from '../assets/mockup-homepage.png';
 import addItemImg from '../assets/mockup-additem.png';
 import listImg from '../assets/mockup-listpage.png';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
+import Accordion from './Accordion';
+import { accordionData } from './accordionData';
 
 export const About = ({ listToken }) => {
+	const [activeAccordionIndex, setActiveAccordionIndex] = useState(null);
 	return (
 		<>
 			<div className="pt-10 text-center">
@@ -84,54 +91,21 @@ export const About = ({ listToken }) => {
 				</section>
 			</div>
 			{/* ACCORDIAN */}
-			<div className="join join-vertical w-full my-4">
-				<h1 className="font-bold text-4xl text-center my-4">FAQ</h1>
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
-						Can I add the same item twice?
-					</div>
-					<div className="collapse-content">
-						<p>You can't add identical items to the same list twice.</p>
-					</div>
-				</div>
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
-						Why does my urgency tag flip to "soon" after I marked an item as
-						purchased?
-					</div>
-					<div className="collapse-content">
-						<p>
-							When you first add a new item, it will take us some time to learn
-							how soon you may need this item again. Overtime, BerryCart will
-							adjust the tags according to your purchasing frequency.
-						</p>
-					</div>
-				</div>
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
-						Why can't I uncheck an item immediately after I marked it as
-						purchased?
-					</div>
-					<div className="collapse-content">
-						<p>
-							We assume you wouldn't need the same item within the next 24
-							hours. After 24 hours, the item will uncheck itself.
-						</p>
-					</div>
-				</div>
-				<div className="collapse collapse-arrow join-item border border-base-300">
-					<input type="radio" name="my-accordion-4" />
-					<div className="collapse-title text-2xl font-medium">
-						Can I add non-english words as item name?
-					</div>
-					<div className="collapse-content">
-						<p>We currently only support English.</p>
-					</div>
+			<div className="w-full my-4">
+				<h2 className="font-bold text-4xl text-center my-4">FAQ</h2>
+				<div className="space-y-3">
+					{accordionData.map(({ title, content }, index) => (
+						<Accordion
+							title={title}
+							content={content}
+							index={index}
+							activeIndex={activeAccordionIndex}
+							setActiveIndex={setActiveAccordionIndex}
+						/>
+					))}
 				</div>
 			</div>
+
 			{/* BUTTON */}
 			<div className="text-center">
 				<NavLink to="/" className="btn btn-neutral mt-3">
