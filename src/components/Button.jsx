@@ -5,7 +5,7 @@ const Button = ({ ariaLabel, label, onClick, type, isDisabled }) => {
 			type={type}
 			onClick={onClick}
 			disabled={isDisabled}
-			className={'btn btn-neutral mt-3'}
+			className="btn bg-[#2b3440] hover:btn-neutral hover:text-white btn-lg text-white text-2xl mt-3"
 		>
 			{label}
 		</button>
