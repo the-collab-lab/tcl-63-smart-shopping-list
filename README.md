@@ -1,68 +1,74 @@
-## Overview
+# BerryCart: Your Personalized Shopping List
 
-This README file explains The Collab Lab’s smart shopping list project and provides instructions for developing it locally.
+Welcome to BerryCart, the app designed to simplify and personalize your grocery shopping experience!
+<br>Say goodbye to traditional shopping lists and hello to smart, adaptive shopping with BerryCart. 🍓
 
-If you’re a Collab Lab developer, WELCOME! We’re so excited to work with you and collaborate on something amazing. Be sure to read [the setup instructions](#set-up-the-project) and then [make your first contribution](#make-your-first-contribution)! For additional details on how your cohort will operate, please check out the [project brief](PROJECT-BRIEF.md).
+Live Site: [BerryCart Shopping List](https://tcl-63-smart-shopping-list.web.app/list)
 
-## What is this project?
+<img width=500px alt="Screenshot of an example of a BerryCart shopping list" src="image-2.png">
 
-The goal of this project is to collaborate with your Collab Lab team to create a “smart” shopping list app that learns your buying habits and helps you remember what you’re likely to need to buy on your next trip to the store.
+## Features
 
-### How does it work?
+- **One-Stop Management**: Keep all your grocery items organized in one app, eliminating the need for paper lists or multiple apps. With BerryCart, every shopping list is unique. Create separate lists for different needs or people, each with its own three-word token
 
-As a user, you will enter items (e.g., “Greek yogurt” or “Paper towels”) into your list. Each time you buy the item, you mark it as purchased in the list. Over time, the app comes to understand the intervals at which you buy different items. If an item is likely to be due to be bought soon, it rises to the top of the shopping list.
+- **Smart Estimations**: The more you use BerryCart, the smarter it gets. It learns your purchasing habits and frequency, estimating when you're likely to buy an item again, ensuring you never run out of your essentials.
+- **Built with Accessibility in Mind**: Our user interface is designed with clear contrasts and screen-reader compatibility. Voice-over functionalities and keyboard navigation ensure that BerryCart is easily navigable for users with visual or motor impairments.
 
-### Check out an example
+## Getting Started
 
-The app will work in many of the same ways as [iNeedToBuy.xyz](https://app.ineedtobuy.xyz/) (on which our project is based) with the exception that we will not be implementing barcode scanning (that feature would add a lot of scope to the project and wasn’t all that useful).
+1. **Creating a List**: Launch BerryCart and tap on 'Create New List' to start fresh or enter your three-word token to dive into an existing list.
 
-📺&nbsp; Check out a video demo of the example app here:
-[![](https://cdn.zappy.app/33815167c45d74c3ae5af232de633add.png)](https://www.youtube.com/watch?v=mwj74mE9s64&t)
+2. **Add Items**: Tap on 'Add Item', input the item's name, and set its purchasing frequency.
 
-<hr>
+3. **Check Off with a Tap**: Bought an item? Simply check it off the list.
 
-## Set up the project
+## Technologies
 
-### Install Node and NPM
+| 🖥           | 🔧                                                                                                                                                                                                                                                                                                                                      |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend     | ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)                                                                                                                                                                                                                           |
+| Backend      | ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)                                                                                                                     |
+| UI/UX Design | ![CSS](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/tailwindcss-272b33?style=for-the-badge&logo=tailwind-css&logoColor=07b0ce) ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) |
+| Libraries    | ![Daisy UI](https://img.shields.io/badge/daisyUI-1ad1a5?style=for-the-badge&logo=daisyui&logoColor=white) ![React Modal](https://img.shields.io/badge/ReactModal-272b33?logo=circle&logoColor=white&style=for-the-badge) ![Toastify](https://img.shields.io/badge/Toastify-272b33?logo=square&logoColor=white&style=for-the-badge)      |
 
-`npm` is distributed with Node.js, which means that when you download Node.js, you automatically get `npm` installed on your computer. You can install Node by [downloading it from the Node.js website](https://nodejs.org/en/) or using a Node version manager like [nvm](https://github.com/nvm-sh/nvm) on a macOS or Linux device or [nvm-windows](https://github.com/coreybutler/nvm-windows) on a Windows device.
+## Instructions:
 
-💡 **Note:** This project requires the latest Long Term Support (LTS) version of Node. If you have an earlier version of Node, now would be a great time to upgrade!
+If you want to run this project on your local computer, follow these steps:
 
-### Clone the project locally
+1. Clone the repo:
 
-On GitHub, navigate to the repo for your cohort’s project (you’re probably there right now), then:
+```
+git clone https://github.com/the-collab-lab/tcl-63-smart-shopping-list.git
+```
 
-1. Click on the "Code" tab. It may already be selected.
-2. Click the green "Code" button to reveal a "Clone" popup.
-3. The "HTTPS" tab should be automatically selected. If not, click "HTTPS."
-4. Click the copy button to copy the url of this repository to your clipboard.
-   ![screenshot of "Code" tab on GitHub](_resources/images/00_get_repo_url_from_gui.png)
+2. Navigate to the project directory:
 
-From your terminal, `cd` into the directory where you want this project to live.
-![screenshot of how to navigate folders in terminal](_resources/images/01_cd_dev_directory.jpg)
+```
+cd tcl-63-smart-shopping-list
+```
 
-Once you’re in the directory, type `git clone` followed by the web URL you just copied to your clipboard from GitHub. Then `cd` into the directory that is created.
-![screenshot of how to git clone](_resources/images/02_git_clone_and_cd.jpg)
+3. Install the dependencies:
 
-### Install the project’s dependencies
+```
+npm install
+```
 
-Once you’ve cloned the project locally and you’re in the project directory, you’ll want to install the project’s dependencies. To do so, type the following into your terminal: `npm ci`
+4. Start the development server:
 
-![screenshot of npm ci in the terminal](_resources/images/03_install_dependencies.jpg)
+```
+npm start
+```
 
-### Access the project in your browser
+## Developer Team
 
-After you’ve cloned the project locally and updated the dependencies, run the project by typing the following into your terminal: `npm start`. You should be able to see the project at `localhost:3000`.
-![screenshot of the react project](_resources/images/04_local_dev_landing_page.jpg)
+- [Shangguan Wang](https://github.com/shangguanwang) 🌉
+- [Raquel Pfeifle](https://github.com/rdpfeifle) 🌄
+- [Corina Murg](https://github.com/CorinaMurg) 🐳
+- [Aslan Taheri](https://github.com/AslanTaheri) 🦁
 
-🎉 You did it! You’re ready to start contributing!
+## Mentors
 
-## Make your first contribution
-
-You’ll want to make your first contribution to this repo before your kick-off call! This will help make sure you’re ready to go on day one.
-
-1. Get this project set up locally by following [the setup instructions here](#set-up-the-project).
-2. Add your name to the [CONTRIBUTORS.md](CONTRIBUTORS.md) file.
-   - Do this from your local environment and not from GitHub in your browser. The purpose (aside from highlighting our amazing team) is to make sure your local environment is set up properly!
-   - Commit to the `main` branch and push it up to the remote repo. (Over the next 8 weeks, we will rely on feature branches as we collaborate on the project, but for this task committing to main will do just fine.)
+- [Devin Jaggernauth](https://github.com/mentalcaries) 👻
+- [Caitlin Floyd](https://github.com/cafloyd) 🌸
+- [Chase Wright](https://github.com/chase-cove) 🐱
+- [Julia Undeutsch](https://github.com/YuriDevAT) 🤓
