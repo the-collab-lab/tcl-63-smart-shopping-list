@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { addItem } from '../api/firebase';
-import { ToastContainer, toast } from 'react-toastify'; // Import Toastify to display alert messages
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 export function AddItem({ listToken, data }) {
 	// normalize itemName by converting to lower case and filtering out any nonalphanumeric characters
@@ -63,9 +63,9 @@ export function AddItem({ listToken, data }) {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="grid justify-items-center">
 				<label htmlFor="itemName">
-					<p>Item name:</p>
+					<h1 className="text-3xl font-bold mt-10 text-center">Add New Item</h1>
 					<input
 						type="text"
 						name="itemName"
@@ -73,10 +73,13 @@ export function AddItem({ listToken, data }) {
 						value={formData.itemName}
 						onChange={handleChange}
 						placeholder="add item here"
-					></input>
+						className="input input-bordered input-lg text-2xl w-full max-w-sm my-3"
+					/>
 				</label>
-				<fieldset style={{ border: 'none' }}>
-					<p>How soon will you buy this again?</p>
+				<fieldset className="grid border-4 border-y-red-200 px-10 py-5 my-5 shadow-sm rounded-2xl">
+					<p className="text-3xl font-bold">
+						How soon will you buy this again?
+					</p>
 					<label htmlFor="soon">
 						{/* this <br> is necessary for the screen reader to read first radio button */}
 						<br />
@@ -87,9 +90,10 @@ export function AddItem({ listToken, data }) {
 							value="7"
 							onChange={handleChange}
 							checked={formData.daysUntilNextPurchase === 7}
+							className="radio checked:bg-red-400 mr-2"
 							required // ensures the user makes a selection before proceeding
 						/>
-						Soon
+						Soon - 7 days
 					</label>
 					<br />
 					<label htmlFor="kindsoon">
@@ -100,8 +104,9 @@ export function AddItem({ listToken, data }) {
 							value="14"
 							checked={formData.daysUntilNextPurchase === 14}
 							onChange={handleChange}
+							className="radio checked:bg-red-400 mr-2"
 						/>
-						Kind of Soon
+						Kind of Soon - 14 days
 					</label>
 					<br />
 					<label htmlFor="notsoon">
@@ -112,14 +117,17 @@ export function AddItem({ listToken, data }) {
 							value="30"
 							checked={formData.daysUntilNextPurchase === 30}
 							onChange={handleChange}
+							className="radio checked:bg-red-400 mr-2"
 						/>
-						Not Soon
+						Not Soon - 30 days
 					</label>
 				</fieldset>
-				<button type="submit">Add Item</button>
+				<button type="submit" className="btn btn-neutral mt-3 w-80">
+					Add Item
+				</button>
 			</form>
 			{/* Prompt users with alert message, including for screen reader users */}
-			<ToastContainer position="top-center" />
+			<ToastContainer position="top-center" transition={Slide} />
 		</>
 	);
 }

@@ -7,6 +7,7 @@
 		"npm": ">=8.19.0"
 	},
 	"dependencies": {
+		"@heroicons/react": "^2.0.18",
 		"@the-collab-lab/shopping-list-utils": "^2.0.0",
 		"firebase": "^10.1.0",
 		"react": "^18.2.0",
@@ -18,10 +19,13 @@
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@nabla/vite-plugin-eslint": "^1.5.0",
+		"@tailwindcss/typography": "^0.5.10",
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^14.0.0",
 		"@testing-library/user-event": "^14.4.3",
 		"@vitejs/plugin-react": "^4.0.4",
+		"autoprefixer": "^10.4.16",
+		"daisyui": "^3.8.1",
 		"eslint": "^8.46.0",
 		"eslint-config-prettier": "^8.10.0",
 		"eslint-config-react-app": "^7.0.1",
@@ -29,7 +33,9 @@
 		"husky": "^8.0.3",
 		"jsdom": "^22.1.0",
 		"lint-staged": "^13.2.3",
+		"postcss": "^8.4.30",
 		"prettier": "^3.0.1",
+		"tailwindcss": "^3.3.3",
 		"vite": "^4.4.8",
 		"vite-plugin-pwa": "^0.16.4",
 		"vite-plugin-svgr": "^3.2.0",

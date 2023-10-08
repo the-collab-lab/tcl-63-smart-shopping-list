@@ -33,7 +33,6 @@ export function useShoppingListData(listId) {
 	useEffect(() => {
 		// in the Home component an invalid token is set to null and any calls to Firestore are skipped
 		if (!listId) return;
-
 		// When we get a listId, we use it to subscribe to real-time updates
 		// from Firestore.
 		return onSnapshot(collection(db, listId), (snapshot) => {
@@ -61,7 +60,7 @@ export function useShoppingListData(listId) {
 	return realData;
 }
 
-// OPTION B: NEWLY CREATED LIST IS ADDED TO FIRESTORE
+// NEWLY CREATED LIST IS ADDED TO FIRESTORE
 // NORMALLY FIRESTORE CREATES A COLLECTION WHEN A DOC IS ADDED TO IT;
 // HERE WE ARE ADDING AN EMPTY DOC TO THE COLLECTION SO WE CAN SAVE THE LIST TO FIRESTORE RIGHT AFTER IT'S CREATED
 

@@ -2,8 +2,8 @@ import './ListItem.css';
 import { useCallback, useEffect, useState } from 'react';
 import { getFutureDate, purchaseSchedule } from '../utils';
 import { updateItem, deleteItem } from '../api/firebase';
-import Button from './Button';
 import DeleteItemModal from './DeleteItemModal';
+import DeleteButton from './DeleteButton';
 
 export function ListItem({ listToken, item, itemId }) {
 	const { name, dateLastPurchased, dateNextPurchased, checked } = item;
@@ -66,35 +66,43 @@ export function ListItem({ listToken, item, itemId }) {
 	};
 
 	return (
-		<>
-			<li className="ListItem">
-				<label aria-label={`Mark ${name} as purchased`}>
-					<input
-						id={name}
-						name={name}
-						type="checkbox"
-						checked={isPurchased}
-						onChange={handleChange}
+		<div className="card md:w-[50rem] max-md:w-[30rem] pb-3 pl-8 bg-base-100 shadow-lg hover:shadow-2xl duration-300 my-3">
+			<>
+				<li className="ListItem flex flex-row items-center justify-between gap-4">
+					<label
+						aria-label={`Mark ${name} as purchased`}
+						className={`capitalize ${isPurchased ? 'line-through' : ''}`}
+					>
+						<input
+							id={name}
+							name={name}
+							type="checkbox"
+							checked={isPurchased}
+							onChange={handleChange}
+							className="mr-2 checkbox checkbox-success"
+						/>
+						{name}
+					</label>
+					<div className="flex flex-col items-center">
+						<span
+							className={`urgency-tag ${purchaseUrgency} mb-3 rounded-bl-lg text-[12px] w-[8rem] hover:scale-125 hover:mr-5 hover:mt-1`}
+						>
+							{displayUrgency}
+						</span>
+						<DeleteButton
+							ariaLabel={`Delete ${name} from your list`}
+							type="button"
+							onClick={toggleDeleteModal}
+						/>
+					</div>
+					<DeleteItemModal
+						isModalOpen={isModalOpen}
+						closeModal={toggleDeleteModal}
+						confirmDelete={handleDelete}
+						itemName={name}
 					/>
-					{name}
-					<span className={`urgency-tag ${purchaseUrgency}`}>
-						{displayUrgency}
-					</span>
-				</label>
-				&nbsp;
-				<Button
-					label="Delete"
-					ariaLabel={`Delete ${name} from your list`}
-					type="button"
-					onClick={toggleDeleteModal}
-				/>
-				<DeleteItemModal
-					isModalOpen={isModalOpen}
-					closeModal={toggleDeleteModal}
-					confirmDelete={handleDelete}
-					itemName={name}
-				/>
-			</li>
-		</>
+				</li>
+			</>
+		</div>
 	);
 }
