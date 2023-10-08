@@ -108,7 +108,10 @@ export const About = ({ listToken }) => {
 
 			{/* BUTTON */}
 			<div className="text-center">
-				<NavLink to="/" className="btn btn-neutral mt-3">
+				<NavLink
+					to="/"
+					className="btn bg-[#2b3440] hover:btn-neutral hover:text-white btn-lg text-white text-2xl mt-3"
+				>
 					Get Started
 				</NavLink>
 			</div>

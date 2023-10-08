@@ -122,7 +122,10 @@ export function AddItem({ listToken, data }) {
 						Not Soon - 30 days
 					</label>
 				</fieldset>
-				<button type="submit" className="btn btn-neutral mt-3 w-80">
+				<button
+					type="submit"
+					className="btn bg-[#2b3440] hover:btn-neutral hover:text-white btn-lg text-white text-2xl mt-3 w-80"
+				>
 					Add Item
 				</button>
 			</form>
