@@ -5,7 +5,10 @@ import React from 'react';
 
 const Accordion = ({ title, content, index, activeIndex, setActiveIndex }) => {
 	return (
-		<details className="collapse collapse-arrow join-item border border-base-300">
+		<details
+			className="collapse collapse-arrow join-item border border-base-300"
+			aria-live="polite"
+		>
 			<summary
 				className="collapse-title text-2xl font-medium"
 				onClick={() => setActiveIndex(activeIndex === index ? null : index)}
