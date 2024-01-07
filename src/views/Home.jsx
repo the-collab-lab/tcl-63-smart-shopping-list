@@ -1,11 +1,11 @@
-import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import Button from '../components/Button';
 import ClearButton from '../components/ClearButton';
 import './Home.css';
 import { useState, useRef } from 'react';
-import { addNewListToFirestore, useShoppingListData } from '../api/firebase';
+import { useShoppingListData } from '../api/firebase';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 export function Home({ setListToken }) {
 	// CREATE A REFERENCE TO THE TOKEN INPUT IN ORDER TO DIRECT FOCUS TO IT AFTER IT'S CLEARED
@@ -15,13 +15,14 @@ export function Home({ setListToken }) {
 	const [isTokenValid, setIsTokenValid] = useState(false);
 	// NEW LIST IS ADDED TO FIREBASE
 	const createNewList = async () => {
-		const newToken = generateToken();
-		try {
-			await addNewListToFirestore(newToken);
-			setListToken(newToken);
-		} catch (error) {
-			console.error(error);
-		}
+		// const newToken = generateToken();
+		// try {
+		// 	await addNewListToFirestore(newToken);
+		// 	setListToken(newToken);
+		// } catch (error) {
+		// 	console.error(error);
+		// }
+		console.log('Creating new lists is no longer supported.');
 	};
 
 	const handleInputChange = (event) => {
@@ -97,6 +98,7 @@ export function Home({ setListToken }) {
 			<Link to="/about" className="underline hover:font-bold">
 				Learn how BerryCart works
 			</Link>
+			<ArchivalNoticeModal />
 		</div>
 	);
 }
